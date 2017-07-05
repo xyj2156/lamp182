@@ -14,8 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// 验证码
+Route::get('admin/code','Admin\LoginController@code');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+
+// 后台登录
+Route::get('/admin/login','Admin\LoginController@login');
+// 后台处理登录信息
+Route::post('/admin/dologin','Admin\LoginController@dologin');
+// 清除session
+Route::get('/admin/logout', 'Admin\LoginController@logout');
+
+
+Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.login'], function(){
     Route::resource('index', 'IndexController');
     Route::resource('user', 'MemberController');
 });
