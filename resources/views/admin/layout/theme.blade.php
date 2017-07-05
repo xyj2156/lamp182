@@ -1,4 +1,4 @@
-<script src="/admin/assets/js/theme.js"></script>
+<script src="{{asset('admin/assets/js/theme.js')}}"></script>
 <div class="tpl-skiner">
     <div class="tpl-skiner-toggle am-icon-cog">
     </div>

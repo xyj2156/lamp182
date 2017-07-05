@@ -1,7 +1,7 @@
 <header>
     <!-- logo -->
     <div class="am-fl tpl-header-logo">
-        <a href="javascript:;"><img src="/home/assets/img/logo.png" alt=""></a>
+        <a href="javascript:;"><img src="{{asset('admin/assets/img/logo.png')}}" alt=""></a>
     </div>
     <!-- 右侧内容 -->
     <div class="tpl-header-fluid">
@@ -21,7 +21,7 @@
             <ul>
                 <!-- 欢迎语 -->
                 <li class="am-text-sm tpl-header-navbar-welcome">
-                    <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                    <a href="javascript:;">欢迎你, <span>{{session('admin_user')['username']}}</span> </a>
                 </li>
 
                 <!-- 新邮件 -->
@@ -35,7 +35,7 @@
                         <li class="tpl-dropdown-menu-messages">
                             <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                 <div class="menu-messages-ico">
-                                    <img src="/home/assets/img/user04.png" alt="">
+                                    <img src="{{asset('admin/assets/img/user04.png')}}" alt="">
                                 </div>
                                 <div class="menu-messages-time">
                                     3小时前
@@ -54,7 +54,7 @@
                         <li class="tpl-dropdown-menu-messages">
                             <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                 <div class="menu-messages-ico">
-                                    <img src="/home/assets/img/user02.png" alt="">
+                                    <img src="{{asset('admin/assets/img/user02.png')}}" alt="">
                                 </div>
                                 <div class="menu-messages-time">
                                     5天前
