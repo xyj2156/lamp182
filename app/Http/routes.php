@@ -22,6 +22,7 @@ Route::get('admin/code','Admin\LoginController@code');
 Route::get('/admin/login','Admin\LoginController@login');
 // 后台处理登录信息
 Route::post('/admin/dologin','Admin\LoginController@dologin');
+// 清除session
 Route::get('/admin/logout', 'Admin\LoginController@logout');
 
 

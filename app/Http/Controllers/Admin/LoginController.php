@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Http\Model\Admin;
+use App\Http\Model\Admin\Admin;
 
 require_once app_path().'/Org/code/Code.class.php';
 use App\Org\code\Code;
