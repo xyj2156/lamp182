@@ -66,6 +66,8 @@ class LoginController extends Controller
                 return back() -> with('error','账号或密码错误');
              }
          }
+         $user -> ltime = time();
+         $user -> save();
          //将用户信息添加到session中
          session(['admin_user'=>$user]);
          return redirect('admin/index');
@@ -80,7 +82,7 @@ class LoginController extends Controller
         return view('admin.index.index');
     }
     /**
-     * 清除session里的 admin_user
+     * 后台退出登录
      */
     public function logout()
     {

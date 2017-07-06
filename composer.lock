@@ -1022,7 +1022,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -1082,7 +1082,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.23",
+            "version": "v2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1135,7 +1135,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1192,7 +1192,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -1247,7 +1247,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.23",
+            "version": "v2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1307,7 +1307,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -1356,7 +1356,7 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1412,16 +1412,16 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9"
+                "reference": "67247e4b5fa37404126a0bae9cda74de2fd9e259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9.zip",
-                "reference": "3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9",
+                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/67247e4b5fa37404126a0bae9cda74de2fd9e259.zip",
+                "reference": "67247e4b5fa37404126a0bae9cda74de2fd9e259",
                 "shasum": ""
             },
             "require": {
@@ -1491,7 +1491,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T14:22:50+00:00"
+            "time": "2017-07-05T07:16:12+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1662,7 +1662,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -1711,7 +1711,7 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
@@ -1785,7 +1785,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -1848,7 +1848,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -3239,7 +3239,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.3",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
