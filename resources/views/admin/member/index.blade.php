@@ -58,7 +58,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function member_delete(id) {
             layer.confirm('真要删除这个用户吗？', {
@@ -87,7 +86,6 @@
             }, function(){
 
             });
-
         }
     </script>
 @endsection

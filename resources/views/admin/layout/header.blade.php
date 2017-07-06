@@ -26,10 +26,10 @@
 
                 <!-- 新邮件 -->
                 <li class="am-dropdown tpl-dropdown" data-am-dropdown>
-                    <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
-                        <i class="am-icon-envelope"></i>
-                        <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
-                    </a>
+                    {{--<a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>--}}
+                        {{--<i class="am-icon-envelope"></i>--}}
+                        {{--<span class="am-badge am-badge-success am-round item-feed-badge">4</span>--}}
+                    {{--</a>--}}
                     <!-- 弹出列表 -->
                     <ul class="am-dropdown-content tpl-dropdown-content">
                         <li class="tpl-dropdown-menu-messages">
@@ -79,9 +79,9 @@
 
                 <!-- 新提示 -->
                 <li class="am-dropdown" data-am-dropdown>
-                    <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        <i class="am-icon-bell"></i>
-                        <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+                    <!-- 修改密码 -->
+                    <a href="{{url('admin/pass/create')}}" >
+                        <i >修改密码</i>
                     </a>
 
                     <!-- 弹出列表 -->
@@ -131,7 +131,7 @@
 
                 <!-- 退出 -->
                 <li class="am-text-sm">
-                    <a href="javascript:;">
+                    <a href="{{url('admin/logout')}}">
                         <span class="am-icon-sign-out"></span> 退出
                     </a>
                 </li>

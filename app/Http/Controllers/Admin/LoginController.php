@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 class LoginController extends Controller
 {
     
-  /**
+    /**
      *返回后台登录页面
      */
     public function login()
@@ -33,6 +33,7 @@ class LoginController extends Controller
         $code = new Code();
         $code->make();
     }
+
     /**
      * 处理后台登录信息
      */
@@ -44,13 +45,13 @@ class LoginController extends Controller
          $request -> flash();
          // 验证表单提交数据的规则
          $this->validate($request, [
-            'username'=>'required|between:5,18',
-            'password'=>'required|between:5,18'
+            'username'=>'required|between:6,18',
+            'password'=>'required|between:6,18'
          ],[
             'username.required'=>'必须输入用户名',
-            'username.between'=>'用户名长度必须在5-18位之间',
+            'username.between'=>'用户名长度必须在6-18位之间',
             'password.required'=>'必须输入密码',
-            'password.between'=>'密码长度必须在5-18位之间'
+            'password.between'=>'密码长度必须在6-18位之间'
          ]);
 
          // 验证码是否正确
@@ -79,16 +80,13 @@ class LoginController extends Controller
     {
         return view('admin.index.index');
     }
+
     /**
-     * 清除session里的 admin_user
+     * 后台退出登录
      */
     public function logout()
     {
         session(['admin_user'=>null]);
         return redirect('admin/login');
     }
-       
-    
-
 }
-
