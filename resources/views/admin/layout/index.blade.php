@@ -14,6 +14,30 @@
 @include('admin.layout.header')
 @include('admin.layout.nav')
 <div class="tpl-content-wrapper">
+
+    {{--提示失败或者成功--}}
+    @if(session('success') || session('error'))
+        <script>
+            $(function (){
+                layer.alert('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
+            });
+        </script>
+    @endif
+
+    {{--提示表单验证错误--}}
+    @if (count($errors) > 0)
+        <script>
+            $(function () {
+                layer.alert(
+                    '@foreach($errors -> all() as $err){{$err.'\n'}}@endforeach',
+                    {
+                        time:3000,
+                        icon:5
+                    }
+                );
+            });
+        </script>
+    @endif
     @section('content')
         {{--内容区域--}}
     @show

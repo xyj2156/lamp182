@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="sidebar-nav-link">
-                    <a href="{{url('admin/usr/')}}">
+                    <a href="{{url('admin/user/')}}">
                         <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看用户
                     </a>
                 </li>

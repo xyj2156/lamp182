@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+    "content-hash": "ec59602e556f671a65c64e684c252441",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1022,7 +1022,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -1082,7 +1082,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.23",
+            "version": "v2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1135,7 +1135,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1192,7 +1192,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -1247,7 +1247,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.23",
+            "version": "v2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1307,7 +1307,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -1356,7 +1356,7 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1412,16 +1412,16 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9"
+                "reference": "67247e4b5fa37404126a0bae9cda74de2fd9e259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9.zip",
-                "reference": "3a6e7cdd11d3210f4b0c5c88a15597a2b9a3c9d9",
+                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/67247e4b5fa37404126a0bae9cda74de2fd9e259.zip",
+                "reference": "67247e4b5fa37404126a0bae9cda74de2fd9e259",
                 "shasum": ""
             },
             "require": {
@@ -1491,7 +1491,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T14:22:50+00:00"
+            "time": "2017-07-05T07:16:12+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1662,7 +1662,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -1711,7 +1711,7 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
@@ -1785,7 +1785,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -1848,7 +1848,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.30",
+            "version": "v2.7.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -1956,6 +1956,68 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "af98b3a4ccac9364f2145fae974ff3392ec402b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/barryvdh/laravel-debugbar/af98b3a4ccac9364f2145fae974ff3392ec402b1.zip",
+                "reference": "af98b3a4ccac9364f2145fae974ff3392ec402b1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "maximebf/debugbar": "~1.13.0",
+                "php": ">=5.5.9",
+                "symfony/finder": "~2.7|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\Debugbar\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Debugbar": "Barryvdh\\Debugbar\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2017-06-14T07:44:44+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -2102,6 +2164,67 @@
                 "test"
             ],
             "time": "2015-05-11T14:41:42+00:00"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "afee79a236348e39a44cb837106b7c5b4897ac2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/maximebf/php-debugbar/afee79a236348e39a44cb837106b7c5b4897ac2a.zip",
+                "reference": "afee79a236348e39a44cb837106b7c5b4897ac2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "^1.0",
+                "symfony/var-dumper": "^2.6|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/DebugBar/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug",
+                "debugbar"
+            ],
+            "time": "2017-01-05T08:46:19+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -3239,7 +3362,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.3",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
