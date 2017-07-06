@@ -26,14 +26,13 @@
                                 <label for="user-name" class="am-u-sm-3 am-form-label">用户名 <span class="tpl-form-line-small-title">UserName</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="user-name" name="username" placeholder="请输入用户名" value="{{ $data1 -> username}}">
-                                    <small>@if(isset($errors -> all() ['username'])){{$errors -> all() ['username']}} @else字数6-18位。 @endif</small>
+                                    <small>字数6-18位。</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">年龄 <span class="tpl-form-line-small-title">Age</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="age" name="age" placeholder="请输入年龄" value="{{$data2 -> age}}">
-                                    <small>@if(isset($errors -> all() ['age'])){{$errors -> all() ['age']}}  @endif</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -50,14 +49,13 @@
                                 <label for="phone" class="am-u-sm-3 am-form-label">手机 <span class="tpl-form-line-small-title">Phone</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="phone" name="phone" placeholder="请输入手机号码" value="{{$data1 -> phone}}">
-                                    <small>@if(isset($errors -> all() ['phone'])){{$errors -> all() ['phone']}} @else请输入11位手机号码。 @endif</small>
+                                    <small>请输入11位手机号码。</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="email" class="am-u-sm-3 am-form-label">邮箱 <span class="tpl-form-line-small-title">E-mail</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="email" name="email" placeholder="请输入电子邮箱" value="{{$data1 -> email}}">
-                                    <small>@if(isset($errors -> all() ['email'])){{$errors -> all() ['email']}}  @endif</small>
                                 </div>
                             </div>
                             <div class="am-form-group">

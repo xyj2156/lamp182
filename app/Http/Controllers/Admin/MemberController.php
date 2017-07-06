@@ -28,7 +28,12 @@ class MemberController extends Controller
 
         $res = Member::where('username', 'like', "%{$search}%") -> paginate(10);
 
-        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res]);
+        $tmp = '';
+        foreach ($req -> all() as $k => $v){
+            $tmp .= "&{$k}={$v}";
+        }
+
+        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'tmp' => $tmp, 'search' => $req -> all()]);
     }
 
     /**
@@ -53,31 +58,28 @@ class MemberController extends Controller
     {
         // 验证表单提交数据的规则
         $this->validate($request, [
-            'auth'=>'required|in:0,1,2',
-            'username'=>'required|between:6,18',
-            'password'=>'required|between:6,18',
-            'age'=>'required|min:0|max:100|integer',
-            'email'=>'required|email',
-            'sex'=>'required|in:w,x,m',
-            'phone'=>'required|integer|size:11',
+            'auth'      =>'required|in:0,1,2',
+            'username'  =>'regex:/^[a-zA-Z_]\w{5,17}$/',
+            'password'  =>'required|between:6,18',
+            'age'       =>'required|min:0|max:100|integer',
+            'email'     =>'required|email',
+            'sex'       =>'required|in:w,x,m',
+            'phone'     =>'regex:/^1[34578][0-9]{9}$/',
         ],[
-            'auth.required' => '权限必须选择。',
-            'auth.in' => '请正确选择权限。',
-            'username.required'=>'必须输入用户名。',
-            'username.between'=>'用户名长度必须在6-18位之间',
-            'password.required'=>'必须输入密码',
-            'password.between'=>'密码长度必须在6-18位之间',
-            'age.required'=>'必须输入年龄。',
-            'age.min'=>'年龄太小了。',
-            'age.max'=>'年龄太大了。',
-            'age.integer'=>'请正确年龄。',
-            'email.required'=>'必须输入邮箱。',
-            'email.email'=>'请正确输入邮箱。',
-            'sex.required'=>'必须选择性别。',
-            'sex.in' => '请正确选择性别。',
-            'phone.required'=>'必须输入手机。',
-            'phone.integer'=>'请正确填写手机号码。',
-            'phone.size'=>'请检测手机号码位数。',
+            'auth.required'     => '权限必须选择。',
+            'auth.in'           => '请正确选择权限。',
+            'username.regex'    => '请正确输入用户名。',
+            'password.required' => '必须输入密码',
+            'password.between'  => '密码长度必须在6-18位之间',
+            'age.required'      => '必须输入年龄。',
+            'age.min'           => '年龄太小了。',
+            'age.max'           => '年龄太大了。',
+            'age.integer'       => '请正确年龄。',
+            'email.required'    => '必须输入邮箱。',
+            'email.email'       => '请正确输入邮箱。',
+            'sex.required'      => '必须选择性别。',
+            'sex.in'            => '请正确选择性别。',
+            'phone.regex'       => '请输入正确手机号码。',
         ]);
 
 //        分别获取数据以便添加到不同表中
@@ -175,16 +177,15 @@ class MemberController extends Controller
         // 验证表单提交数据的规则
         $this->validate($request, [
             'auth'=>'required|in:0,1,2',
-            'username'=>'required|between:6,18',
+            'username'=>'regex:/^[a-zA-Z_]\w{5,17}/',
             'age'=>'required|min:0|max:100|integer',
             'email'=>'required|email',
             'sex'=>'required|in:w,x,m',
-            'phone'=>'required|size:11',
+            'phone'=>'regex:/^1[34578][0-9]{9}$/',
         ],[
             'auth.required' => '权限必须选择。',
             'auth.in' => '请正确选择权限。',
-            'username.required'=>'必须输入用户名。',
-            'username.between'=>'用户名长度必须在6-18位之间',
+            'username.regex'=>'请正确输入用户名。',
             'age.required'=>'必须输入年龄。',
             'age.min'=>'年龄太小了。',
             'age.max'=>'年龄太大了。',
@@ -193,8 +194,7 @@ class MemberController extends Controller
             'email.email'=>'请正确输入邮箱。',
             'sex.required'=>'必须选择性别。',
             'sex.in' => '请正确选择性别。',
-            'phone.required'=>'必须输入手机。',
-            'phone.size'=>'请检测手机号码位数。',
+            'phone.regex'=>'请正确输入手机。',
         ]);
 
         $res1 = Member::find($id);
