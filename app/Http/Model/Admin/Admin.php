@@ -9,14 +9,8 @@ class Admin extends Model
     protected $table = 'admins';
     protected $promaryKey = 'id';
 
-    protected $fillable = [
+    protected $guarded = [];
 
-    	'username',
-    	'password',
-    	'phone',
-    	'email'
-
-    ];
     public $timestamps = false;
 
 

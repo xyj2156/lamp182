@@ -19,4 +19,6 @@ return [
         'm' => '男',
         'w' => '女'
     ],
+    'admin_face_path' => '/uploads/uface/admin',
+    'home_face_path' => '/uploads/uface/home',
 ];
