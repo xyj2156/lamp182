@@ -34,4 +34,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
 
     // 修改密码
     Route::resource('pass','PassController');
+
+//    演员管理模块
+    Route::resource('cast', 'CastController');
 });

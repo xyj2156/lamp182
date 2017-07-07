@@ -40,5 +40,24 @@
                 </li>
             </ul>
         </li>
+        <li class="sidebar-nav-link">
+            <a href="javascript:;" class="sidebar-nav-sub-title">
+                <i class="am-icon-table sidebar-nav-link-logo"></i> 演员管理
+                <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+            </a>
+            <ul class="sidebar-nav sidebar-nav-sub">
+                <li class="sidebar-nav-link">
+                    <a href="{{url('admin/cast/create')}}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加演员
+                    </a>
+                </li>
+
+                <li class="sidebar-nav-link">
+                    <a href="{{url('admin/cast/')}}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看演员
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </div>
