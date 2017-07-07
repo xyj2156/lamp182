@@ -3,13 +3,13 @@
     <div class="tpl-sidebar-user-panel">
         <div class="tpl-user-panel-slide-toggleable">
             <div class="tpl-user-panel-profile-picture">
-                <img src="{{asset('admin/assets/img/user04.png')}}" alt="">
+                <img src="{{asset(session('admin_user') -> uface)}}" alt="">
             </div>
             <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
               {{session('admin_user')['username']}}
           </span>
-            <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
+            <a href="{{url('admin/userset/create')}}" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
     </div>
 

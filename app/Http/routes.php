@@ -26,15 +26,19 @@ Route::post('/admin/dologin','Admin\LoginController@dologin');
 Route::get('/admin/logout', 'Admin\LoginController@logout');
 
 
-Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.login'], function(){
-//    首页路由
-    Route::resource('index', 'IndexController');
-//    前台用户管理模块
-    Route::resource('user', 'MemberController');
 
+Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.login'], function(){
+
+    // 首页路由
+    Route::resource('index', 'IndexController');
+    // 前台用户管理模块
+    Route::resource('user', 'MemberController');
     // 修改密码
     Route::resource('pass','PassController');
-
 //    演员管理模块
     Route::resource('cast', 'CastController');
+//    后台管理员信息修改（只能修改自己的）
+    Route::resource('userset','UsersetController');
+//    后台头像上传
+    Route::any('upload','UsersetController@upload');
 });

@@ -29,5 +29,7 @@ return [
             '添加演员' => 'admin/cast/create',
             '查看演员' => 'admin/cast'
         ]
-    ]
+    ],
+    'admin_face_path' => '/uploads/uface/admin',
+    'home_face_path' => '/uploads/uface/home',
 ];
