@@ -41,4 +41,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('userset','UsersetController');
 //    后台头像上传
     Route::any('upload','UsersetController@upload');
+//    电影类型管理
+    Route::resource('type', 'TypeController');
 });

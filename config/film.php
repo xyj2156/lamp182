@@ -28,7 +28,16 @@ return [
         '演员管理' => [
             '添加演员' => 'admin/cast/create',
             '查看演员' => 'admin/cast'
-        ]
+        ],
+        '分类管理' => [
+            '添加分类' => 'admin/type/create',
+            '查看分类' => 'admin/type'
+        ],
+    ],
+    'type' => [
+        1 => '地区',
+        '年份',
+        '语言'
     ],
     'admin_face_path' => '/uploads/uface/admin',
     'home_face_path' => '/uploads/uface/home',
