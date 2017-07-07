@@ -362,4 +362,16 @@ $('.sidebar-nav-sub-title').on('click', function() {
     $(this).siblings('.sidebar-nav-sub').slideToggle(80)
         .end()
         .find('.sidebar-nav-sub-ico').toggleClass('sidebar-nav-sub-ico-rotate');
-})
+});
+
+setTimeout(function (){
+//    获取网址来设定展开的菜单
+    var path = location.pathname.split('/')[2];
+    var arr = {
+        user : 1,
+        cast : 2
+    };
+    var li = $('.left-sidebar>.sidebar-nav>.sidebar-nav-link');
+    li.eq(arr[path]).find('span.am-icon-chevron-down').addClass('sidebar-nav-sub-ico-rotate');
+    li.eq(arr[path]).find('ul.sidebar-nav').css('display', 'block');
+},0);

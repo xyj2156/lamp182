@@ -16,48 +16,30 @@
     <!-- 菜单 -->
     <ul class="sidebar-nav">
         <li class="sidebar-nav-heading">lamp182 在线订票系统<span class="sidebar-nav-heading-info"> <sub>---江洋八子-四个</sub></span></li>
-        <li class="sidebar-nav-link">
-            <a href="{{url('admin/index')}}" class="active">
-                <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
-            </a>
-        </li>
-        <li class="sidebar-nav-link">
-            <a href="javascript:;" class="sidebar-nav-sub-title">
-                <i class="am-icon-table sidebar-nav-link-logo"></i> 前台用户管理
-                <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
-            </a>
-            <ul class="sidebar-nav sidebar-nav-sub">
+        @foreach(config('film.nav') as $k => $v)
+            @if(is_array($v))
                 <li class="sidebar-nav-link">
-                    <a href="{{url('admin/user/create')}}">
-                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加用户
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> {{$k}}
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        @foreach($v as $m => $n)
+                            <li class="sidebar-nav-link">
+                                <a href="{{url($n)}}">
+                                    <span class="am-icon-angle-right sidebar-nav-link-logo"></span> {{$m}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            @else
+                <li class="sidebar-nav-link">
+                    <a href="{{url($v)}}">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> {{$k}}
                     </a>
                 </li>
-
-                <li class="sidebar-nav-link">
-                    <a href="{{url('admin/user/')}}">
-                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看用户
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-nav-link">
-            <a href="javascript:;" class="sidebar-nav-sub-title">
-                <i class="am-icon-table sidebar-nav-link-logo"></i> 演员管理
-                <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
-            </a>
-            <ul class="sidebar-nav sidebar-nav-sub">
-                <li class="sidebar-nav-link">
-                    <a href="{{url('admin/cast/create')}}">
-                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加演员
-                    </a>
-                </li>
-
-                <li class="sidebar-nav-link">
-                    <a href="{{url('admin/cast/')}}">
-                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看演员
-                    </a>
-                </li>
-            </ul>
-        </li>
+            @endif
+        @endforeach
     </ul>
 </div>

@@ -56,14 +56,19 @@ class CastController extends Controller
         // 验证表单提交数据的规则
         $this->validate($request, [
             'name'  =>'required',
+            'age'   =>'required|min:0|max:100|integer',
         ],[
-            'username.required'    => '请输入演员名。',
+            'name.required'    => '请输入演员名。',
+            'age.required'      => '必须输入年龄。',
+            'age.min'           => '年龄太小了。',
+            'age.max'           => '年龄太大了。',
         ]);
 
 //        分别获取数据以便添加到不同表中
         $data = $request -> only([
             'name',
             'description',
+            'age'
         ]);
 
         $data['ctime'] = $data['utime'] = time();
@@ -86,7 +91,8 @@ class CastController extends Controller
      */
     public function show($id)
     {
-        $cast = Cast::find($id);
+        $data = Cast::find($id);
+        return view('admin.cast.show', compact('data'));
     }
 
     /**
@@ -113,13 +119,18 @@ class CastController extends Controller
         // 验证表单提交数据的规则
         $this->validate($request, [
             'name'  =>'required',
+            'age'   =>'required|min:0|max:100|integer',
         ],[
             'name.required'    => '请输入演员名。',
+            'age.required'      => '必须输入年龄。',
+            'age.min'           => '年龄太小了。',
+            'age.max'           => '年龄太大了。',
         ]);
 
         $cast = Cast::find($id);
         $cast -> name = $request -> input('name');
         $cast -> description = $request -> input('description');
+        $cast -> age = $request -> input('age');
 
         if ($cast -> save()) {
             return redirect('admin/cast') -> with('success', '修改成功。');

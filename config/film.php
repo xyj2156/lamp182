@@ -19,4 +19,15 @@ return [
         'm' => '男',
         'w' => '女'
     ],
+    'nav' => [
+        '首页' => 'admin/index',
+        '前台用户管理' => [
+            '添加用户' => 'admin/user/create',
+            '查看用户' => 'admin/user'
+        ],
+        '演员管理' => [
+            '添加演员' => 'admin/cast/create',
+            '查看演员' => 'admin/cast'
+        ]
+    ]
 ];

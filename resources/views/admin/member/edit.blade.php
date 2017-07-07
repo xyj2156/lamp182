@@ -6,7 +6,7 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl"><a href="{{url('admin/user')}}">用户管理 </a> > 添加用户</div>
+                        <div class="widget-title am-fl"><a href="{{url('admin/user')}}">用户管理 </a> > 编辑用户</div>
                     </div>
                     <div class="widget-body am-fr">
                         <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/user')}}/{{$data1 -> id}}">

@@ -19,6 +19,16 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="user-phone" class="am-u-sm-3 am-form-label">性别 <span class="tpl-form-line-small-title">Sex</span></label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" style="display: none;" name="sex">
+                                        <option value="m">男</option>
+                                        <option value="w">女</option>
+                                        <option value="x" selected>保密</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="user-intro" class="am-u-sm-3 am-form-label">演员简介 <span class="tpl-form-line-small-title">Description</span></label>
                                 <div class="am-u-sm-9">
                                     <textarea class="" rows="10" id="user-intro" name="description" placeholder="请输入文章内容">{{old('description')}}</textarea>

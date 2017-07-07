@@ -46,7 +46,7 @@
                                 <td>{{$v['description']}}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
-                                        <a href="{{url("admin/cast/{$v['id']}/edit")}}" title="编辑">
+                                        <a href="{{url("admin/cast/{$v['id']}/edit")}}" title="编辑" onclick="return isEdit(this)">
                                             <i class="am-icon-pencil"></i> 编辑
                                         </a>
                                         <a href="javascript:;" onclick="member_delete({{$v['id']}})" class="tpl-table-black-operation-del" title="删除">
@@ -81,7 +81,7 @@
                         } else {
                             icon = 6;
                             setTimeout(function(){
-                                location.href = '/admin/user';
+                                location.href = '/admin/cast';
                             },1000);
                         }
                         layer.alert(msg.msg,{icon:icon});
@@ -91,6 +91,17 @@
             }, function(){
 
             });
+        }
+
+        function isEdit(obj) {
+            layer.confirm('修改演员会导致所有与之相关联的电影中的演员信息，一起修改，确认要修改吗？', {
+                btn: ['改','再想想'] //按钮
+            }, function(){
+                location.href = obj.href;
+            }, function(){
+
+            });
+            return false;
         }
     </script>
 @endsection
