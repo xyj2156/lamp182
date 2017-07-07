@@ -28,9 +28,10 @@ class LoginController extends Controller
     /**
      * 验证码
      */
-    public function code()
+    public function code($id)
     {
         $code = new Code();
+        $code -> num(1);
         $code->make();
     }
 

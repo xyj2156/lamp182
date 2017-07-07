@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 // 验证码
-Route::get('admin/code','Admin\LoginController@code');
+Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
 
 // 后台登录

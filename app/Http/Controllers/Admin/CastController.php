@@ -56,12 +56,11 @@ class CastController extends Controller
         // 验证表单提交数据的规则
         $this->validate($request, [
             'name'  =>'required',
-            'age'   =>'required|min:0|max:100|integer',
+            'sex'       =>'required|in:w,x,m',
         ],[
             'name.required'    => '请输入演员名。',
-            'age.required'      => '必须输入年龄。',
-            'age.min'           => '年龄太小了。',
-            'age.max'           => '年龄太大了。',
+            'sex.required'      => '必须选择性别。',
+            'sex.in'            => '请正确选择性别。',
         ]);
 
 //        分别获取数据以便添加到不同表中
@@ -119,12 +118,11 @@ class CastController extends Controller
         // 验证表单提交数据的规则
         $this->validate($request, [
             'name'  =>'required',
-            'age'   =>'required|min:0|max:100|integer',
+            'sex'       =>'required|in:w,x,m',
         ],[
             'name.required'    => '请输入演员名。',
-            'age.required'      => '必须输入年龄。',
-            'age.min'           => '年龄太小了。',
-            'age.max'           => '年龄太大了。',
+            'sex.required'      => '必须选择性别。',
+            'sex.in'            => '请正确选择性别。',
         ]);
 
         $cast = Cast::find($id);

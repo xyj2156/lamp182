@@ -17,7 +17,7 @@
                     <div class="am-form-group">
                         <input type="text" style='width:150px' class="tpl-form-input" id="user-name" placeholder="请输入验证码" name="code">
                         <div>
-                            <img src="{{ url('admin/code') }}" alt="" onclick="this.src='{{ url('admin/code') }}?'+Math.random()" style='margin-left: 200px;margin-top:-60px;'>  
+                            <img src="{{ url('code') }}/{{rand(10000, 99999)}}.jpg" alt="验证码" style='margin-left: 200px;margin-top:-60px;'>
                         </div>
                         
                     </div>
@@ -37,6 +37,11 @@
     </div>
 @include('admin.layout.theme')
 @include('admin.layout.script')
+    <script>
+        $('img[alt]').click(function () {
+            this.src = '{{url('code')}}/' + Math.random().toString().replace('.', '') + '.jpg';
+        });
+    </script>
     @if(session('error'))
         <script>
             layer.alert('{{session('error')}}');
