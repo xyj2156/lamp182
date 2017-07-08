@@ -24,7 +24,8 @@ class TypeController extends Controller
         foreach ($data as $k => $v){
             $data[$k] ['_name']  = str_repeat('┝━', substr_count($v['path'] , ',') - 1) . $v ['name'] ;
         }
-        return view('admin.type.index', compact('data'));
+        $title = '分类查看';
+        return view('admin.type.index', compact('data', 'title'));
     }
 
     /**
@@ -34,7 +35,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('admin.type.create');
+        return view('admin.type.create',['title' => '添加分类']);
     }
 
     /**
@@ -80,7 +81,8 @@ class TypeController extends Controller
     public function edit($id)
     {
         $data = Film_type::find($id);
-        return view('admin.type.edit', compact('data'));
+        $title = '';
+        return view('admin.type.edit', compact('data', 'title'));
     }
 
     /**

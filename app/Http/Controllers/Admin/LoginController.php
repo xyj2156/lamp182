@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function login()
     {
-        return view('admin.login.login');
+        return view('admin.login.login', ['title' => '后台登陆']);
     }
 
     /**

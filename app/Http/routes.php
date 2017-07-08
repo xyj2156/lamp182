@@ -43,4 +43,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::any('upload','UsersetController@upload');
 //    电影类型管理
     Route::resource('type', 'TypeController');
+//    网站配置
+    Route::controller('config', 'WebConfigController');
 });

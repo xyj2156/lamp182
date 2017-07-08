@@ -213,7 +213,7 @@ class MemberController extends Controller
         $res2 -> age = $request -> input('age', '18');
         $res2 -> sex = $request -> input('sex', '18');
 
-        if(!$res1 -> save() || !$res2 -> save()){
+        if(!$res1 -> update() || !$res2 -> save()){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
         }

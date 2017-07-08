@@ -91,7 +91,8 @@ class CastController extends Controller
     public function show($id)
     {
         $data = Cast::find($id);
-        return view('admin.cast.show', compact('data'));
+        $title = '演员详情';
+        return view('admin.cast.show', compact('data', 'title'));
     }
 
     /**
@@ -103,7 +104,7 @@ class CastController extends Controller
     public function edit($id)
     {
         $cast = Cast::find($id);
-        return view('admin.cast.edit', ['data' => $cast]);
+        return view('admin.cast.edit', ['data' => $cast, 'title' => '演员编辑']);
     }
 
     /**
@@ -130,7 +131,7 @@ class CastController extends Controller
         $cast -> description = $request -> input('description');
         $cast -> age = $request -> input('age');
 
-        if ($cast -> save()) {
+        if ($cast -> update()) {
             return redirect('admin/cast') -> with('success', '修改成功。');
         } else {
             return back() -> with('error', '修改失败。');

@@ -33,6 +33,10 @@ return [
             '添加分类' => 'admin/type/create',
             '查看分类' => 'admin/type'
         ],
+        '网站配置' => [
+            '修改配置' => 'admin/config',
+            '轮播图' => 'admin/config/banner'
+        ],
     ],
     'type' => [
         1 => '地区',
