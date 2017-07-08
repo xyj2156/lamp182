@@ -11,6 +11,7 @@
                     <div class="widget-body am-fr">
                         <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/type')}}/{{$data -> id}}">
                             {{csrf_field()}}
+                            <input type="hidden" name="_method" value="put">
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">选择分类 <span class="tpl-form-line-small-title">SelectType</span></label>
                                 <div class="am-u-sm-9">

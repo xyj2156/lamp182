@@ -53,7 +53,7 @@ class TypeController extends Controller
         ]);
 //        获取数据
         $data = $request -> only(['name','pid']);
-        $data['path'] = $request -> input('pid') != 0?'0,'.$request -> input('pid'):'0,';
+        $data['path'] = $request -> input('pid') != 0?'0,'.$request -> input('pid').',':'0,';
 //        添加数据并判断
         if(Film_type::create($data))
             return redirect('admin/type') -> with('success', '添加成功。');
@@ -100,7 +100,7 @@ class TypeController extends Controller
             'name.required'     => '分类必须填写。'
         ]);
         $data = $request -> only(['pid', 'name']);
-        $data['path'] = '0,'.$request -> input('pid');
+        $data['path'] = '0,'.$request -> input('pid').',';
         $type = Film_type::find($id);
         if($type -> update($data)){
             return redirect('admin/type') -> with('success', '修改成功。');

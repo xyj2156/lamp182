@@ -92,7 +92,7 @@
 
                 });
             }else {
-                layer.msg('顶级分类不能删除')
+                layer.msg('顶级分类不能编辑')
             }
 
             return false;

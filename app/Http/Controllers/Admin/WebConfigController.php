@@ -67,4 +67,9 @@ class WebConfigController extends Controller
             return back() -> with('error', '添加失败。');
         }
     }
+
+    public function getEdit(Request $req)
+    {
+
+    }
 }
