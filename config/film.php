@@ -37,12 +37,25 @@ return [
             '修改配置' => 'admin/config',
             '轮播图' => 'admin/config/banner'
         ],
+        '友情链接' => [
+            '添加链接' => 'admin/link/create',
+            '查看链接' => 'admin/link'
+        ]
     ],
     'type' => [
         1 => '地区',
         '年份',
         '语言'
     ],
-    'admin_face_path' => '/uploads/uface/admin',
-    'home_face_path' => '/uploads/uface/home',
+    'uploads' => [
+        // 后台管理员的头像
+        'admin_face_path' => '/uploads/uface/admin',
+        // 前台的头像图片
+        'home_face_path' => '/uploads/uface/home',
+        // 友情链接的缩略图
+        'admin_thumb_path' => '/uploads/thumbnail',
+        // 电影缩略图上传位置
+        'film_path' => '/uploads/film_thumbail',
+    ]
+
 ];

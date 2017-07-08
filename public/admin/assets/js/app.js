@@ -371,7 +371,8 @@ setTimeout(function (){
         'user'    : 1,
         'cast'    : 2,
         'type'    : 3,
-        'config'  : 4
+        'config'  : 4,
+        'link'    : 5
     };
     var li = $('.left-sidebar>.sidebar-nav>.sidebar-nav-link');
     li.eq(arr[path]).find('span.am-icon-chevron-down').addClass('sidebar-nav-sub-ico-rotate');
