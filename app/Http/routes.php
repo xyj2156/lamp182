@@ -41,4 +41,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('userset','UsersetController');
 //    后台头像上传
     Route::any('upload','UsersetController@upload');
+//    后台电影路由
+    Route::get('film/create','FilmController@create');
+    Route::get('film/show','FilmController@show');
+    Route::post('film/store','FilmController@store');
+    Route::get('film/edit','FilmController@edit');
+    Route::post('film/update','FilmController@update');
+    Route::get('film/delete','FilmController@delete');
 });

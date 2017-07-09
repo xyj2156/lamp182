@@ -28,6 +28,10 @@ return [
         '演员管理' => [
             '添加演员' => 'admin/cast/create',
             '查看演员' => 'admin/cast'
+        ],
+        '电影管理' => [
+            '添加电影' => 'admin/film/create',
+            '查看电影' => 'admin/film/show'
         ]
     ],
     'admin_face_path' => '/uploads/uface/admin',
