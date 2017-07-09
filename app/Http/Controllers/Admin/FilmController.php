@@ -235,7 +235,7 @@ class FilmController extends Controller
             return back() -> with('error', '修改失败请稍候重试。');
         }
     }
-    
+
     /**
      * 删除电影
      * @auth 黄小康
