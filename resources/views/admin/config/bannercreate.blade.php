@@ -14,7 +14,7 @@
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="user-name" name="title" value="{{old('title')}}">
+                                    <input type="text" class="tpl-form-input" id="user-name" required name="title" value="{{old('title')}}">
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -63,14 +63,14 @@
             // 判断是否有选择上传文件
             var imgPath = $("#doc-form-file").val();
             if (imgPath == "") {
-                alert("请选择上传图片！");
+                layer.msg("请选择上传图片！");
                 return;
             }
             //判断上传文件的后缀名
             var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
             if (strExtension != 'jpg' && strExtension != 'gif'
                 && strExtension != 'png' && strExtension != 'bmp') {
-                alert("请选择图片文件");
+                layer.msg("请选择图片文件");
                 return;
             }
 
@@ -78,7 +78,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{url('admin/upload')}}",
+                url: "{{url('admin/upload')}}?path=banner_path",
                 _method:'post',
                 _token:'{{csrf_token()}}',
                 data: formData,
@@ -94,7 +94,7 @@
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("上传失败，请检查网络后重试");
+                    layer.msg("上传失败，请检查网络后重试");
                 }
             });
         }

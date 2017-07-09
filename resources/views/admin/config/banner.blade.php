@@ -36,11 +36,11 @@
                         <tbody>
                         @foreach($data as $k => $v)
                             <tr class="gradeX">
-                                <td><input type="text" value="{{$v -> order}}"></td>
+                                <td><input type="number" max="255" data-id="{{$v -> id}}" value="{{$v -> order}}" width="20"></td>
                                 <td>{{$v -> id}}</td>
                                 <td>{{$v -> title}}</td>
                                 <td><img src="{{asset($v -> pic)}}" alt="" style="height:100px"></td>
-                                <td><a href="{{$v -> url}}">{{$v -> url}}</a></td>
+                                <td><a href="{{$v -> url}}" target="_blank">{{$v -> url}}</a></td>
                                 <td>{{$v -> updated_at}}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
@@ -60,16 +60,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
     <script>
         function member_delete(id) {
-            layer.confirm('真要删除这个用户吗？', {
+            layer.confirm('真要删除这个轮播图吗？', {
                 btn: ['忍痛删除','舍不得'] //按钮
             }, function(){
                 $.post(
-                    '{{url('admin/user')}}/'+id,
+                    '{{url('admin/config/delete')}}',
                     {
-                        '_method' : 'delete',
-                        '_token' : '{{csrf_token()}}'
+                        '_token' : '{{csrf_token()}}',
+                        'id' : id
                     },
                     function (msg){
                         var icon= 0;
@@ -78,7 +81,7 @@
                         } else {
                             icon = 6;
                             setTimeout(function(){
-                                location.href = '/admin/user';
+                                location.href = '{{url('admin/config/banner')}}';
                             },1000);
                         }
                         layer.alert(msg.msg,{icon:icon});
@@ -89,5 +92,52 @@
 
             });
         }
+
+        $(function (){
+            $('td>input').change(function (){
+                var me = $(this);
+                $.get(
+                    '{{url('admin/config/order')}}',
+                    {
+                        'id' : me.attr('data-id'),
+                        'order' : me.val()
+                    }
+                    ,function (msg){
+                        layer.msg(msg.msg);
+                        if (!msg.status){
+                            var obj = {};
+                            var arr = [];
+
+                            $('.gradeX').each(function (){
+                                var o = $(this);
+                                var i = o.find('td').find('input').val();
+                                obj[i] = o;
+
+                                arr[arr.length] = i;
+                            });
+                            if(obj.length <= 1) return false;
+
+                            arr.sort(function(a, b){
+                                return a - b;
+                            });
+
+                            var i = arr.length;
+                            var k = Object.keys(obj).length;
+                            if(i != k){
+                                location = '{{url('admin/config/banner')}}';
+                                return false;
+                            } else {
+                                arr.time = setInterval(function () {
+                                    i --;
+                                    var tmp = obj[arr[i]];
+                                    tmp.parent().prepend(tmp.hide().show(400));
+                                    if(i <= 0) clearInterval(arr.time);
+                                }, 50);
+                            }
+                        }
+                    }
+                );
+            });
+        });
     </script>
 @endsection

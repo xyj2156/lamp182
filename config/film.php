@@ -54,8 +54,12 @@ return [
         'home_face_path' => '/uploads/uface/home',
         // 友情链接的缩略图
         'admin_thumb_path' => '/uploads/thumbnail',
-        // 电影缩略图上传位置
+//         电影缩略图上传位置
         'film_path' => '/uploads/film_thumbail',
+//        轮播图上传位置
+        'banner_path' => '/uploads/banner_thumb',
+//        logo
+        'logo_path' => '/uploads/logo_thumb',
     ]
 
 ];
