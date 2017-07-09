@@ -140,7 +140,7 @@ class WebConfigController extends Controller
 //            清除ajax在session 中的记录
             session(['banner_path' => null]);
 //            删除旧文件
-            if(is_file($file) && $isUnlink) unlink($file);
+            if($isUnlink && is_file($file)) unlink($file);
             return redirect('admin/config/banner') -> with('success', '修改成功。');
         } else
             return back() -> with('error', '修改失败请稍候重试。');

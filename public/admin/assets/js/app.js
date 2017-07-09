@@ -369,10 +369,11 @@ setTimeout(function (){
     var path = location.pathname.split('/')[2];
     var arr = {
         'user'    : 1,
-        'cast'    : 2,
-        'type'    : 3,
-        'config'  : 4,
-        'link'    : 5
+        'film'    : 2,
+        'cast'    : 3,
+        'type'    : 4,
+        'config'  : 5,
+        'link'    : 6
     };
     var li = $('.left-sidebar>.sidebar-nav>.sidebar-nav-link');
     li.eq(arr[path]).find('span.am-icon-chevron-down').addClass('sidebar-nav-sub-ico-rotate');

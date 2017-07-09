@@ -19,11 +19,16 @@ return [
         'm' => '男',
         'w' => '女'
     ],
+//    导航栏配置
     'nav' => [
         '首页' => 'admin/index',
         '前台用户管理' => [
             '添加用户' => 'admin/user/create',
             '查看用户' => 'admin/user'
+        ],
+        '电影管理' => [
+            '添加电影' => 'admin/film/create',
+            '查看电影' => 'admin/film/'
         ],
         '演员管理' => [
             '添加演员' => 'admin/cast/create',
@@ -40,13 +45,14 @@ return [
         '友情链接' => [
             '添加链接' => 'admin/link/create',
             '查看链接' => 'admin/link'
-        ]
+        ],
     ],
     'type' => [
         1 => '地区',
         '年份',
-        '语言'
+        '类型'
     ],
+//    上传路径配置
     'uploads' => [
         // 后台管理员的头像
         'admin_face_path' => '/uploads/uface/admin',

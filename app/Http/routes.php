@@ -49,4 +49,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('link','LinkController');
 //    友情链接排序
     Route::get('link/order/{id}-{order}', 'LinkController@order');
+//    后台电影路由
+    Route::resource('film','FilmController');
 });

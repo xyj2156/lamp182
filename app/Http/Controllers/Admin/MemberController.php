@@ -28,11 +28,6 @@ class MemberController extends Controller
 
         $res = Member::where('username', 'like', "%{$search}%") -> paginate(10);
 
-        $tmp = '';
-        foreach ($req -> all() as $k => $v){
-            $tmp .= "&{$k}={$v}";
-        }
-
         return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'tmp' => $tmp, 'search' => $req -> all()]);
     }
 
