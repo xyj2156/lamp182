@@ -28,7 +28,7 @@ class MemberController extends Controller
 
         $res = Member::where('username', 'like', "%{$search}%") -> paginate(10);
 
-        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'tmp' => $tmp, 'search' => $req -> all()]);
+        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'search' => $req -> all()]);
     }
 
     /**
@@ -128,6 +128,7 @@ class MemberController extends Controller
     {
         $res1 = Member::find($id);
         $res2 = $res1 -> detail;
+//        dd($res1, $res2);
 //        判断有没有数据
         if (!$res1 || !$res2) {
             return redirect('admin/user') -> with('error', '请按套路出牌。。');

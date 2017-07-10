@@ -52,3 +52,5 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
 //    后台电影路由
     Route::resource('film','FilmController');
 });
+
+Route::get('test', 'test@test');
