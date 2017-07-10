@@ -80,7 +80,6 @@ class FilmController extends Controller
             'actor' => 'required',
             'uptime' => 'required',
             'film_detail' => 'required',
-
         ],[
             'name.required'  => '请输入电影名称.',
             'price.required' => '请输入电影票价.',
@@ -116,7 +115,6 @@ class FilmController extends Controller
             'actor',
             'uptime',
             'film_detail',
-            'price',
         ]);
 
         
@@ -150,6 +148,9 @@ class FilmController extends Controller
     public function show($id)
     {
         $data = Film::find($id);
+        if(!$data) return back() -> with('error', '请按照套路出牌。');
+        $data2 = $data -> detail;
+        if(!$data2) return back() -> with('error', '请按照套路出牌。');
 
         return view('admin.film.indexFilm',['title' => '电影详情 -- '.$data -> name,'data'=>$data]);
     }

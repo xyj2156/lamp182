@@ -9,10 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Model\Admin\Film;
+
 class test extends Controller
 {
     public function test()
     {
-        dd($_SERVER);
+        dd(Film::find(39) -> detail);
     }
 }
