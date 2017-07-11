@@ -67,7 +67,7 @@ class CastController extends Controller
         $data = $request -> only([
             'name',
             'description',
-            'age'
+            'sex'
         ]);
 
         $data['ctime'] = $data['utime'] = time();
@@ -129,7 +129,7 @@ class CastController extends Controller
         $cast = Cast::find($id);
         $cast -> name = $request -> input('name');
         $cast -> description = $request -> input('description');
-        $cast -> age = $request -> input('age');
+        $cast -> sex = $request -> input('sex');
 
         if ($cast -> update()) {
             return redirect('admin/cast') -> with('success', '修改成功。');

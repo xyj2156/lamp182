@@ -9,12 +9,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Model\Admin\Cast;
 use App\Http\Model\Admin\Film;
 
 class test extends Controller
 {
     public function test()
     {
-        dd(Film::find(39) -> detail);
+        $data2 = Cast::where('id', 'in',['1,2,3']) -> get();
+//        $data = Cast::find($id) -> film;
+        dump($data2);
     }
 }

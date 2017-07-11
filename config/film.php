@@ -46,6 +46,10 @@ return [
             '添加链接' => 'admin/link/create',
             '查看链接' => 'admin/link'
         ],
+        '影厅管理' => [
+            '添加影厅' => 'admin/filmroom/create',
+            '查看影厅' => 'admin/filmroom'
+        ],
     ],
     'type' => [
         1 => '地区',

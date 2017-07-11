@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Admin\Cast;
 use App\Http\Model\Admin\Film_type;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,9 @@ class FilmController extends Controller
      */
     public function create()
     {
-
-        $type = Film_type::all();
         $title = '添加电影';
+//        处理电影分类
+        $type = Film_type::all();
         $area_type = [];
         $_type = [];
         $year = [];
@@ -110,7 +111,6 @@ class FilmController extends Controller
 
 //      获取详情表数据
         $data2 = $request -> only([
-            'name',
             'director',
             'actor',
             'uptime',
@@ -152,6 +152,8 @@ class FilmController extends Controller
         $data2 = $data -> detail;
         if(!$data2) return back() -> with('error', '请按照套路出牌。');
 
+
+
         return view('admin.film.indexFilm',['title' => '电影详情 -- '.$data -> name,'data'=>$data]);
     }
 
@@ -166,7 +168,9 @@ class FilmController extends Controller
     {
 
         $data = Film::find($id);
+        if(!$data) return back() -> with('error', '电影不存在。');
         $data2 = FilmDetail::find($id);
+        if(!$data2) return back() -> with('error', '电影数据库出问题了。');
         $type = Film_type::all();
         $title = '修改电影 -- '.$data -> name;
         $area_type = [];
@@ -187,9 +191,7 @@ class FilmController extends Controller
             }
         }
 
-        if($data) return view('admin.film.editFilm', compact('data', 'data2', 'title', '_type', 'year', 'area_type'));
-        
-        return redirect('admin/film')->with('error','电影不存在。');
+        return view('admin.film.editFilm', compact('data', 'data2', 'title', '_type', 'year', 'area_type'));
     }
 
     public function update(Request $request, $id)
@@ -199,6 +201,7 @@ class FilmController extends Controller
             'name'  => 'required',
             'price' => 'required|numeric',
             '_type' => 'required',
+            'director' => 'required',
             'area_type' => 'required',
             'year' => 'required',
             'film_pic' => 'required',
@@ -207,6 +210,7 @@ class FilmController extends Controller
             'price.required' => '请输入电影票价.',
             'price.numeric' => '请输入正确的票价.',
             '_type.required'  => '请输入电影所属类型.',
+            'director.required'  => '请输入导演.',
             'area_type.required' => '请输入电影所属地区.',
             'year.required' => '请输入电影所属年份.',
             'film_pic.required' => '请选择电影封面图片',
@@ -215,8 +219,25 @@ class FilmController extends Controller
         $res = Film::find($id);
 
         if( !$res ) return back() -> with('error','无此电影。');
+        $res2 = FilmDetail::find($id);
+        if( !$res2 ) return back() -> with('error','无此电影。');
 
-        $data = $request -> except('_token','id');
+        $data = $request -> only([
+            'name',
+            'film_pic',
+            'price',
+            '_type',
+            'area_type',
+            'year'
+        ]);
+        $data2 = $request -> only([
+            'director',
+            'actor',
+            'uptime',
+            'film_detail'
+        ]);
+
+        $data['film_pic'] = isset($data['film_pic']) ? $data['film_pic'] : $res -> film_pic;
 //        记录一下旧文件
         $file = public_path().$res -> film_pic;
         $isUnlink = $res -> film_pic != $data['film_pic'];
@@ -228,7 +249,7 @@ class FilmController extends Controller
         $res -> area_type = $data['area_type'];
         $res -> year = $data['year'];
 
-        if($res -> update()){
+        if($res -> update($data) && $res2 -> update($data2)){
             session(['film_path' => null]);
             if($isUnlink && is_file($file)) unlink($file);
             return redirect('admin/film') -> with('success','修改成功');
@@ -265,6 +286,12 @@ class FilmController extends Controller
             DB::rollback();
             return ['status' => 500, 'msg' => '内部处理错误，请稍候再试 。。'];
         }
+    }
+
+    public function film($name)
+    {
+        $res = Film::where('name', 'like', "%{$name}%") -> select('id', 'name') -> take(5) -> get();
+        return $res -> toArray();
     }
 
 }
