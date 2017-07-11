@@ -46,6 +46,10 @@ return [
             '添加链接' => 'admin/link/create',
             '查看链接' => 'admin/link'
         ],
+        '后台管理员管理' => [
+            '添加管理员用户' => 'admin/admins/create',
+            '查看管理员用户' => 'admin/admins',
+        ],
     ],
     'type' => [
         1 => '地区',

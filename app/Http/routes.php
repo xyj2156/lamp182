@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::get('link/order/{id}-{order}', 'LinkController@order');
 //    后台电影路由
     Route::resource('film','FilmController');
+//    后台管理员管理
+    Route::resource('admins','AdminsController');
 });
 
 Route::get('test', 'test@test');
