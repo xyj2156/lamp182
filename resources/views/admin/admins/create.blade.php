@@ -6,40 +6,49 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl"><a href="">友情链接 </a> > 修改链接</div>
+                        <div class="widget-title am-fl"><a href="{{url('admin/admins')}}">管理员管理 </a> > 添加管理员</div>
                     </div>
                     <div class="widget-body am-fr">
-                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/link')}}/{{$data -> id}}">
+                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/admins')}}">
                             {{csrf_field()}}
-                            <input type="hidden" name="_method" value="put">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">链接名 <span class="tpl-form-line-small-title">LinkName</span></label>
+                                <label for="user-name" class="am-u-sm-3 am-form-label">管理员 <span class="tpl-form-line-small-title">UserName</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="linkname" name="linkname" value="{{ $data -> linkname}}">
+                                    <input type="text" class="tpl-form-input" id="user-name" name="username" placeholder="请输入管理员名" value="{{old('username')}}">
+                                    <small>不能以数字开头，字数6-18位的数组字母下划线。</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="age" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
+                                <label for="password" class="am-u-sm-3 am-form-label">密码 <span class="tpl-form-line-small-title">PassWord</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="linktitle" name="linktitle" placeholder="请输入链接标题" value="{{ $data -> linktitle}}">
+                                    <input type="password" class="tpl-form-input" id="password" name="password" placeholder="请输入密码" value="{{old('password')}}">
+                                    <small>字数6-18位。</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="phone" class="am-u-sm-3 am-form-label">地址 <span class="tpl-form-line-small-title">Url</span></label>
+                                <label for="phone" class="am-u-sm-3 am-form-label">手机 <span class="tpl-form-line-small-title">Phone</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="linkurl" name="linkurl" placeholder="请输入链接地址" value="{{ $data -> linkurl}}">
+                                    <input type="text" class="tpl-form-input" id="phone" name="phone" placeholder="请输入手机号码" value="{{old('phone')}}">
+                                    <small>请输入11位手机号码。</small>
                                 </div>
                             </div>
-                            <input type="hidden" name="linkthumb" value="" id="uface">
                             <div class="am-form-group">
-                                <label for="user-weibo" class="am-u-sm-3 am-form-label">缩略图 <span class="tpl-form-line-small-title">Thumbnail</span></label>
+                                <label for="email" class="am-u-sm-3 am-form-label">邮箱 <span class="tpl-form-line-small-title">E-mail</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="email" name="email" placeholder="请输入电子邮箱" value="{{old('email')}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <input type="hidden" name="uface" value="" id="uface">
+                            <div class="am-form-group">
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">头像 <span class="tpl-form-line-small-title">Uface</span></label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-group am-form-file">
                                         <div class="tpl-form-file-img">
-                                            <img src="{{ $data -> linkthumb}}" alt="" id="pic" style="max-height:200px;">
+                                            <img src="{{old('uface')}}" alt="" id="pic" style="max-height:200px;">
                                         </div>
                                         <button type="button" class="am-btn am-btn-danger am-btn-sm">
-                                            <i class="am-icon-cloud-upload"></i> 请修改缩略图</button>
+                                            <i class="am-icon-cloud-upload"></i> 添加头像</button>
                                         <input id="doc-form-file" type="file" name="myfile" multiple="">
                                     </div>
                                 </div>
@@ -84,7 +93,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{url('admin/upload')}}?path=admin_thumb_path",
+                url: "{{url('admin/upload')}}?path=admin_face_path",
                 _method:'post',
                 _token:'{{csrf_token()}}',
                 data: formData,
@@ -100,7 +109,7 @@
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    layer.msg("上传失败，请检查网络后重试");
+                    alert("上传失败，请检查网络后重试");
                 }
             });
         }

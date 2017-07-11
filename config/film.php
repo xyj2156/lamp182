@@ -50,6 +50,10 @@ return [
             '添加影厅' => 'admin/filmroom/create',
             '查看影厅' => 'admin/filmroom'
         ],
+        '后台管理员管理' => [
+            '添加管理员用户' => 'admin/admins/create',
+            '查看管理员用户' => 'admin/admins',
+        ],
     ],
     'type' => [
         1 => '地区',

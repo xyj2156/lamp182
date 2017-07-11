@@ -55,6 +55,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('filmroom', 'FilmRoomController');
 //    获取电影信息
     Route::get('films/{name}', 'FilmController@film');
+//    后台管理员管理
+    Route::resource('admins','AdminsController');
 });
 
 Route::get('test', 'test@test');
