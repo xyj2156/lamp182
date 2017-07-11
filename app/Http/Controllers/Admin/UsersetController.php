@@ -6,7 +6,6 @@ use App\Http\Model\Admin\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
-use Storage;
 use App\Http\Controllers\Controller;
 
 class UsersetController extends Controller
@@ -16,26 +15,48 @@ class UsersetController extends Controller
      */
     public function upload(Request $request)
     {
-            $file = Input::file('myfile');	//接文件
+            $file = $request -> file('myfile');	//接文件
 
             //文件是否上传成功
             if($file->isValid()){	//判断文件是否上传成功
-                $originalName = $file->getClientOriginalName(); //源文件名
+
+                // 获取上传路径数组
+                $save_path = config('film.uploads');
+
+                // 获取ajax传过来的 path
+                $path_o = trim($request -> input('path'));
+
+                // 没有传返回 ''
+                if(!$path_o){
+                    return '';
+                }
+
+                // 打开 config 目录里的 film.php文件自然会懂
+                $path = $save_path[$path_o];
 
                 $ext = $file->getClientOriginalExtension();    //上传文件的后缀名
 
                 $type = $file->getClientMimeType(); //文件类型
 
-                $realPath = $file->getRealPath();   //临时文件的绝对路径
-
                 $fileName = date('Y-m-d-H-i-s').'-'.uniqid().'.'.$ext;  //新文件名
 
-                // 将图片上传到本地服务器
-                $path = $file->move(public_path() .'/'. config("film.admin_face_path"), $fileName);
+                // 删除session里的$path_o  (目的: 让ajax提交的文件始终只有一个)
+                $file_o = public_path().'/' .session($path_o);
+                if(is_file($file_o)) {
+                    unlink($file_o);
+                }
 
-                // 返回文件的上传路径
-                $filepath = config("film.admin_face_path") .'/'. $fileName;
-                return $filepath;
+                // 将图片上传到本地服务器
+                $res = $file->move(public_path() .'/'.$path, $fileName);
+                // 文件的路径
+                $resPath = $path.'/'.$fileName;
+                if($res){
+                    // 把路径存在session里
+                    session([$path_o => $resPath]);
+                    return $resPath;
+                }else{
+                    return '';
+                }
             }
 
     }
@@ -103,11 +124,9 @@ class UsersetController extends Controller
     {
         // 验证表单提交数据的规则
         $this->validate($request, [
-            'username'  =>'regex:/^[a-zA-Z_]\w{5,17}$/',
             'email'     =>'required|email',
             'phone'     =>'regex:/^1[34578][0-9]{9}$/',
         ],[
-            'username.regex'    => '请正确输入用户名。',
             'email.required'    => '必须输入邮箱。',
             'email.email'       => '请正确输入邮箱。',
             'phone.regex'       => '请输入正确手机号码。',
@@ -116,7 +135,6 @@ class UsersetController extends Controller
         $user = Admin::find($id);
         // 接收用户修改后的数据
         $data = $request -> only([
-            'username',
             'email',
             'phone',
             'uface'

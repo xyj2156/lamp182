@@ -17,7 +17,8 @@ class Film extends Model
     public $timestamps = false;
 
     //关联外表
-    public function FilmDetail()
+
+    public function detail()
     {
     	return $this -> hasOne('App\Http\Model\Admin\FilmDetail','id','id');
     }

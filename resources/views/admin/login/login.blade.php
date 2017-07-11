@@ -9,13 +9,13 @@
                 <form action="{{url('admin/dologin')}}" class="am-form tpl-form-line-form" method="post">
                 {{csrf_field()}}
                     <div class="am-form-group">
-                        <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入账号" name="username" value="{{old('username')}}">
+                        <input type="text" class="tpl-form-input" required id="user-name" minlength="6" maxlength="18" placeholder="请输入账号" name="username" value="{{old('username')}}">
                     </div>
                     <div class="am-form-group">
-                        <input type="password" class="tpl-form-input" id="user-name" placeholder="请输入密码" name="password">
+                        <input type="password" class="tpl-form-input" required id="user-name" placeholder="请输入密码" name="password">
                     </div>
                     <div class="am-form-group">
-                        <input type="text" style='width:150px' class="tpl-form-input" id="user-name" placeholder="请输入验证码" name="code">
+                        <input type="text" style='width:150px' class="tpl-form-input" required id="user-name" placeholder="请输入验证码" name="code">
                         <div>
                             <img src="{{ url('code') }}/{{rand(10000, 99999)}}.jpg" alt="验证码" style='margin-left: 200px;margin-top:-60px;'>
                         </div>

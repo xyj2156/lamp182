@@ -28,12 +28,7 @@ class MemberController extends Controller
 
         $res = Member::where('username', 'like', "%{$search}%") -> paginate(10);
 
-        $tmp = '';
-        foreach ($req -> all() as $k => $v){
-            $tmp .= "&{$k}={$v}";
-        }
-
-        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'tmp' => $tmp, 'search' => $req -> all()]);
+        return view('admin.member.index', ['title' => '前台用户查看', 'data' => $res, 'search' => $req -> all()]);
     }
 
     /**
@@ -133,6 +128,7 @@ class MemberController extends Controller
     {
         $res1 = Member::find($id);
         $res2 = $res1 -> detail;
+//        dd($res1, $res2);
 //        判断有没有数据
         if (!$res1 || !$res2) {
             return redirect('admin/user') -> with('error', '请按套路出牌。。');
@@ -213,7 +209,7 @@ class MemberController extends Controller
         $res2 -> age = $request -> input('age', '18');
         $res2 -> sex = $request -> input('sex', '18');
 
-        if(!$res1 -> save() || !$res2 -> save()){
+        if(!$res1 -> update() || !$res2 -> save()){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
         }

@@ -14,5 +14,11 @@ class Member extends Model
     protected $guarded = [];
 //    是否自动维护 create_at 和 update_at
     public $timestamps = false;
-   
+
+
+    public function detail()
+    {
+        return $this -> hasOne('\App\Http\Model\Admin\Member_detail','id','id');
+    }
+
 }

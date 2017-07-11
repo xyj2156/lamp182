@@ -19,21 +19,53 @@ return [
         'm' => '男',
         'w' => '女'
     ],
+//    导航栏配置
     'nav' => [
         '首页' => 'admin/index',
         '前台用户管理' => [
             '添加用户' => 'admin/user/create',
             '查看用户' => 'admin/user'
         ],
+        '电影管理' => [
+            '添加电影' => 'admin/film/create',
+            '查看电影' => 'admin/film/'
+        ],
         '演员管理' => [
             '添加演员' => 'admin/cast/create',
             '查看演员' => 'admin/cast'
         ],
-        '电影管理' => [
-            '添加电影' => 'admin/film/create',
-            '查看电影' => 'admin/film/show'
-        ]
+        '分类管理' => [
+            '添加分类' => 'admin/type/create',
+            '查看分类' => 'admin/type'
+        ],
+        '网站配置' => [
+            '修改配置' => 'admin/config',
+            '轮播图' => 'admin/config/banner'
+        ],
+        '友情链接' => [
+            '添加链接' => 'admin/link/create',
+            '查看链接' => 'admin/link'
+        ],
     ],
-    'admin_face_path' => '/uploads/uface/admin',
-    'home_face_path' => '/uploads/uface/home',
+    'type' => [
+        1 => '地区',
+        '年份',
+        '类型'
+    ],
+//    上传路径配置
+    'uploads' => [
+        // 后台管理员的头像
+        'admin_face_path' => '/uploads/uface/admin',
+        // 前台的头像图片
+        'home_face_path' => '/uploads/uface/home',
+        // 友情链接的缩略图
+        'admin_thumb_path' => '/uploads/thumbnail',
+//         电影缩略图上传位置
+        'film_path' => '/uploads/film_thumbail',
+//        轮播图上传位置
+        'banner_path' => '/uploads/banner_thumb',
+//        logo
+        'logo_path' => '/uploads/logo_thumb',
+    ]
+
 ];

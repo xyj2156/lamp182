@@ -3,7 +3,7 @@
 --}}
 <div class="am-u-lg-12 am-cf">
     <div class="am-fr">
-        {!! $data -> render() !!}
+        {!! $data -> appends($search) -> render() !!}
     </div>
 </div>
 @section('style')

@@ -39,13 +39,20 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('cast', 'CastController');
 //    后台管理员信息修改（只能修改自己的）
     Route::resource('userset','UsersetController');
-//    后台头像上传
+//    后台上传
     Route::any('upload','UsersetController@upload');
+
+//    电影类型管理
+    Route::resource('type', 'TypeController');
+//    网站配置
+    Route::controller('config', 'WebConfigController');
+//    友情链接模块
+    Route::resource('link','LinkController');
+//    友情链接排序
+    Route::get('link/order/{id}-{order}', 'LinkController@order');
 //    后台电影路由
-    Route::get('film/create','FilmController@create');
-    Route::get('film/show','FilmController@show');
-    Route::post('film/store','FilmController@store');
-    Route::get('film/edit','FilmController@edit');
-    Route::post('film/update','FilmController@update');
-    Route::get('film/delete','FilmController@delete');
+    Route::resource('film','FilmController');
+
 });
+
+Route::get('test', 'test@test');

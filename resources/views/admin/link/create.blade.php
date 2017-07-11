@@ -6,43 +6,39 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl">管理员 > 设置</div>
+                        <div class="widget-title am-fl"><a href="">友情链接 </a> > 添加链接</div>
                     </div>
                     <div class="widget-body am-fr">
-                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/userset/'.session('admin_user')->id)}}">
+                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/link')}}">
                             {{csrf_field()}}
-                            <input type="hidden" name="_method" value="put">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">管理员 <span class="tpl-form-line-small-title">UserName</span></label>
+                                <label for="user-name" class="am-u-sm-3 am-form-label">链接名 <span class="tpl-form-line-small-title">LinkName</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="user-name" name="username" disabled value="{{session('admin_user')->username}}">
-                                    <small>不能以数字开头，字数6-18位的数组字母下划线。</small>
+                                    <input type="text" class="tpl-form-input" id="linkname" name="linkname" placeholder="请输入链接名" value="{{old('linkname')}}">
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="phone" class="am-u-sm-3 am-form-label">手机 <span class="tpl-form-line-small-title">Phone</span></label>
+                                <label for="age" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="phone" name="phone" value="{{session('admin_user')->phone}}">
-                                    <small>请输入11位手机号码。</small>
+                                    <input type="text" class="tpl-form-input" id="linktitle" name="linktitle" placeholder="请输入链接标题" value="{{old('linktitle')}}">
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="email" class="am-u-sm-3 am-form-label">邮箱 <span class="tpl-form-line-small-title">E-mail</span></label>
+                                <label for="phone" class="am-u-sm-3 am-form-label">地址 <span class="tpl-form-line-small-title">Url</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="email" name="email" value="{{session('admin_user')->email}}">
-                                    <small></small>
+                                    <input type="text" class="tpl-form-input" id="linkurl" name="linkurl" placeholder="请输入链接地址" value="{{old('linkurl')}}">
                                 </div>
                             </div>
-                            <input style='display: none' type="text" class="tpl-form-input" id="uface" name="uface"  value="{{session('admin_user')->uface}}" >
+                            <input type="hidden" name="linkthumb" value="" id="uface">
                             <div class="am-form-group">
-                                <label for="user-weibo" class="am-u-sm-3 am-form-label">头像 <span class="tpl-form-line-small-title">UFace</span></label>
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">缩略图 <span class="tpl-form-line-small-title">Thumbnail</span></label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-group am-form-file">
                                         <div class="tpl-form-file-img">
-                                            <img src="{{session('admin_user')->uface}}" alt="" id="pic" style="max-height:200px;">
+                                            <img src="{{old('linkthumb')}}" alt="" id="pic" style="max-height:200px;">
                                         </div>
                                         <button type="button" class="am-btn am-btn-danger am-btn-sm">
-                                            <i class="am-icon-cloud-upload"></i> 添加图片</button>
+                                            <i class="am-icon-cloud-upload"></i> 添加缩略图</button>
                                         <input id="doc-form-file" type="file" name="myfile" multiple="">
                                     </div>
                                 </div>
@@ -87,7 +83,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{url('admin/upload')}}?path=admin_face_path",
+                url: "{{url('admin/upload')}}?path=admin_thumb_path",
                 _method:'post',
                 _token:'{{csrf_token()}}',
                 data: formData,
@@ -95,9 +91,7 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                
                 success: function(data) {
-
 //                                    console.log(data);
 //                                    alert("上传成功");
                     $('#pic').attr('src', data).hide(200).show(600);
