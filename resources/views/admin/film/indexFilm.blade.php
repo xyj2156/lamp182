@@ -3,14 +3,18 @@
 	<div class="container-fluid am-cf">
         <div class="row">
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+
                 <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 电影管理 <small>江洋八子</small></div>
+
                 <p class="page-header-description">简单组合。。。干不简单的事情。。。</p>
             </div>
             {{--<!-- 搜索 -->--}}
             <div class="am-fl tpl-header-search">
+
                 <form class="tpl-header-search-form" action="{{url('admin/film')}}">
                     <button class="tpl-header-search-btn am-icon-search" type="submit"></button>
                     <input class="tpl-header-search-box" name="search" type="text" value="{{$search['search'] or ''}}" placeholder="搜索电影名。.">
+
                 </form>
             </div>
         </div>
@@ -41,13 +45,16 @@
                             <tr class="gradeX">
                                 <td>{{$film->id}}</td>
                                 <td>{{$film->name}}</td>
+
                                 <td><img style="max-width:200px" src="{{$film->film_pic}}"></td>
+
                                 <td>{{$film->price}}</td>
                                 <td>{{$film->_type}}</td>
                                 <td>{{$film->area_type}}</td>
 								<td>{{$film->year}}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
+
                                         <a href="{{url('admin/film')}}/{{$film->id}}/edit" title="编辑">
                                             <i class="am-icon-pencil"></i> 编辑
                                         </a>
@@ -61,6 +68,7 @@
                         </tbody>
                     </table>
                    @include('admin.layout.render')
+
                 </div>
             </div>
         </div>
@@ -70,11 +78,13 @@
 @section('script')
     <script>
         function member_delete(id) {
+
             layer.confirm('真要删除这个电影吗？', {
                 btn: ['忍痛删除','舍不得'] //按钮
             }, function(){
                 $.post(
                     '{{url('admin/film')}}/'+id,
+
                     {
                         '_method' : 'delete',
                         '_token' : '{{csrf_token()}}'
@@ -86,7 +96,9 @@
                         } else {
                             icon = 6;
                             setTimeout(function(){
+
                                 location.href = '{{asset('/admin/film')}}';
+
                             },1000);
                         }
                         layer.alert(msg.msg,{icon:icon});

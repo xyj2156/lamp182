@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('userset','UsersetController');
 //    后台上传
     Route::any('upload','UsersetController@upload');
+
 //    电影类型管理
     Route::resource('type', 'TypeController');
 //    网站配置
@@ -57,6 +58,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::get('films/{name}', 'FilmController@film');
 //    后台管理员管理
     Route::resource('admins','AdminsController');
+//    后台订单管理
+    Route::resource('orders','OrdersController');
 });
 
 Route::get('test', 'test@test');

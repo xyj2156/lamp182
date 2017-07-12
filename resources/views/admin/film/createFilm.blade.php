@@ -8,76 +8,95 @@
                         <div class="widget-title am-fl"><a href="{{url('admin/user')}}">电影管理 </a> > 添加电影</div>
                     </div>
                     <div class="widget-body am-fr">
+
                         <form class="am-form tpl-form-line-form" method="post" action="{{url('/admin/film/')}}" enctype="multipart/form-data">
+
                             {{csrf_field()}}
                             
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">电影名称 <span class="tpl-form-line-small-title">FilmName</span></label>
                                 <div class="am-u-sm-9">
+
                                     <input type="text" class="tpl-form-input" id="user-name" required name="name" placeholder="请输入电影名" value="{{old('name')}}">
+
                                     <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
+
                                     <input type="number" class="tpl-form-input" id="age" required name="price" placeholder="请输入售价" value="{{old('price')}}">
+
                                     <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">导演 <span class="tpl-form-line-small-title">director</span></label>
                                 <div class="am-u-sm-9">
+
                                     <input type="text" class="tpl-form-input" id="phone" required name="director" placeholder="请输入导演" value="{{old('director')}}">
+
                                     <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">演员 <span class="tpl-form-line-small-title">actor</span></label>
                                 <div class="am-u-sm-9">
+
                                     <input type="text" class="tpl-form-input" id="phone" required name="actor" placeholder="请输入演员,多个演员用逗号分开" value="{{old('actor')}}">
+
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">上映时间 <span class="tpl-form-line-small-title">uptime</span></label>
                                 <div class="am-u-sm-9">
+
                                     <input type="date" class="tpl-form-input" id="phone" required name="uptime" value="{{old('uptime') ? old('uptime') : date('Y-m-d')}}">
+
                                     <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">类型 <span class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
+
                                     <select data-am-selected="{searchBox: 1}" name="_type">
                                         @foreach($_type as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="email" class="am-u-sm-3 am-form-label">地区 <span class="tpl-form-line-small-title">Rigion</span></label>
                                 <div class="am-u-sm-9">
+
                                     <select data-am-selected="{searchBox: 2}" name="area_type">
                                         @foreach($area_type as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">年份 <span class="tpl-form-line-small-title">Year</span></label>
                                 <div class="am-u-sm-9">
+
                                     <select data-am-selected="{searchBox: 3}" name="year">
                                         @foreach($year as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach
+
                                     </select>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail</span></label>
                                 <div class="am-u-sm-9">
+
                                     <textarea name="film_detail" rows="5">{{old('film_detail')}}</textarea>
                                 </div>
                             </div>
@@ -94,12 +113,15 @@
                                         <input id="doc-form-file" type="file" name="myfile" multiple="">
                                     </div>
                                 </div>
+
                             </div>
                             <div class="am-form-group">
                                 <label for="password" class="am-u-sm-3 am-form-label">预告片 <span class="tpl-form-line-small-title">prevue</span></label>
                                 <div class="am-u-sm-9">
                                     <a href="javascript:;" class="a-upload">
+
                                         <input type="file" id="videofile">点击这里上传预告片（暂时不开放）
+
                                     </a>
                                 </div>
                             </div>
@@ -116,6 +138,7 @@
     </div>
 @endsection
 @section('script')
+
 <script>
     $(function () {
         $("#doc-form-file").change(function () {
@@ -164,4 +187,5 @@
         });
     }
 </script>
+
 @endsection

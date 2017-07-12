@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 2017年7月9日 18:46:48 项英杰 全文修正
  */
@@ -7,6 +8,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin\Cast;
 use App\Http\Model\Admin\Film_type;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,6 +19,7 @@ use DB;
 
 class FilmController extends Controller
 {
+
     public function index(Request $req)
     {
         $search = $req -> input('search');
@@ -25,6 +28,7 @@ class FilmController extends Controller
         $search = $req -> all();
         return view('admin.film.indexFilm', compact('data', 'title', 'search'));
     }
+
 
     /**
      * 引入电影添加页面
@@ -57,6 +61,7 @@ class FilmController extends Controller
         }
 
         return view('admin.film.createFilm', compact('title', 'area_type', '_type', 'year'));
+
     }
 
     /**
@@ -74,13 +79,17 @@ class FilmController extends Controller
             'price' => 'required|min:0|integer',
             '_type' => 'required',
             'area_type' => 'required',
+
             'year' => 'required|integer',
+
             'film_pic' => 'required',
 
             'director' => 'required',
             'actor' => 'required',
             'uptime' => 'required',
             'film_detail' => 'required',
+
+
         ],[
             'name.required'  => '请输入电影名称.',
             'price.required' => '请输入电影票价.',
@@ -89,6 +98,8 @@ class FilmController extends Controller
             '_type.required'  => '请输入电影所属类型.',
             'area_type.required' => '请输入电影所属地区.',
             'year.required' => '请输入电影所属年份.',
+
+
             'year.integer' => '请输入正确年份.',
             'film_pic.required' => '请选择电影封面图片',
 
@@ -99,6 +110,8 @@ class FilmController extends Controller
         ]);
         
 
+
+
      //获取主表数据
         $data1 = $request -> only([
             'name',
@@ -106,8 +119,10 @@ class FilmController extends Controller
             '_type',
             'area_type',
             'year',
+
             'film_pic'
         ]);
+
 
 //      获取详情表数据
         $data2 = $request -> only([
@@ -115,7 +130,9 @@ class FilmController extends Controller
             'actor',
             'uptime',
             'film_detail',
+
         ]);
+
 
         
         //开启事务
@@ -128,8 +145,10 @@ class FilmController extends Controller
 
         if( $res1 && $res2 ){
             DB::commit();
+
             session(['film_path' => null]);
             return redirect('admin/film/') -> with('success', '添加成功');
+
         }else{
             DB::rollBack();
             return back() -> with('error','添加失败');
@@ -145,6 +164,7 @@ class FilmController extends Controller
      *
      * @return
      */
+
     public function show($id)
     {
         $data = Film::find($id);
@@ -155,6 +175,7 @@ class FilmController extends Controller
 
 
         return view('admin.film.indexFilm',['title' => '电影详情 -- '.$data -> name,'data'=>$data]);
+
     }
 
     /**
@@ -164,6 +185,7 @@ class FilmController extends Controller
      *
      * @return
      */
+
     public function edit($id)
     {
 
@@ -208,6 +230,7 @@ class FilmController extends Controller
         ],[
             'name.required'  => '请输入电影名称.',
             'price.required' => '请输入电影票价.',
+
             'price.numeric' => '请输入正确的票价.',
             '_type.required'  => '请输入电影所属类型.',
             'director.required'  => '请输入导演.',
@@ -243,11 +266,13 @@ class FilmController extends Controller
         $isUnlink = $res -> film_pic != $data['film_pic'];
 
         $res -> film_pic = $data['film_pic'];
+
         $res -> name = $data['name'];
         $res -> price = $data['price'];
         $res -> _type = $data['_type'];
         $res -> area_type = $data['area_type'];
         $res -> year = $data['year'];
+
 
         if($res -> update($data) && $res2 -> update($data2)){
             session(['film_path' => null]);
@@ -258,12 +283,14 @@ class FilmController extends Controller
         }
     }
 
+
     /**
      * 删除电影
      * @auth 黄小康
      *
      * @return
      */
+
     public function destroy($id)
     {
         $res1 = Film::find($id);
@@ -285,6 +312,7 @@ class FilmController extends Controller
         } else {
             DB::rollback();
             return ['status' => 500, 'msg' => '内部处理错误，请稍候再试 。。'];
+
         }
     }
 
