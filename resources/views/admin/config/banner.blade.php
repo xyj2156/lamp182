@@ -141,3 +141,12 @@
         });
     </script>
 @endsection
+
+@section('style')
+    <style>
+        .theme-black tr>td>input{
+            color:#000;
+        }
+        tr>td>input{width:30px;}
+    </style>
+@endsection

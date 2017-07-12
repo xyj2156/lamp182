@@ -20,5 +20,4 @@ class Member extends Model
     {
         return $this -> hasOne('\App\Http\Model\Admin\Member_detail','id','id');
     }
-
 }

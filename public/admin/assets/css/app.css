@@ -1555,7 +1555,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   background: 0 0;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
@@ -1908,4 +1908,8 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
     top: 112px;
     right: 0;
   }
+}
+
+.theme-black .am-selected-search input{
+  color:#4d6b8a;
 }

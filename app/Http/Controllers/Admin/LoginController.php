@@ -14,6 +14,7 @@ use App\Org\code\Code;
 
 use Illuminate\Support\Facades\Crypt;
 
+
 class LoginController extends Controller
 {
     
@@ -60,7 +61,8 @@ class LoginController extends Controller
              return back() -> with('error','验证码错误');
          }
          // 查询数据库是否有这个用户
-         $user = Admin::where('username','=',$data['username']) -> first() ;
+         $user = Admin::where('username','=',$data['username']) -> first();
+
          if (!$user) {
              return back() -> with('error','用户名不存在');
          } else {
@@ -68,7 +70,12 @@ class LoginController extends Controller
                 return back() -> with('error','账号或密码错误');
              }
          }
-         //将用户信息添加到session中
+         // 获取到当前登录成功的时间
+         $user -> ltime = time();
+         // 执行跟新数据
+         $user  -> save();
+
+         // 将用户信息添加到session中
          session(['admin_user' => $user]);
          return redirect('admin/index');
        

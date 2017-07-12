@@ -18,4 +18,9 @@ class Cast extends Model
     {
 
     }
+
+    public function Film()
+    {
+        return $this -> belongsToMany('\App\Http\Model\Admin\Film','film_casts','cid','fid');
+    }
 }

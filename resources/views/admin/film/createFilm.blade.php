@@ -1,7 +1,4 @@
 @extends('admin.layout.index')
-@section('style')
-<link href="{{asset('/admin/assets/css/k.css')}}" type="text/css" rel="stylesheet" />
-@endsection
 @section('content')
 	<div class="row-content am-cf">
         <div class="row">
@@ -29,7 +26,7 @@
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <input type="number" class="tpl-form-input" id="age" name="price" placeholder="请输入售价" value="{{old('price')}}">
+                                    <input type="number" class="tpl-form-input" id="age" required name="price" placeholder="请输入售价" value="{{old('price')}}">
 
                                     <small></small>
                                 </div>
@@ -38,7 +35,7 @@
                                 <label for="phone" class="am-u-sm-3 am-form-label">导演 <span class="tpl-form-line-small-title">director</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <input type="text" class="tpl-form-input" id="phone" name="director" placeholder="请输入导演" value="{{old('director')}}">
+                                    <input type="text" class="tpl-form-input" id="phone" required name="director" placeholder="请输入导演" value="{{old('director')}}">
 
                                     <small></small>
                                 </div>
@@ -47,16 +44,15 @@
                                 <label for="phone" class="am-u-sm-3 am-form-label">演员 <span class="tpl-form-line-small-title">actor</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <input type="text" class="tpl-form-input" id="phone" name="actor" placeholder="请输入演员" value="{{old('actor')}}">
+                                    <input type="text" class="tpl-form-input" id="phone" required name="actor" placeholder="请输入演员,多个演员用逗号分开" value="{{old('actor')}}">
 
-                                    <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">上映时间 <span class="tpl-form-line-small-title">uptime</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <input type="date" class="tpl-form-input" id="phone" name="uptime" value="{{old('uptime') ? old('uptime') : date('Y-m-d')}}">
+                                    <input type="date" class="tpl-form-input" id="phone" required name="uptime" value="{{old('uptime') ? old('uptime') : date('Y-m-d')}}">
 
                                     <small></small>
                                 </div>

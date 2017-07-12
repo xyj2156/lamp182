@@ -22,6 +22,20 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="director" class="am-u-sm-3 am-form-label">导演 <span class="tpl-form-line-small-title">Director</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="director" name="director" placeholder="请输入导演" value="{{$data2->director}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="actor" class="am-u-sm-3 am-form-label">演员 <span class="tpl-form-line-small-title">Price</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="actor" name="actor" placeholder="请输入演员" value="{{$data2->actor}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="age" name="price" placeholder="请输入售价" value="{{$data->price}}">

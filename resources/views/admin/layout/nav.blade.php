@@ -17,6 +17,10 @@
     <ul class="sidebar-nav">
         <li class="sidebar-nav-heading">lamp182 在线订票系统<span class="sidebar-nav-heading-info"> <sub>---江洋八子-四个</sub></span></li>
         @foreach(config('film.nav') as $k => $v)
+            {{-- auth 权限为 1 (老板号) 的让它显示后台管理员模块 --}}
+            @if((session('admin_user') -> auth) != 1 && ($k == '后台管理员管理') )
+                <?php continue;?>
+            @endif
             @if(is_array($v))
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">

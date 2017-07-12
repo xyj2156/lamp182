@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">用户列表</div>
+                    <div class="widget-title am-fl">演员列表</div>
                 </div>
                 <div class="widget-body  widget-body-lg am-fr">
                     <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">

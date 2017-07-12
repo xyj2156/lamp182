@@ -52,7 +52,14 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::get('link/order/{id}-{order}', 'LinkController@order');
 //    后台电影路由
     Route::resource('film','FilmController');
-
+//    影厅管理
+    Route::resource('filmroom', 'FilmRoomController');
+//    获取电影信息
+    Route::get('films/{name}', 'FilmController@film');
+//    后台管理员管理
+    Route::resource('admins','AdminsController');
+//    后台订单管理
+    Route::resource('orders','OrdersController');
 });
 
 Route::get('test', 'test@test');
