@@ -12,8 +12,8 @@
             <div class="am-fl tpl-header-search">
                 <form class="tpl-header-search-form" action="{{url('admin/orders')}}">
                     <button class="tpl-header-search-btn am-icon-search" type="submit"></button>
-                    <input class="tpl-header-search-box" name="search" type="text" value="{{$search['search'] or ''}}" placeholder="搜索用户名。.">
-                    <input class="tpl-header-search-box" name="number" type="text" value="{{$search['number'] or ''}}" placeholder="搜索订单号。.">
+                    <input class="tpl-header-search-box" name="search" type="text" value="{{$search['search'] or ''}}" placeholder="请输入用户名">
+                    <input class="tpl-header-search-box" name="number" type="text" value="{{$search['number'] or ''}}" placeholder="请输入订单号">
                 </form>
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">管理员列表</div>
+                    <div class="widget-title am-fl">订单列表</div>
                 </div>
                 <div class="widget-body  widget-body-lg am-fr">
                     <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">

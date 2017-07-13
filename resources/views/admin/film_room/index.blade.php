@@ -44,7 +44,7 @@
                                     <td>该电影在{{date('Y-m-d H:i:s', $vv['start_time'])}}播放,请等待..</td>
                                 @else
                                     @if($time > $vv['start_time'] && $time < $vv['end_time'])
-                                        <td><span style="color:green">{{$ridsR[$vv -> rid]}}</span>：　<span style="color:orange">{{$fidsR[$vv -> fid]}}</span>　正在播放..</td>
+                                        <td><span style="color:yellow;">{{$ridsR[$vv -> rid]}}</span>：　<span style="color:orange">{{$fidsR[$vv -> fid]}}</span>　正在播放..</td>
                                     @elseif($time > $vv['end_time'])
                                         <td>该电影已播放完毕..</td>
                                     @endif
@@ -68,6 +68,9 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
     <script>
         function member_delete(id) {
             layer.confirm('真要删除这个用户吗？', {
