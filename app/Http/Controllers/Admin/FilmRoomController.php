@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin\Film;
+use App\Http\Model\Admin\FilmRoom;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -85,4 +86,5 @@ class FilmRoomController extends Controller
     {
         //
     }
+
 }

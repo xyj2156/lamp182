@@ -48,7 +48,9 @@ return [
         ],
         '影厅管理' => [
             '添加影厅' => 'admin/filmroom/create',
-            '查看影厅' => 'admin/filmroom'
+            '查看影厅' => 'admin/filmroom',
+            '添加影厅信息' => 'admin/filmrooms/create',
+            '查看影厅信息' => 'admin/filmrooms/'
         ],
         '后台管理员管理' => [
             '添加管理员用户' => 'admin/admins/create',

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index.index');
 });
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('admins','AdminsController');
 //    后台订单管理
     Route::resource('orders','OrdersController');
+//    影厅信息管理
+    Route::resource('filmrooms','FilmRoomsController');
 });
 
 Route::get('test', 'test@test');

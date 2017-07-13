@@ -19,7 +19,7 @@
     @if(session('success') || session('error'))
         <script>
             $(function (){
-                layer.alert('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
+                layer.msg('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
             });
         </script>
     @endif
