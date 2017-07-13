@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Home\IndexController@getIndex');
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
@@ -41,6 +39,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('userset','UsersetController');
 //    后台上传
     Route::any('upload','UsersetController@upload');
+
 //    电影类型管理
     Route::resource('type', 'TypeController');
 //    网站配置
@@ -57,6 +56,12 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::get('films/{name}', 'FilmController@film');
 //    后台管理员管理
     Route::resource('admins','AdminsController');
+//    后台订单管理
+    Route::resource('orders','OrdersController');
+//    影厅硬件信息管理
+    Route::resource('filmrooms','FilmRoomsController');
+//    后台评论管理
+    Route::resource('review','ReviewController');
 });
 
 Route::get('test', 'test@test');

@@ -1,16 +1,19 @@
 @extends('admin.layout.index')
+
 @section('content')
 	<div class="row-content am-cf">
         <div class="row">
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
+
                         <div class="widget-title am-fl"><a href="{{url('admin/film')}}">电影管理 </a> > 修改电影</div>
                     </div>
                     <div class="widget-body am-fr">
                         <form class="am-form tpl-form-line-form" method="post" action="{{url('/admin/film/')}}/{{$data->id}}">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="put">
+
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">电影名称 <span class="tpl-form-line-small-title">FilmName</span></label>
                                 <div class="am-u-sm-9">
@@ -42,34 +45,41 @@
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">类型 <span class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
+
                                     <select data-am-selected="" name="_type">
                                         @foreach($_type as $v)
                                             <option value="{{$v -> id}}" {{$data -> _type == $v -> id?'selected':''}} >{{$v -> name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="email" class="am-u-sm-3 am-form-label">地区 <span class="tpl-form-line-small-title">Rigion</span></label>
                                 <div class="am-u-sm-9">
+
                                     <select data-am-selected="" name="area_type">
                                         @foreach($area_type as $v)
                                             <option value="{{$v -> id}}" {{$data -> area_type == $v -> id ? 'selected' : ''}}>{{$v -> name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">年份 <span class="tpl-form-line-small-title">Year</span></label>
                                 <div class="am-u-sm-9">
                                     <select data-am-selected="" style="display: none;" name="year">
+
                                         @foreach($year as $v)
                                             <option value="{{$v -> id}}" {{$data -> year == $v -> id ? 'selected' : ''}}>{{$v -> name}}</option>
                                         @endforeach
+
                                     </select>
                                 </div>
                             </div>
                             <div class="am-form-group">
+
                                 <label for="phone" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail</span></label>
                                 <div class="am-u-sm-9">
                                     <textarea name="film_detail" rows="5">{{$data2 -> film_detail}}</textarea>
@@ -88,6 +98,7 @@
                                         <input id="doc-form-file" type="file" name="myfile" multiple="">
                                     </div>
                                 </div>
+
                             </div>
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3">
@@ -102,6 +113,7 @@
     </div>
 @endsection
 @section('script')
+
 <script>
     $(function () {
         $("#doc-form-file").change(function () {
@@ -149,4 +161,5 @@
         });
     }
 </script>
+
 @endsection

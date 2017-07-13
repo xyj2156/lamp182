@@ -144,16 +144,6 @@ class FilmRoomController extends Controller
         $filmroom = FilmRoom::select('id','name') -> get();
         // 电影的信息
         $film = Film::select('id','name') -> get();
-
-//        $rid = $data -> rid;
-//        $fid = $data -> fid;
-//        $filmroom1 = FilmRoom::where('id',$rid) -> select('id','name') -> get();
-//
-//        $film = Film::where('id',$fid) -> select('id','name') -> get();
-
-
-//        dd($data -> start_time);
-//        dd($filmroom,$film);
         return view('admin.film_room.edit',['title' => '修改播放信息','data' => $data,'filmroom' => $filmroom ,'film' => $film ]);
     }
 

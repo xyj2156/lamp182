@@ -22,7 +22,7 @@ class MemberController extends Controller
      */
     public function index(Request $req)
     {
-//        $data = Member::where('');
+//      $data = Member::where('');
         $page = $req -> input('page',1);
         $search = $req -> input('search', '');
 
