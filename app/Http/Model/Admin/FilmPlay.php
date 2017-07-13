@@ -4,10 +4,10 @@ namespace App\Http\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FilmRoom extends Model
+class FilmPlay extends Model
 {
     //关联的表
-    protected $table = 'film_rooms';
+    protected $table = 'film_plays';
     //主键
     protected $primaryKey = 'id';
     //黑名单

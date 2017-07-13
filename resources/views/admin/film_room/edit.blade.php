@@ -6,61 +6,45 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl"><a href="{{url('admin/user')}}">用户管理 </a> > 编辑用户</div>
+                        <div class="widget-title am-fl"><a href="">播放影片管理 </a> > 修改影片</div>
                     </div>
                     <div class="widget-body am-fr">
-                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/user')}}/{{$data1 -> id}}">
+                        <form class="am-form tpl-form-line-form" method="post" action="{{url('admin/filmroom/')}}/{{$data -> id}}">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="put">
                             <div class="am-form-group">
-                                <label for="user-phone" class="am-u-sm-3 am-form-label">会员权限 <span class="tpl-form-line-small-title">Auth</span></label>
+                                <label for="age" class="am-u-sm-3 am-form-label">影厅号码/名字 <span class="tpl-form-line-small-title">FilmName</span></label>
                                 <div class="am-u-sm-9">
-                                    <select data-am-selected="{searchBox: 1}" style="display: none;" name="auth">
-                                        @foreach(config('film.auth') as $k => $v)
-                                            <option value="{{$k}}" {{$k == $data2['auth'] ? 'selected':''}}>{{$v}}</option>
-                                        @endforeach
+                                    <select data-am-selected="{searchBox: 99}" style="display: none;" name="rid" >
+                                        <option value="0">==请在下面输入框筛选==</option>
+                                        @foreach($filmroom as $kk => $vv)<option {{ ($data -> rid == $vv -> id) ? 'selected' : '' }} value="{{$vv -> id}}">{{$vv -> name}}</option>@endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">用户名 <span class="tpl-form-line-small-title">UserName</span></label>
+                                <label for="age" class="am-u-sm-3 am-form-label">播放电影 <span class="tpl-form-line-small-title">Film</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="user-name" name="username" placeholder="请输入用户名" value="{{ $data1 -> username}}">
-                                    <small>字数6-18位。</small>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label for="age" class="am-u-sm-3 am-form-label">年龄 <span class="tpl-form-line-small-title">Age</span></label>
-                                <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="age" name="age" placeholder="请输入年龄" value="{{$data2 -> age}}">
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label for="user-phone" class="am-u-sm-3 am-form-label">性别 <span class="tpl-form-line-small-title">Sex</span></label>
-                                <div class="am-u-sm-9">
-                                    <select data-am-selected="{searchBox: 1}" style="display: none;" name="sex">
-                                        @foreach(config('film.sex') as $k => $v)
-                                            <option value="{{$k}}" {{$k == $data2 -> sex ? 'selected' : ''}}>{{$v}}</option>
-                                        @endforeach
+                                    <select data-am-selected="{searchBox: 99}" style="display: none;" name="fid">
+                                        <option value="0">==请在下面输入框筛选==</option>
+                                        @foreach($film as $k => $v)<option {{ ($data -> fid == $v -> id) ? 'selected' : '' }} value="{{$v -> id}}">{{$v -> name}}</option>@endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="phone" class="am-u-sm-3 am-form-label">手机 <span class="tpl-form-line-small-title">Phone</span></label>
+                                <label for="phone" class="am-u-sm-3 am-form-label">开始播放时间 <span class="tpl-form-line-small-title">StartTime</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="phone" name="phone" placeholder="请输入手机号码" value="{{$data1 -> phone}}">
-                                    <small>请输入11位手机号码。</small>
+                                    <input type="datetime-local" class="tpl-form-input" required id="phone" name="start_time" style="width:200px" placeholder="开始日期" value="{{str_replace('CST','T',date('Y-m-dTH:i:s',$data -> start_time))}}">
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="email" class="am-u-sm-3 am-form-label">邮箱 <span class="tpl-form-line-small-title">E-mail</span></label>
+                                <label for="email" class="am-u-sm-3 am-form-label">结束播放时间 <span class="tpl-form-line-small-title">EndTime</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="email" name="email" placeholder="请输入电子邮箱" value="{{$data1 -> email}}">
+                                    <input type="datetime-local" class="tpl-form-input" required id="email" style="width:200px" name="end_time" placeholder="结束日期"  value="{{str_replace('CST','T',date('Y-m-dTH:i:s',$data -> end_time))}}">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">修改</button>
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
                                 </div>
                             </div>
                         </form>
@@ -69,4 +53,24 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="{{asset('admin/assets/js/layui.js')}}"></script>
+    <script>
+        $(function () {
+            $('#age').on('keydown', function (e) {
+                if(e.keyCode !=13)  return ;
+                var name = this.value;
+                $.get('{{url('admin/films')}}/' + name, function (msg){
+                    try {
+                        console.log(msg);
+                    } catch (e){
+                        console.log(e);
+                    }
+                },'json');
+                return false;
+            });
+        });
+    </script>
 @endsection

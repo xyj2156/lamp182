@@ -47,8 +47,8 @@ return [
             '查看链接' => 'admin/link'
         ],
         '影厅管理' => [
-            '添加影厅' => 'admin/filmroom/create',
-            '查看影厅' => 'admin/filmroom'
+            '添加播放信息' => 'admin/filmroom/create',
+            '查看播放信息' => 'admin/filmroom'
         ],
         '后台管理员管理' => [
             '添加管理员用户' => 'admin/admins/create',
