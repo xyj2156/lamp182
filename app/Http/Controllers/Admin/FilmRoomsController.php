@@ -140,11 +140,16 @@ class FilmRoomsController extends Controller
      */
     public function destroy($id)
     {
+        return [
+            'status' => 403,
+            'msg' => '影厅与影厅播放信息紧密关联,暂不提供删除.如果需要请在 <span style="color: red">app/Http/Controller/Admin/FilmRoomsController.php</span> 第'.__LINE__.'行左右,删除第一个 return 即可.'
+        ];
         $res = FilmRoom::find($id);
         if(!$res) return [
             'status' => 404,
             'msg' => '影片未找到....'
         ];
+
 
         if($res -> delete())
             return [

@@ -37,8 +37,8 @@
                         <tbody>
                         @foreach($data as $k => $v)
                             <tr class="gradeX">
-                                <td><span>{{$v -> id}}</span></td>
-                                <td><span>{{$v -> name}}</span></td>
+                                <td>{{$v -> id}}</td>
+                                <td>{{$v -> name}}</td>
                                 <td>
                                     <?php
                                         $seat = explode(',', $v -> seat);
@@ -109,4 +109,12 @@
             });
         }
     </script>
+@endsection
+
+@section('meta')
+    <style>
+        #example-r .gradeX>td{
+            vertical-align:middle;
+        }
+    </style>
 @endsection

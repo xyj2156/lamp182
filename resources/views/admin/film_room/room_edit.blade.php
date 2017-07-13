@@ -21,7 +21,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">座位信息 <span class="tpl-form-line-small-title">Seat</span></label>
                                 <div class="am-u-sm-9" id="seat">
-                                    <input type="number" value="{{$data -> row}}" name="row">排 <input type="number" value="{{$data -> col}}" name="col">列 黄色代表有座位,白色代表没有
+                                    <input min="1" type="number" value="{{$data -> row}}" name="row">排 <input min="1" type="number" value="{{$data -> col}}" name="col">列 黄色代表有座位,白色代表没有
                                     <div id="seats"></div>
                                 </div>
                             </div>
