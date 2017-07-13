@@ -8,3 +8,4 @@ _ide_helper.php
 .idea/*
 /storage/
 /storage/*
+/public/uploads/*
