@@ -83,6 +83,8 @@ class WebConfigController extends Controller
         if(Banner::create($data)){
 //            添加轮播图之后删除记录在 session 中的图片记录，防止下次上传图片后删除这个图片文件
             session(['banner_path' => null]);
+//            读取文件配置写到 redis 中
+            $this -> bannerThumb();
             return redirect('admin/config/banner') -> with('success', '添加成功。');
         } else {
             return back() -> with('error', '添加失败。');
@@ -141,6 +143,8 @@ class WebConfigController extends Controller
             session(['banner_path' => null]);
 //            删除旧文件
             if($isUnlink && is_file($file)) unlink($file);
+//            生成配置文件
+            $this -> bannerThumb();
             return redirect('admin/config/banner') -> with('success', '修改成功。');
         } else
             return back() -> with('error', '修改失败请稍候重试。');
@@ -167,6 +171,7 @@ class WebConfigController extends Controller
         if($banner -> delete()){
 //            删除文件
             if(is_file($file)) unlink($file);
+            $this -> bannerThumb();
             return [
                 'status' => 0,
                 'msg' => '删除成功。'
@@ -195,15 +200,23 @@ class WebConfigController extends Controller
         if(!$banner) return ['status' => 403, 'msg' => '请按套路出牌。'];
 //        执行排序
         $banner -> order = $order;
-        if($banner -> update())
+        if($banner -> update()){
+            $this -> bannerThumb();
             return [
                 'status' => 0,
                 'msg' => '排序成功。'
             ];
-        else
+        } else
             return [
                 'status' => 403,
                 'msg' => '排序出问题了，请保证值在 0- 255 之间。'
             ];
+    }
+
+    public function bannerThumb()
+    {
+        $banner = Banner::select('title', 'pic', 'url') -> orderBy('order', 'asc') -> get();
+        $str = var_export($banner -> toArray(), true);
+        file_put_contents(config_path().'/banner.php',"<?php \n return {$str};");
     }
 }

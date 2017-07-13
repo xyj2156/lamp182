@@ -1,0 +1,129 @@
+.main .login-tab{height:46px;}
+.main .login-tab li{
+    float:left;
+    width:98px;
+    height:46px;
+    line-height:46px;
+    border-radius:3px 3px 0 0;
+    background-color:#e0f3ff;
+    border:1px solid #c3dff0;
+    border-bottom:none;
+    margin-right:8px;
+    color:#116ea9;
+    font-size:16px;
+    text-align:center;
+    cursor:pointer;
+    list-style: none;
+}
+.main .login-tab .cur{
+    position:relative;
+    background-color:#fff;
+    border-color:#dcdcdc;
+    color:#333;
+    z-index:6;
+    cursor:default;
+    margin-bottom: -1px;
+}
+.main .login-tab .login{float:right; font-size:13px; color:#116ea9; margin-top:15px;}
+.main .tab-con{position:relative; min-height:300px; background-color:#fff; border-radius:0 3px 3px 3px; font-size:14px; padding:50px 0; z-index:5;}
+.main .tab-con th{width:100px; padding-right:20px; text-align:right; font-weight:normal; color:#333;}
+.main .tab-con td{padding:12px 0;}
+.main .tab-con input{border-radius:3px; width:300px; height:35px; box-sizing:border-box;}
+
+.main .tab-con .tip img{display:none; margin:-7px 8px 0 0;}
+.main .tab-con .tip{display: block;width:160px; height:50px; color:#666; line-height:24px; padding:0 0 0 25px; margin:0 0 -30px 0;}
+
+.main .tab-con .test input:first-child{width:170px; margin-right:5px;}
+.main .tab-con .test input:last-child{width:151px; font-size:12px;}
+.main .tab-con .confirm{height:40px; line-height:40px; font-size:16px;font-family: "微软雅黑"}
+.main .tab-con .vd input{width:205px; margin-right:10px;}
+
+.main .reg-tip{width: 288px;margin-left: 44px;margin-top: -15px;margin-bottom: 10px;}
+
+input{width:230px;}
+input[type=radio]{width:auto;}
+tr .valid input {width: 50%;margin-right: 5%;}
+.find{font-size:12px;}
+.find td{padding:0;}
+.find input{width:auto; margin:-3px 8px 0 0;}
+.find label{ margin-right:85px;}
+.reg{float:right; min-height:290px; padding:120px 40px 0; background:url(../images/login-sep.png) no-repeat 0 50%;}
+.reg p{font-size:17px; font-style:italic; line-height:30px; padding-bottom:30px;}
+.reg .reg-btn{display: block;width:172px; height:40px; line-height:38px; border:1px solid #ff7607;  border-radius:2px; background: #ff8c2f; background: -moz-linear-gradient(#ff8c2f, #ff7607); background: -webkit-linear-gradient(#ff8c2f, #ff7607); background: -o-linear-gradient(#ff8c2f, #ff7607); background: linear-gradient(#ff8c2f, #ff7607); color:#fff; text-decoration:none; vertical-align:top; text-align:center; -moz-box-sizing: border-box; box-sizing:border-box; cursor:pointer; color:#fff; font-size:16px; box-shadow:1px 1px 2px 1px #cfcfcf;}
+.reg .reg-btn:hover{background: #ff7607; background: -moz-linear-gradient(#ff7607, #ff8c2f); background: -webkit-linear-gradient(#ff7607, #ff8c2f); background: -o-linear-gradient(#ff7607, #ff8c2f); background: linear-gradient(#ff7607, #ff8c2f);}
+.error-tip{
+    color: #DC0000;
+    font-size: 14px;
+    height: 22px;
+    line-height: 22px;
+    padding: 7px 0 3px;
+    text-align: center;
+}
+.rg-con{margin-top:0;}
+.rg-con .login-tab .cur{border-color:#C4C4C4;}
+.rg-con .tab-con .test input:first-child{width:70px;}
+.rg-con .tab-con .vd input{width:135px;}
+.rg-con .tab-con{padding-top:50px;}
+
+.client-from label{
+    font-weight: normal;
+    width: 100px;
+    margin: 0 5px 12px 0;
+}
+
+#form-login input{
+    text-indent: 10px;
+}
+
+#form-login input.confirm{
+    background: #2899e1;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: button;
+    background: linear-gradient(#57b4f0,#33a4ec);
+    border-radius: 3px;
+    border: 1px solid #2899e1;
+}
+
+/* 注册 */
+#reg_choose,#reg_choose li{
+    margin: 0;
+    padding: 0;
+}
+#reg_choose{
+    width:100%;
+}
+#reg_choose::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+#reg_choose li{
+    display: inline-block;
+    color:black;
+    width:25%;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#reg_choose .active{
+    background:  #ff7607;
+}
+
+#reg_phone,#reg_mail{
+    position: absolute;
+    margin-left: 15%;
+    background: #fff;
+    transform: translateX(45px);
+}
+#reg_phone{
+    transform: scaleX(-1) translateZ(-1px) translateX(-45px);
+}
+#reg_all{
+    transition: all 1s;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transform:  translateX(-10px);
+}

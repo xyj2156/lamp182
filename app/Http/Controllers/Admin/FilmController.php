@@ -167,15 +167,34 @@ class FilmController extends Controller
 
     public function show($id)
     {
+        //根据ID取出电影表数据
         $data = Film::find($id);
         if(!$data) return back() -> with('error', '请按照套路出牌。');
-        $data2 = $data -> detail;
-        if(!$data2) return back() -> with('error', '请按照套路出牌。');
+        $filmDetail = $data -> detail;
+        if(!$filmDetail) return back() -> with('error', '请按照套路出牌。');
+        //取出电影详情表数据
+        $data['director'] = $filmDetail['director'];
+        $data['time'] = $filmDetail['time'];
+        $data['uptime'] = $filmDetail['uptime'];
+        $data['film_detail'] = $filmDetail['film_detail'];
+        //取出对应的演员
+        $actor = explode(',',$filmDetail['actor']);
+        $actor = Cast::select('name')->whereIn('id',$actor)->get();
+        $data['actor'] = $actor;
+        //取出对应的类型名
+        $types = array($data['_type'],$data['area_type'],$data['year']);
+        $types = Film_type::select('name','pid')->whereIn('id',$types)->get();
+        foreach($types as $k => $v){
+            if($v['pid'] == 1){
+                $data['area_type'] = $v['name'];
+            }elseif($v['pid'] == 2){
+                $data['year'] = $v['name'];
+            }else{
+                $data['_type'] = $v['name'];
+            }
+        }
 
-
-
-        return view('admin.film.indexFilm',['title' => '电影详情 -- '.$data -> name,'data'=>$data]);
-
+        return view('admin.film.detailFilm',['title' => '电影详情 -- '.$data -> name,'data'=>$data]);
     }
 
     /**
@@ -320,6 +339,11 @@ class FilmController extends Controller
     {
         $res = Film::where('name', 'like', "%{$name}%") -> select('id', 'name') -> take(5) -> get();
         return $res -> toArray();
+    }
+
+    public function search(Request $request)
+    {
+        echo '123';
     }
 
 }
