@@ -6,15 +6,16 @@
  * Time: 20:18
  */
 
-namespace app\Http\Controller\Home;
+namespace App\Http\Controllers;
 
 
-use App\Http\Controllers\Controller;
+use App\Http\Model\Admin\Film;
 
 class Common extends Controller
 {
     public function __construct()
     {
-
+        $filmClick = Film::orderBy('click','desc') -> take(10) -> get();
+        view() -> share('click',$filmClick);
     }
 }

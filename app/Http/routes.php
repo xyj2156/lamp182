@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.index.index');
-});
+Route::get('/', 'Home\IndexController@getIndex');
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
