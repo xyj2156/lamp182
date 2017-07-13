@@ -1,6 +1,7 @@
 @extends('home.layout.index')
 @section('banner')@include('home.layout.banner')@endsection
 @section('content')
+    {{dump($click,$play)}}
     <div class="content_top">
         <div class="heading">
             <h3>New Products</h3>

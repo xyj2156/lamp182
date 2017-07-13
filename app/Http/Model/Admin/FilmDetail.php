@@ -14,4 +14,9 @@ class FilmDetail extends Model
     protected $guarded = [];
     //是否自动维护 create_at 和 update_at
     public $timestamps = false;
+
+    public function upper()
+    {
+        return $this -> hasOne(Film::class, 'id', 'id');
+    }
 }

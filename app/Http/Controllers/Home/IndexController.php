@@ -1,20 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: JiefKing
- * Date: 2017/7/13
- * Time: 20:56
- */
 
-namespace App\Http\Controller\Home;
-
+namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Common;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
 
 class IndexController extends Common
 {
     public function getIndex()
     {
-        dd($click);
+        return view('home.index.index');
     }
 }

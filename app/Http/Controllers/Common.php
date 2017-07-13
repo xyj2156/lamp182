@@ -10,12 +10,16 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Model\Admin\Film;
+use App\Http\Model\Admin\FilmDetail;
 
 class Common extends Controller
 {
     public function __construct()
     {
-        $filmClick = Film::orderBy('click','desc') -> take(10) -> get();
+        $filmClick = Film::where('click','>',0) -> select('id','name','click') -> orderBy('click','desc') -> take(10) -> get();
+        $filmPlay = Film::where('play','>',0) -> select('id','name','play') -> orderBy('play','desc') -> take(10) -> get();
+
         view() -> share('click',$filmClick);
+        view() -> share('play',$filmPlay);
     }
 }
