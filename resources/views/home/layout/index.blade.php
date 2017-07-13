@@ -31,8 +31,8 @@
                     </div>
                     <div class="account_desc">
                         <ul>
-                            <li><a href="contact.html">注册</a></li>
-                            <li><a href="contact.html">登录</a></li>
+                            <li><a href="{{url('reg')}}">注册</a></li>
+                            <li><a href="{{url('login')}}">登录</a></li>
                             <li><a href="preview.html">支付</a></li>
                             <li><a href="#">订单</a></li>
                             <li><a href="#">个人中心</a></li>

@@ -65,3 +65,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
 });
 
 Route::get('test', 'test@test');
+
+// 前台登录
+Route::get('login','Home\LoginController@login');
+// 前台处理登录信息
+Route::post('dologin','Home\LoginController@dologin');
+
