@@ -28,7 +28,7 @@ class ReviewController extends Controller
         foreach($member as $k=>$v){
             $uids[] = $v->id;
         }
-        $data = Review::whereIn('mid',$uids)->orderBy('time','desc')->paginate(2);
+        $data = Review::whereIn('mid',$uids)->orderBy('time','desc')->paginate(10);
         //为每条评论找到对应用户名
         foreach($data as $k=>$v){
             foreach($member as $kk=>$vv){
@@ -88,7 +88,7 @@ class ReviewController extends Controller
         //取出电影名称
         $filmName = Film::select(['name'])->where('id',$fid)->get()[0]->name;
         //根据 fid 取出电影的评论
-        $data = Review::where('fid',$fid)->orderBy('time','desc')->paginate(2);
+        $data = Review::where('fid',$fid)->orderBy('time','desc')->paginate(10);
         
         //根据 mid 取出评论对应的用户
         $mids = [];
