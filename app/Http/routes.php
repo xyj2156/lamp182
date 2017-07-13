@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.
     Route::resource('admins','AdminsController');
 //    后台订单管理
     Route::resource('orders','OrdersController');
+//    后台评论管理
+    Route::resource('review','ReviewController');
 });
 
 Route::get('test', 'test@test');

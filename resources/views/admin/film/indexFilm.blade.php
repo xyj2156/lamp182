@@ -61,6 +61,9 @@
                                         <a href="javascript:;" onclick="member_delete('{{$film->id}}')" class="tpl-table-black-operation-del" title="删除">
                                             <i class="am-icon-trash"></i> 删除
                                         </a>
+                                        <a href="{{url('admin/review')}}/{{$film->id}}" class="tpl-table-black-operation-del" title="电影评论">
+                                            <i class="am-icon-trash"></i> 电影评论
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
