@@ -53,7 +53,7 @@ class ReviewController extends Controller
             }
         }
 
-        return view('admin.review.index',['data'=>$data,'search'=>$request->all(),'username'=>$search]);
+        return view('admin.review.index',['data'=>$data,'search'=>$request->all(),'username'=>$search,'title' => '用户评论搜索']);
     }
 
     /**
@@ -107,7 +107,7 @@ class ReviewController extends Controller
         }
 
 
-        return view('admin.review.show',['data'=>$data,'filmName'=>$filmName,'search'=>$request->all(),'fid'=>$fid]);
+        return view('admin.review.show',['data'=>$data,'filmName'=>$filmName,'search'=>$request->all(),'fid'=>$fid,'title' => "{$filmName} 的评论"]);
     }
 
     /**
