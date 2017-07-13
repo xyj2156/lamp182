@@ -98,6 +98,8 @@ class FilmRoomController extends Controller
 
         // 通过id 降序查出 end_time 值
         $user = FilmPlay::orderBy('id','desc') -> select('end_time') -> first();
+//        播放次数自增
+        Film::find($data['fid']) -> increment('play');
         if ($user) {
             // 结束时间
             $end_time = $user -> end_time ;
