@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title></title>
+        <title>{{$title}} -- {{config('webconf.title')}}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        @section('meta')
+            <meta name="keywords" content="{{config('webconf.keywords')}}" />
+            <meta name="description" content="{{config('webconf.description')}}"/>
+        @show
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{{asset('home/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
         <link href="{{asset('home/css/slider.css')}}" rel="stylesheet" type="text/css" media="all"/>
@@ -10,9 +14,8 @@
         <script type="text/javascript" src="{{asset('home/js/move-top.js')}}"></script>
         <script type="text/javascript" src="{{asset('home/js/easing.js')}}"></script>
         <script type="text/javascript" src="{{asset('home/js/jquery.nivo.slider.js')}}"></script>
-        <script type="text/javascript" src="{{asset('home/js/reg.js')}}"></script>
+        <script src="{{asset('layer/layer.js')}}"></script>
         @section('style')@show
-        @section('meta')@show
         <script type="text/javascript">
             $(function() {
                 $('#slider').nivoSlider();
@@ -25,7 +28,7 @@
                 <div class="wrap">
                     <div class="nav_list">
                          <ul>
-                             <li><a href="index.html">主页</a></li>
+                             <li><a href="{{url('/')}}">主页</a></li>
                              <li><a href="index.html">地区</a></li>
                              <li><a href="index.html">年份</a></li>
                              <li><a href="index.html">类型</a></li>
@@ -46,7 +49,7 @@
             <div class="wrap">
                 <div class="header_top">
                      <div class="logo">
-                         <a href="index.html"><img src="{{asset('home/images/logo.png')}}" alt="" /></a>
+                         <a href="{{url('/')}}"><img src="{{asset(config('webconf.logo'))}}" alt="" /></a>
                      </div>
                      <div class="header_top_right">
                           <div class="search_box">
@@ -124,6 +127,27 @@
         </script>
         <a href="#" id="toTop"><span id="toTopHover"></span></a>
         @section('script')@show
+        {{--提示表单验证错误--}}
+        @if (count($errors) > 0)
+            <script>
+                $(function () {
+                    layer.alert(
+                        '@foreach($errors -> all() as $err){{$err.'\n'}}@endforeach',
+                        {
+                            time:3000,
+                            icon:5
+                        }
+                    );
+                });
+            </script>
+        @endif{{--提示失败或者成功--}}
+        @if(session('success') || session('error'))
+            <script>
+                $(function (){
+                    layer.msg('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
+                });
+            </script>
+        @endif
     </body>
 </html>
 

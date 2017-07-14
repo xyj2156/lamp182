@@ -36,10 +36,11 @@ class WebConfigController extends Controller
         $config = Webconfig::find(1);
 
 
-        if($config -> update($req -> only(['title', 'email', 'logo', 'keywords', 'description']))) {
-            dd($config->toArray());
+        if( $config -> update($req -> only(['title', 'email', 'logo', 'keywords', 'description']) )) {
+//            向配置文件中更新配置项
+            file_put_contents(config_path().'/webconf.php', '<?php return '.var_export($config->toArray(), true).';');
             return redirect('admin/config')->with('success', '修改成功');
-        }else
+        } else
             return back() -> with('error', '修改失败，请稍候重试。');
     }
 
