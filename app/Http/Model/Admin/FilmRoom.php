@@ -12,4 +12,5 @@ class FilmRoom extends Model
     protected $primaryKey = 'id';
     //黑名单
     protected $guarded = [];
+
 }
