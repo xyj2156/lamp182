@@ -50,7 +50,7 @@
                     </div>
                     {{--评论--}}
                     <div class="product_desc">
-                        <p style="font-size:20px;color: #333;font-family: 'ambleregular';">热门短评:</p>
+                        <p style="font-size:20px;color: #333;font-family: 'ambleregular';border-bottom: 2px solid #707070; margin-bottom:20px">热门短评:</p>
 
                         <div class="review_cnt" id="longcomment">
                             <ul class="clear">
@@ -120,7 +120,6 @@
 
 @section('style')
     <style>
-
         .published {
             height: 78px;
             padding: 0;
@@ -151,6 +150,17 @@
             width: 688px;
             margin-left: 120px;
             margin-top: -105px;
+        }
+        .bdb_f2 .mt7{
+            margin-top:30px;
+            font-size:14px;
+            color:  #707070;
+        }
+        #longcomment{
+            border-bottom: 1px solid #ccc;
+        }
+        .bdb_f2{
+            margin-bottom: 10px;
         }
 
     </style>
