@@ -26,7 +26,7 @@
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">地址 <span class="tpl-form-line-small-title">Url</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="linkurl" name="linkurl" placeholder="请输入链接地址" value="{{old('linkurl')}}">
+                                    <input type="text" class="tpl-form-input" id="linkurl" name="linkurl" placeholder="请输入链接地址" value="{{old('linkurl')?old('linkurl'):'http://'}}">
                                 </div>
                             </div>
                             <input type="hidden" name="linkthumb" value="" id="uface">

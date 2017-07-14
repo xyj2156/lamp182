@@ -189,7 +189,7 @@
 .demo div{box-sizing: border-box}
 @media screen and (max-width: 360px) {.demo {width:340px}}
 
-.front{width: 300px;margin: 5px 32px 45px 32px;background-color: #f0f0f0;	color: #666;text-align: center;padding: 3px;border-radius: 5px;}
+.front{width: 300px;margin: 15px auto;background-color: #f0f0f0;	color: #666;text-align: center;padding: 3px;border-radius: 5px;}
 .booking-details {float: right;position: relative;width:30%;height: 450px; }
 .booking-details h3 {margin: 5px 5px 0 0;font-size: 16px;}
 .booking-details p{line-height:26px; font-size:16px; color:#999}
@@ -211,3 +211,21 @@ span.seatCharts-legendDescription {margin-left: 5px;line-height: 30px;}
 #selected-seats li{float:left; width:72px; height:26px; line-height:26px; border:1px solid #d3d3d3; background:#f7f7f7; margin:6px; font-size:14px; font-weight:bold; text-align:center}
 /*#seat-map > div.seatCharts-row >  div:first-child ~ div[class$=' available']{padding-top: 5px;}*/
 /*#seat-map > div.seatCharts-row >  div:first-child ~ div:hover{padding-top: 0;}*/
+.seatCharts-row > div{transition: all .3s}
+.btn{
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ff8400;
+    color: #fff;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    padding: 0 12px;
+    transition: background-color .2s linear 0s;
+    border: 0;
+    cursor: pointer;
+}

@@ -195,26 +195,32 @@ class MemberController extends Controller
 
         $res1 = Member::find($id);
         $res2 = Member_detail::find($id);
+        dd($res1, $res2);
 //        没有数据可能就是来路不正
         if(!$res1 || !$res2){
             return redirect('admin/user') -> with('error', '请按套路出牌。。');
         }
 
         DB::beginTransaction();
-        $res1 -> username = $request -> input('username','null');
-        $res1 -> phone = $request -> input('phone','null');
-        $res1 -> email = $request -> input('email','null');
+//        $res1 -> username = $request -> input('username','null');
+//        $res1 -> phone = $request -> input('phone','null');
+//        $res1 -> email = $request -> input('email','null');
 
-        $res2 -> auth = $request -> input('auth','0');
-        $res2 -> age = $request -> input('age', '18');
-        $res2 -> sex = $request -> input('sex', '18');
+//        $res2 -> auth = $request -> input('auth','0');
+//        $res2 -> age = $request -> input('age', '18');
+//        $res2 -> sex = $request -> input('sex', '18');
 
-        if(!$res1 -> update() || !$res2 -> save()){
+        $a = $res1 -> update($request -> only(['username','phone','email']));
+        $b = $res2 -> update($request -> only(['auth','age','sex']));
+
+        dump($a,$b,DB::getQueryLog());
+
+        if(!$a || !$b){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
         }
         DB::commit();
-        return redirect('admin/user') -> with('success', '修改成功。');
+//        return redirect('admin/user') -> with('success', '修改成功。');
     }
 
     /**

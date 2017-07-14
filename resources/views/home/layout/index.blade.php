@@ -48,7 +48,7 @@
             </div>
             <div class="wrap">
                 <div class="header_top">
-                     <div class="logo">
+                     <div class="logo" style="width:187px;height:87px;overflow: hidden;">
                          <a href="{{url('/')}}"><img src="{{asset(config('webconf.logo'))}}" alt="" /></a>
                      </div>
                      <div class="header_top_right">
@@ -76,46 +76,18 @@
         <div class="footer">
             <div class="wrap">
                 <div class="section group">
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Information</h4>
+                    <div class="social-icons">
+                        <h4 style="font-weight: bold;">友情链接：</h4>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Customer Service</a></li>
-                            <li><a href="#">Advanced Search</a></li>
-                            <li><a href="#">Orders and Returns</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Why buy from us</h4>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Customer Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="contact.html">Site Map</a></li>
-                            <li><a href="#">Search Terms</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>My account</h4>
-                        <ul>
-                            <li><a href="contact.html">Sign In</a></li>
-                            <li><a href="index.html">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="contact.html">Help</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Contact</h4>
-                        <ul>
-                            <li><span>+91-123-456789</span></li>
-                            <li><span>地址:xxxxxxxxxxx</span></li>
+                            @foreach(config('link') as $v)
+                            <li title="{{$v['linktitle']}}"><a href="{{$v['linkurl']}}" target="_blank"><img src="{{asset($v['linkthumb'])}}" alt=""></a><p>{{$v['linkname']}}</p></li>
+                            @endforeach
+                            <div class="clear"></div>
                         </ul>
                     </div>
                 </div>
                 <div class="copy_right">
-                    <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://www.777moban.com/">777模板</a></p>
+                    <p>{{str_replace('xxxx',date('Y'),config('webconf.copyright'))}} <a>{{config('webconf.icp')}}</a> <a href="mailto://{{config('webconf.email')}}">{{config('webconf.email')}}</a> <a target="_blank" href="https://github.com/xyj2156/lamp182">技术支持</a></p>
                 </div>
             </div>
         </div>

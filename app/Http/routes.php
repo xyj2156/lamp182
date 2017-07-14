@@ -74,8 +74,10 @@ Route::post('dologin','Home\LoginController@dologin');
 Route::get('reg','Home\RegController@reg');
 // 前台处理注册信息
 
+
+Route::group(['namespace' => 'Home'],function (){
+    Route::controller('/order', 'OrderController');
 // 前台电影详情
-Route::get('filmdetails/{id}','Home\FilmDetailsController@index');
-
-
+    Route::get('filmdetails/{id}','FilmDetailsController@index');
+});
 
