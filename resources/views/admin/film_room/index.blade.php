@@ -36,7 +36,7 @@
                             <tr class="gradeX">
                                 <td>{{$vv['id']}}</td>
                                 <td><a href="">{{$ridsR[$vv -> rid]}}</a></td>
-                                <td><a href="{{url('admin/'.$vv['fid'])}}">{{$fidsR[$vv -> fid]}}</a></td>
+                                <td><a href="{{url('admin/film/'.$vv['fid'])}}">{{$fidsR[$vv -> fid]}}</a></td>
                                 <td>{{date('Y-m-d H:i:s', $vv['start_time'])}}</td>
                                 <td>{{date('Y-m-d H:i:s', $vv['end_time'])}}</td>
                                 {{--状态--}}
