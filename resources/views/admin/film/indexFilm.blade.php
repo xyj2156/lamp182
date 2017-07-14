@@ -10,15 +10,14 @@
             </div>
             {{--<!-- 搜索 -->--}}
             <div class="am-fl tpl-header-search">
-
                 <form class="tpl-header-search-form" action="{{url('admin/film')}}">
                     <button class="tpl-header-search-btn am-icon-search" type="submit"></button>
                     <input class="tpl-header-search-box" name="search" type="text" value="{{$search['search'] or ''}}" placeholder="搜索电影名。.">
-
                 </form>
             </div>
         </div>
     </div>
+    
     <div class="row-content am-cf">
     {{--显示表格--}}
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -44,7 +43,7 @@
                         @foreach($data as $film)
                             <tr class="gradeX">
                                 <td>{{$film->id}}</td>
-                                <td>{{$film->name}}</td>
+                                <td><a href="{{url('admin/film')}}/{{$film->id}}">{{$film->name}}</a></td>
 
                                 <td><img style="max-width:200px" src="{{$film->film_pic}}"></td>
 
