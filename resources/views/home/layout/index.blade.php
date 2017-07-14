@@ -4,8 +4,8 @@
         <title>{{$title}} -- {{config('webconf.title')}}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         @section('meta')
-            <meta name="keywords" content="{{config('webconf.keywords')}}" />
-            <meta name="description" content="{{config('webconf.description')}}"/>
+        <meta name="keywords" content="{{config('webconf.keywords')}}" />
+        <meta name="description" content="{{config('webconf.description')}}"/>
         @show
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{{asset('home/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>

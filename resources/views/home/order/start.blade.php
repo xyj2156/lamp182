@@ -108,7 +108,13 @@
                 }
             });
             //已售出的座位
-            sc.get(['1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
+            $.post('{{url('order/seat')}}',{
+                _token: '{{csrf_token()}}',
+                id : '{{$film -> id}}'
+            },function (data){
+                sc.get(data).status('unavailable');
+            }, 'json');
+
 //          设定牌号
             s = $('#seat-map div.seatCharts-seat').each(function (k, v){
                 var arr = v.id.split('_');
@@ -118,16 +124,17 @@
             $('.checkout-button').click(function (){
                 var seat = sc.find('selected').seatIds;
                 var seat = seat.join(',');
-                console.log(seat);
                 $.post('{{url('order')}}',{
                     _token : '{{csrf_token()}}',
                     seat : seat,
-                    id : '{{$film -> id}}'
+                    fid : '{{$film -> id}}',
+                    rid : '{{$room -> id}}',
+                    pid : '{{$playing -> id}}'
                 },function (data){
                     console.log(data);
                     layer.msg(data.msg);
                     if(!data.status){
-
+                        location = '{{url('order/success')}}?name='+ data.name;
                     }
                 },'json');
             });
@@ -138,7 +145,6 @@
             sc.find('selected').each(function () {
                 total = accAdd(total, price);
             });
-
             return total;
         }
 

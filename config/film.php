@@ -79,6 +79,21 @@ return [
         'banner_path' => '/uploads/banner_thumb',
 //        logo
         'logo_path' => '/uploads/logo_thumb',
-    ]
-
+    ],
+//    星期
+    'week' => [
+        0 => '日',
+        1 => '一',
+        2 => '二',
+        3 => '三',
+        4 => '四',
+        5 => '五',
+        6 => '六',
+    ],
+//    订单状态
+    'order' => [
+        1 => '未付款',
+        2 => '已付款',
+        3 => '废除',
+    ],
 ];
