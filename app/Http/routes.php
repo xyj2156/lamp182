@@ -79,5 +79,6 @@ Route::group(['namespace' => 'Home'],function (){
     Route::controller('/order', 'OrderController');
 // 前台电影详情
     Route::get('filmdetails/{id}','FilmDetailsController@index');
+    Route::post('comment','FilmDetailsController@comment');
 });
 

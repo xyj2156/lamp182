@@ -48,34 +48,44 @@
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';">剧情简介:</p>
                         <span>{!! $filmdetail -> film_detail_full !!}<span/>
                     </div>
+
                     {{--评论--}}
                     <div class="product_desc">
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';border-bottom: 2px solid #707070; margin-bottom:20px">热门短评:</p>
-
+                        @foreach($reciew as $kk=>$vv)
                         <div class="review_cnt" id="longcomment">
                             <ul class="clear">
                                 <li class="bdb_f2">
                                     <div class="fl pr">
                                         <div class="bjj"></div>
-                                        <img src="http://film.spider.com.cn/img/common/images/boy.jpg" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
-                                        <div class="tc fs0">灵魂的尾巴***</div>
+                                        <img src="{{url($vv['uface'])}}" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
+                                        <div class="tc fs0">{{$vv['name']}}</div>
                                     </div>
                                     <div class="fl w730 ml20 mt10">
-                                        <div class="fs0 f14">戴美瞳的大圣，大战一半去换发型的天尊，好色的卷帘，古板的天蓬，有点儿像紫霞的阿紫，宛如智障的阿月以及永远都差不多的二郎。剪辑的真是乱七八糟，好在特效可以补救回来，反正金箍棒一扛，背景音乐一响，观众就燃了起来。这算是我看到第一次说起筋斗云来历的</div>
-                                        <div class="fsc8 mt7">来自：蜘蛛电影票iphone版2017-07-14 13:51:55 </div>
+                                        <div class="fs0 f14">{{$vv['content']}}</div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <p></p>
-                        <div class="published pr" id="datecontent2">
-                            <textarea class="published_text fl" cols="" rows="" id="filmcontent2" style="color: rgb(145, 145, 145);" onkeyup="textareaMaxlength('2');" onfocus="if(this.value=='其实我是从很严谨的学术角度来评价这部电影的...'){this.value='';this.style.color='#333333'}" onblur="if(this.value==''){this.value='其实我是从很严谨的学术角度来评价这部电影的...';this.style.color='#919191'}">其实我是从很严谨的学术角度来评价这部电影的...</textarea>
-                            <input type="button" value="发表" id="tjdd" class="published_btn fr fw" onclick="addfilmShortcomment('悟空传',3,'l','2')">
+                        @endforeach
+                        {{--分页--}}
+                        <div class="am-u-lg-12 am-cf">
+                            <div class="am-fr">
+                                {!! $reciew -> render() !!}
+                            </div>
                         </div>
+
+                        <form action="{{url('comment')}}" method="post">
+                            {{csrf_field()}}
+                            <div class="published pr" id="datecontent2">
+                                <textarea class="published_text fl" cols="" rows="" name='filmcontent2' id="filmcontent2" value='' style="color: rgb(145, 145, 145);" ></textarea>
+                                <input type="button" value="发表" id="tjdd" class="published_btn fr fw" onclick="fun()">
+                            </div>
+                        </form>
                     </div>
 
                 </div>
-
+                {{--右侧--}}
                 <div class="rightsidebar span_3_of_1 sidebar">
                     <h2>点击榜</h2>
                     @foreach($click as $k => $v)
@@ -92,7 +102,6 @@
                     </div>
                     @endforeach
                 </div>
-
                 <div class="rightsidebar span_3_of_1 sidebar">
                     <h2>热播榜</h2>
                     @foreach($play as $kk => $vv)
@@ -114,6 +123,30 @@
             </div>
         </div>
     </div>
+    <script>
+
+        function fun(){
+            $.ajax({
+                type : 'post',
+                url:'{{url('comment')}}',
+                data:{
+                    content :$('#filmcontent2').val(),
+                    _token:'{{csrf_token()}}',
+                    fid: '{{$film -> id}}'
+                },
+                success:function(data){
+                    if(data.status !== 0){
+                        layer.alert(data.data);
+                    } else {
+                        layer.alert(data.data);
+                        setTimeout(function(){
+                            location.href = '{{url('filmdetails')}}/{{$film -> id}}';
+                        },500);
+                    }
+                },
+            });
+        }
+    </script>
 
 
 @endsection
@@ -124,13 +157,12 @@
             height: 78px;
             padding: 0;
             border: solid 2px #6e7aa0;
-            margin-top: 20px;
         }
         .published_text {
             font-size: 14px;
             line-height: 24px;
-            width: 688px;
-            height: 57px;
+            width: 82.1%;
+            height: 58px;
             padding: 10px;
             border: 0px;
             vertical-align: top;
@@ -138,13 +170,14 @@
         }
         .published_btn {
             font-size: 18px;
-            width: 100px;
-            height: 78px;
+            width: 14.8%;
+            height: 100%;
             line-height: 78px;
             cursor: pointer;
             border: 1px;
             background: #6e7aa0;
             color: #fff;
+            float: right;
         }
         .bdb_f2 .mt10{
             width: 688px;
@@ -152,18 +185,67 @@
             margin-top: -105px;
         }
         .bdb_f2 .mt7{
-            margin-top:30px;
             font-size:14px;
             color:  #707070;
         }
         #longcomment{
-            border-bottom: 1px solid #ccc;
+            margin-bottom: 50px;
         }
         .bdb_f2{
+            margin-bottom: 50px;
+        }
+        .pr {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 50px;
+            width:97%;
+        }
+        .tc{
             margin-bottom: 10px;
         }
 
+        /*分页样式*/
+        .pagination{
+            margin: 0;
+            padding: 0;
+            padding-left: 0;
+            margin: 1.5rem 0;
+            list-style: none;
+            color: #999;
+            text-align: left;
+            position: relative;
+            font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .pagination>li{
+            margin: 0 3px;
+            display: inline-block;
+        }
+        .pagination>li span,.pagination>li a{
+            color: #fff;
+            padding: 6px 12px;
+            background: #FC7D01;
+            border: none;
+            border-radius: 0;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            display: block;
+        }
+        .pagination>li.active span{
+            background: #167fa1;
+            color: #fff;
+            border: 1px solid #167fa1;
+            padding: 6px 12px;
+        }
     </style>
 
-    @endsection
+@endsection
+
+
+
+
+
+
+
 
