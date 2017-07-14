@@ -18,7 +18,7 @@ class LinkController extends Controller
     public function index()
     {
 
-        return view('admin.link.index', ['data' => Link::orderBy('order','asc') -> get()]);
+        return view('admin.link.index', ['data' => Link::orderBy('order','asc') -> get(), 'title' => '友情链接']);
     }
 
     /**
@@ -28,7 +28,7 @@ class LinkController extends Controller
      */
     public function create()
     {
-        return view('admin.link.create');
+        return view('admin.link.create', ['title' => '添加友情链接']);
     }
 
     /**
@@ -66,6 +66,8 @@ class LinkController extends Controller
         $res = Link::create($data);
         if ($res) {
             session(['admin_thumb_path' => null]);
+//            生成配置文件
+            $this -> conf();
             return redirect('admin/link') -> with('success','添加成功');
         } else {
             return back() -> with('error','添加失败');
@@ -93,7 +95,7 @@ class LinkController extends Controller
     public function edit($id)
     {
         $data = Link::find($id);
-        return view('admin.link.edit',['data' => $data]);
+        return view('admin.link.edit',['data' => $data, 'title' => "编辑<{$data -> linkname}>友情链接"]);
     }
 
     /**
@@ -130,7 +132,6 @@ class LinkController extends Controller
         $user = Link::find($id);
         // 取出这条数据对应的 linkthumb
         $file = public_path().$user -> linkthumb;
-
         // 执行修改
         if ($user -> update($data)) {
             session(['admin_thumb_path' => null]);
@@ -138,11 +139,12 @@ class LinkController extends Controller
             if(is_file($file)){
                 unlink($file);
             }
+//            生成配置文件
+            $this -> conf();
             return redirect('admin/link') -> with('success','修改成功');
         } else {
             return back() -> with('error','修改失败');
         }
-
     }
 
     /**
@@ -164,24 +166,43 @@ class LinkController extends Controller
             if (is_file($file)) {
                 $res2 = unlink($file);
             }
+//            生成配置文件
+            $this -> conf();
             return ['status' => 0, 'msg' => '删除成功..'];
         } else {
             return ['status' => 1, 'msg' => '删除失败..'];
         }
     }
 
+    /** 排序函数/方法 2017年7月14日 22:14:11 author 项英杰 只是添加了注释
+     * 同时修改了下返回信息
+     * @param $id
+     * @param $order
+     * @return array
+     */
     public function order($id, $order)
     {
         $res = Link::find($id);
         $res -> order = $order;
         if($res -> save()){
+//            生成配置文件
+            $this -> conf();
             $code = 0;
-            $msg = '修改成功';
+            $msg = '修改排序成功';
         }else{
             $code = 400;
-            $msg = '修改失败';
+            $msg = '修改排序失败';
         }
 
         return ['status' => $code, 'msg' => $msg];
+    }
+
+    /**
+     * 生成配置文件
+     */
+    public function conf()
+    {
+        $res = Link::where('order', '>', 0) -> OrderBy('order') -> get();
+        file_put_contents(config_path().'/link.php','<?php return '.var_export($res -> toArray(),true).';');
     }
 }

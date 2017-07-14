@@ -147,6 +147,6 @@
         .theme-black tr>td>input{
             color:#000;
         }
-        tr>td>input{width:30px;}
+        tr>td>input{width:50px;}
     </style>
 @endsection

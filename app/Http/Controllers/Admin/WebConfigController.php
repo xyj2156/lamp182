@@ -172,6 +172,7 @@ class WebConfigController extends Controller
         if($banner -> delete()){
 //            删除文件
             if(is_file($file)) unlink($file);
+//            生成配置文件
             $this -> bannerThumb();
             return [
                 'status' => 0,
@@ -202,6 +203,7 @@ class WebConfigController extends Controller
 //        执行排序
         $banner -> order = $order;
         if($banner -> update()){
+//            生成配置文件
             $this -> bannerThumb();
             return [
                 'status' => 0,
