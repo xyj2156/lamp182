@@ -642,6 +642,7 @@ body {
 .wish-list li{
 	display:inline-block;
 	margin-right:45px;
+	margin-bottom: -10px;
 }
 .wish-list li a{
 	color: #383838;
@@ -653,13 +654,13 @@ body {
 .wish-list li a:hover {
 	color:#FC7D01;
 }
-.wish-list li.wish{
-	background:url(../images/wishlist.png) no-repeat 0;
-}
-.wish-list li.compare{
-	background:url(../images/compare.png) no-repeat 0;
-	margin-right:0;
-}
+/*.wish-list li.wish{*/
+	/*background:url(../images/wishlist.png) no-repeat 0;*/
+/*}*/
+/*.wish-list li.compare{*/
+	/*background:url(../images/compare.png) no-repeat 0;*/
+	/*margin-right:0;*/
+/*}*/
 .product_desc h2{
 	font-size:1.2em;
 	color: #333;

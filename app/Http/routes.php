@@ -70,4 +70,12 @@ Route::get('test', 'test@test');
 Route::get('login','Home\LoginController@login');
 // 前台处理登录信息
 Route::post('dologin','Home\LoginController@dologin');
+// 前台注册用户
+Route::get('reg','Home\RegController@reg');
+// 前台处理注册信息
+
+// 前台电影详情
+Route::get('filmdetails/{id}','Home\FilmDetailsController@index');
+
+
 
