@@ -2,19 +2,10 @@
     <div class="header_bottom_left">
         <div class="categories">
             <ul>
-                <h3>Categories</h3>
-                <li><a href="#">All</a></li>
-                <li><a href="#">Hindi</a></li>
-                <li><a href="#">Telugu</a></li>
-                <li><a href="#">English</a></li>
-                <li><a href="#">Tamil</a></li>
-                <li><a href="#">Malayalam</a></li>
-                <li><a href="#">Kannada</a></li>
-                <li><a href="#">Bengali</a></li>
-                <li><a href="#">Assami</a></li>
-                <li><a href="#">Kids</a></li>
-                <li><a href="#">Animation</a></li>
-                <li><a href="#">Games</a></li>
+                <h3>电影点击榜</h3>
+                @foreach($click as $k => $v)
+                <li><a href="#">{{$v -> name}}</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -23,11 +14,9 @@
         <div class="slider">
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
-                    <a href=""><img src="{{asset('home/images/1.jpg')}}" data-thumb="images/1.jpg" alt="" /></a>
-                    <img src="{{asset('home/images/2.jpg')}}" data-thumb="images/2.jpg" alt="" />
-                    <img src="{{asset('home/images/3.jpg')}}" data-thumb="images/3.jpg" alt="" />
-                    <img src="{{asset('home/images/4.jpg')}}" data-thumb="images/4.jpg" alt="" />
-                    <img src="{{asset('home/images/5.jpg')}}" data-thumb="images/5.jpg" alt="" />
+                    @foreach(config('banner') as $k => $v)
+                    <a title="{{ $v['title'] }}" href="{{ $v['url'] }}"><img src="{{ asset($v['pic']) }}" data-thumb="images/1.jpg" alt="" /></a>
+                    @endforeach
                 </div>
             </div>
         </div>

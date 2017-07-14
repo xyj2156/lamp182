@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title> ert</title>
+        <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{{asset('home/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
@@ -10,7 +10,9 @@
         <script type="text/javascript" src="{{asset('home/js/move-top.js')}}"></script>
         <script type="text/javascript" src="{{asset('home/js/easing.js')}}"></script>
         <script type="text/javascript" src="{{asset('home/js/jquery.nivo.slider.js')}}"></script>
+        <script type="text/javascript" src="{{asset('home/js/reg.js')}}"></script>
         @section('style')@show
+        @section('meta')@show
         <script type="text/javascript">
             $(function() {
                 $('#slider').nivoSlider();
@@ -63,7 +65,7 @@
         <div class="main">
             <div class="wrap">
                 <div class="content">
-                    {{--更新内容--}}
+                    {{--填充内容--}}
                     @section('content')@show
                 </div>
             </div>

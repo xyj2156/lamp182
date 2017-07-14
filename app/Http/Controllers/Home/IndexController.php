@@ -11,6 +11,7 @@ class IndexController extends Common
 {
     public function getIndex()
     {
+        
         return view('home.index.index');
     }
 }
