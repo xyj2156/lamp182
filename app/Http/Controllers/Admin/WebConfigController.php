@@ -22,7 +22,7 @@ class WebConfigController extends Controller
      */
     public function getIndex()
     {
-        $data = Webconfig::select('title','email', 'logo', 'keywords', 'description') -> find(1);
+        $data = Webconfig::select('title','email', 'logo', 'keywords', 'description','copyright', 'icp') -> find(1);
         $title = '网站配置修改';
         return view('admin.config.edit', compact('data', 'title'));
     }
@@ -36,7 +36,7 @@ class WebConfigController extends Controller
         $config = Webconfig::find(1);
 
 
-        if( $config -> update($req -> only(['title', 'email', 'logo', 'keywords', 'description']) )) {
+        if( $config -> update($req -> only(['title', 'email', 'logo', 'keywords', 'description', 'copyright', 'icp']) )) {
 //            向配置文件中更新配置项
             file_put_contents(config_path().'/webconf.php', '<?php return '.var_export($config->toArray(), true).';');
             return redirect('admin/config')->with('success', '修改成功');

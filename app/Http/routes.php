@@ -71,3 +71,7 @@ Route::get('login','Home\LoginController@login');
 // 前台处理登录信息
 Route::post('dologin','Home\LoginController@dologin');
 
+Route::group(['namespace' => 'Home'],function (){
+    Route::controller('/order', 'OrderController');
+});
+

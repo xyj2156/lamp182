@@ -44,6 +44,18 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="copyright" class="am-u-sm-3 am-form-label">版权信息 <span class="tpl-form-line-small-title">CopyRight</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="copyright" name="copyright" value="{{$data -> copyright}}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="icp" class="am-u-sm-3 am-form-label">备案信息 <span class="tpl-form-line-small-title">ICP</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="icp" name="icp" value="{{$data -> icp}}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="user-intro" class="am-u-sm-3 am-form-label">网站描述 <span class="tpl-form-line-small-title">Description</span></label>
                                 <div class="am-u-sm-9">
                                     <textarea class="" rows="10" id="user-intro" name="description" placeholder="请输入描述内容">{{$data -> description}}</textarea>

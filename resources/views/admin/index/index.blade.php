@@ -33,7 +33,7 @@
                     </tr>
                     <tr class="gradeX">
                         <td>开发者：</td>
-                        <td>项英杰、杨鹏亮、崔波波、黄大康</td>
+                        <td>项英杰、杨鹏亮、黄大康</td>
                     </tr>
                     <tr class="even gradeC">
                         <td>上传附件限制：</td>

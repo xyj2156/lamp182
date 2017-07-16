@@ -18,6 +18,11 @@ class FilmPlay extends Model
 
     public function detail()
     {
-        return $this -> hasOne('\App\Http\Model\Admin\Film','fid','id');
+        return $this -> hasOne('\App\Http\Model\Admin\Film','id','fid');
+    }
+
+    public function room()
+    {
+        return $this -> hasOne('\App\Http\Model\Admin\FilmRoom', 'id', 'rid');
     }
 }
