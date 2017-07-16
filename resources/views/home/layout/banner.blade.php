@@ -4,7 +4,7 @@
             <ul>
                 <h3>电影点击榜</h3>
                 @foreach($click as $k => $v)
-                <li><a href="#">{{$v -> name}}</a></li>
+                <li><a href="{{url('filmdetails/'.$v -> id)}}">{{$v -> name}}</a></li>
                 @endforeach
             </ul>
         </div>
