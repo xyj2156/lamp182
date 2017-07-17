@@ -77,7 +77,7 @@ class LoginController extends Controller
 
          // 将用户信息添加到session中
          session(['admin_user' => $user]);
-         return redirect('admin/index');
+         return redirect('admin/index') -> with('success','登陆成功');
        
     }
 
