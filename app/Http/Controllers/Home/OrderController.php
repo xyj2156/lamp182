@@ -8,7 +8,7 @@ use App\Http\Model\Admin\FilmPlay;
 use App\Http\Model\Admin\FilmRoom;
 use App\Http\Model\Admin\Member_detail;
 use App\Http\Model\Admin\Orders;
-use BaconQrCode\Encoder\QrCode;
+use QrCode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,9 +26,17 @@ class OrderController extends Controller
     public function getIndex(Request $req)
     {
         $fid = $req -> input('id',0);
-        if($fid === 0) return back() -> with('error', '请按照套路出牌....');
+        if($fid === 0)
+            return array(
+            'status' => 403,
+            'msg' => '没有播放id..'
+        );
         $playing = FilmPlay::where('id', $fid) -> where('start_time', '>', time()-10*60) -> first();
-        if(!$playing) return back() -> with('error', '电影已开播,不能购买.');
+        if(!$playing)
+            return [
+            'status' => 403,
+            'msg' => '您有订单未付款'
+        ];
 
         $room = $playing -> room;
         $film = $playing -> detail;
@@ -66,6 +74,9 @@ class OrderController extends Controller
 //        检测购买未付款的座位是否卖出
         $mem_room_list = 'list:room:'.$room;
         $mem = Redis::lrange($mem_room_list, 0, -1);
+        if($mem){
+            return back() -> with('error', '您有订单未付款....');
+        }
         foreach ($mem as $v){
             $tmpKey = 'set:room:'.$room.':'.$v;
             foreach ($arr as $vv){
@@ -231,7 +242,19 @@ class OrderController extends Controller
     public function postSuccess(Request $req)
     {
         $id = $req -> orderId;
-        $order = Orders::where('name', $id) -> first();
+        $order = Orders::where('name', $id) -> where('mid', session('home_user') -> id) -> first();
+        if(!$order)
+            return back() -> with('error', '订单未找到');
+        if($order -> status == 2){
+            return back() -> with('success', '订单已付款');
+        }
+        if(time() - $order -> ctime >= 15*60){
+            if($order -> status != 3){
+                $order -> status = 3;
+                $order -> update();
+            }
+            return back() -> with('error', '订单已过期');
+        }
         $mem = Member_detail::find($order -> mid);
         $num = $order -> price*$order -> num;
         if($mem -> money < $num){
@@ -262,9 +285,9 @@ class OrderController extends Controller
             Redis::Smove($setKey1,$setKey2,$v);
         }
         DB::commit();
+
+//        $code = QrCode::size(300,300) -> generate($id);
         $code = $id;
-        echo $code;
-        return QrCode::generate('Make me into a QrCode!');
         return view('',compact('code'));
     }
 }

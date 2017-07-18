@@ -69,6 +69,7 @@
                     sec = 59;
                     min --;
                 }
+                console.log(min,sec);
                 if (min <= 0 && sec <= 0){
                     clearInterval(time);
                     layer.alert('订单超时', {icon:5});

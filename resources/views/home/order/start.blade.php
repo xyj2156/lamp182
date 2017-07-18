@@ -139,21 +139,31 @@
                 @if($arr)
                     location = '{{url('order/success')}}?name={{$orderName -> name}}';
                 @else
-                var seat = sc.find('selected').seatIds;
-                var seat = seat.join(',');
-                $.post('{{url('order')}}',{
-                    _token : '{{csrf_token()}}',
-                    seat : seat,
-                    fid : '{{$film -> id}}',
-                    rid : '{{$room -> id}}',
-                    pid : '{{$playing -> id}}'
-                },function (data){
-                    console.log(data);
-                    layer.msg(data.msg);
-                    if(!data.status){
-                        location = '{{url('order/success')}}?name='+ data.name;
+                layer.confirm('请确认座位信息，因为提交后，只能在时间超时后才能重新选择座位。<br />您确认要提交座位信息吗？',
+                    {
+                        btn: ['确认','再想想'], //按钮
+                        title: '座位信息提示',
+                        icon:3
+                    },
+                    function(){
+                        var sea = sc.find('selected').seatIds;
+                        var seat = sea.join(',');
+                        console.log(seat);
+                        $.post('{{url('order')}}',{
+                            _token : '{{csrf_token()}}',
+                            seat : seat,
+                            fid : '{{$film -> id}}',
+                            rid : '{{$room -> id}}',
+                            pid : '{{$playing -> id}}'
+                        },function (data){
+                            console.log(data);
+                            layer.msg(data.msg);
+                            if(!data.status){
+                                window.location.href = '{{url('order/success')}}?name='+ data.name;
+                            }
+                        },'json');
                     }
-                },'json');
+                );
                 @endif
             });
         });
