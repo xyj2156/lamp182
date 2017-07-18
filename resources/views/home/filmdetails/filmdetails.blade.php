@@ -5,12 +5,11 @@
         <div class="wrap">
             <div class="content_top">
                 <div class="back-links">
-                    <p><a href="index.html">首页</a> &gt;&gt;&gt;&gt; <a href="#" class="active">电影详情</a></p>
+                    <p><a href="{{url('/')}}">首页</a> &gt;&gt;&gt;&gt; <a href="#" class="active">电影详情</a></p>
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="section group">
-
                 <div class="cont-desc span_1_of_2">
                     <div class="product-details">
                         <div class="grid images_3_of_2">
@@ -27,7 +26,7 @@
                                 <ul>
                                     <li><span>导演:</span> &nbsp; {{$filmdetail -> director}}</li>
                                     <b style="font-size:16px;color: #333;font-family: 'ambleregular';">演员:</b> &nbsp;<span style="color: #707070;">@foreach($cast as $k => $v){{$v -> name}} &nbsp;  &nbsp; @endforeach</span>
-{{-- 项英杰 修复电影类型 --}}
+                                    {{-- 项英杰 修复电影类型 --}}
                                     <li><span>类型:</span>&nbsp; {{$type[$film->_type]}} / {{$type[$film->area_type]}} / {{$type[$film->year]}}</li>
                                     <p></p>
                                     <li><span>上映时间:</span>&nbsp; {{$filmdetail -> uptime}}</li>
@@ -49,11 +48,9 @@
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';">剧情简介:</p>
                         <span>{!! $filmdetail -> film_detail_full !!}<span/>
                     </div>
-
                     {{--评论--}}
                     <div class="product_desc">
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';border-bottom: 2px solid #707070; margin-bottom:20px">热门短评:</p>
-
                             @foreach($reciew as $kk=>$vv)
                             <div class="review_cnt" id="longcomment">
                                 <ul class="clear">
@@ -70,7 +67,6 @@
                                 </ul>
                             </div>
                         @endforeach
-
                         {{--分页--}}
                         <div class="am-u-lg-12 am-cf">
                             <div class="am-fr">
@@ -86,7 +82,6 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
                 {{--右侧--}}
                 <div class="rightsidebar span_3_of_1 sidebar">
@@ -121,8 +116,6 @@
                         </div>
                     @endforeach
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -146,10 +139,10 @@
                             location.href = '{{url('filmdetails')}}/{{$film -> id}}';
                         },500);
                     }
-                },
+                }
             });
         }
-
+        // 购票
         function buy_movie(){
             $.ajax({
                 type : 'post',
@@ -183,17 +176,12 @@
 
 
         }
-
-
     </script>
-
-
 @endsection
 
 @section('style')
     {{--电影购票--}}
     <style>
-
         .movie_box li{
             float:left;
             margin:10px;
@@ -207,7 +195,6 @@
         .movie_box a{
             color:#fff;
         }
-
 
         .published {
             height: 78px;
@@ -295,5 +282,4 @@
             padding: 6px 12px;
         }
     </style>
-
 @endsection
