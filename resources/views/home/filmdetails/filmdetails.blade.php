@@ -1,11 +1,11 @@
-@extends('home.layout.index')
+@extends('home.layout.detail')
 
 @section('content')
     <div class="main">
         <div class="wrap">
             <div class="content_top">
                 <div class="back-links">
-                    <p><a href="{{url('/')}}">首页</a> &gt;&gt;&gt;&gt; <a href="#" class="active">电影详情</a></p>
+                    <p><a href="{{url('/')}}">首页</a> &gt;&gt;&gt;&gt; <a class="active">{{$film -> name}}</a></p>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -27,10 +27,10 @@
                                     <li><span>导演:</span> &nbsp; {{$filmdetail -> director}}</li>
                                     <b style="font-size:16px;color: #333;font-family: 'ambleregular';">演员:</b> &nbsp;<span style="color: #707070;">@foreach($cast as $k => $v){{$v -> name}} &nbsp;  &nbsp; @endforeach</span>
                                     {{-- 项英杰 修复电影类型 --}}
-                                    <li><span>类型:</span>&nbsp; {{$type[$film->_type]}} / {{$type[$film->area_type]}} / {{$type[$film->year]}}</li>
+                                    <li><span>类型:</span>&nbsp; {{$type[$film->_type]}} / {{$type[$film->area_type]}} / {{$type[$film->year].'年'}}</li>
                                     <p></p>
-                                    <li><span>上映时间:</span>&nbsp; {{$filmdetail -> uptime}}</li>
-                                    <li><span>片长:</span>&nbsp; {{$filmdetail -> time}}</li>
+                                    <li><span>上映时间:</span>&nbsp; {{date('m月d日',$filmdetail -> uptime)}}</li>
+                                    <li><span>片长:</span>&nbsp; {{str_replace(':','小时',$filmdetail -> time).'分钟'}}</li>
                                 </ul>
                             </div>
                             <div class="wish-list" style="margin-bottom: -10px;">
@@ -51,7 +51,7 @@
                     {{--评论--}}
                     <div class="product_desc">
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';border-bottom: 2px solid #707070; margin-bottom:20px">热门短评:</p>
-                            @foreach($reciew as $kk=>$vv)
+                        @foreach($reciew as $kk=>$vv)
                             <div class="review_cnt" id="longcomment">
                                 <ul class="clear">
                                     <li class="bdb_f2">
@@ -63,6 +63,7 @@
                                         <div class="fl w730 ml20 mt10">
                                             <div class="fs0 f14">{{$vv['content']}}</div>
                                         </div>
+                                        <span style="float:right;color:#ccc">{{date('Y-m-d H:i:s',$vv['time'])}}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -89,12 +90,11 @@
                     @foreach($click as $k => $v)
                     <div class="special_movies">
                         <div class="movie_poster">
-                            <a href="preview.html"><img src="{{$v -> film_pic}}" alt=""></a>
+                            <a href="{{url('filmdetails')}}/{{$v -> id}}"><img src="{{$v -> film_pic}}" alt=""></a>
                         </div>
                         <div class="movie_desc">
-                            <h3><a href="preview.html">{{$v -> name}}</a></h3>
+                            <h3><a href="{{url('filmdetails')}}/{{$v -> id}}">{{$v -> name}}</a></h3>
                             <p><span>$620.87</span> &nbsp; {{$v -> price}}</p>
-                            <span><a href="#">购票</a></span>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -105,12 +105,11 @@
                     @foreach($play as $kk => $vv)
                         <div class="special_movies">
                             <div class="movie_poster">
-                                <a href="preview.html"><img src="{{$vv -> film_pic}}" alt=""></a>
+                                <a href="{{url('filmdetails')}}/{{$vv -> id}}"><img src="{{$vv -> film_pic}}" alt="" style=""></a>
                             </div>
                             <div class="movie_desc">
-                                <h3><a href="preview.html">{{$vv -> name}}</a></h3>
+                                <h3><a href="{{url('filmdetails')}}/{{$vv -> id}}">{{$vv -> name}}</a></h3>
                                 <p><span>$620.87</span> &nbsp; {{$vv -> price}}</p>
-                                <span><a href="#">购票</a></span>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -152,29 +151,30 @@
                     id:'{{$film -> id}}'
                 },
                 success:function(data){
-                    console.log(data);
-                    var arr = data.data;
-                    var str = '';
-                    for (var i = 0; i < arr.length; i++){
-                        str += "<ul class='movie_box'>"+
-                                    "<a href='{{url('order')}}?id="+arr[i][1]+"'>"+"<li>"+ arr[i][0] +"</li>"+"</a>"+
+//                    console.log(data);
+                    if(data.status !== 0){
+                        layer.alert(data.data);
+                    } else {
+                        var arr = data.data;
+                        var str = '';
+                        for (var i = 0; i < arr.length; i++){
+                            str +=
+                                "<ul class='movie_box'>"+
+                                "<a href='{{url('order')}}?id="+arr[i][1]+"'>"+"<li>"+ arr[i][0] +"</li>"+"</a>"+
                                 "</ul>";
+                        }
+                        layer.open({
+                            type: 1,
+                            title:'影厅',
+                            skin: 'layui-layer-demo', //样式类名
+                            closeBtn: 0, //不显示关闭按钮
+                            anim: 2,
+                            shadeClose: true, //开启遮罩关闭
+                            content:str
+                        });
                     }
-
-                    layer.open({
-                        type: 1,
-                        title:'影厅',
-                        skin: 'layui-layer-demo', //样式类名
-                        closeBtn: 0, //不显示关闭按钮
-                        anim: 2,
-                        shadeClose: true, //开启遮罩关闭
-                        content:str
-                    });
                 }
-
             });
-
-
         }
     </script>
 @endsection
@@ -182,10 +182,16 @@
 @section('style')
     {{--电影购票--}}
     <style>
+        .layui-layer-title{
+            text-align: center;
+            padding: 0px;
+            background:#ccc;
+        }
         .movie_box li{
             float:left;
             margin:10px;
-            width:100px;
+            width:300px;
+            border-radius: 10px;
             height:100px;
             background:#FC7D01;
             text-align: center;
@@ -282,4 +288,9 @@
             padding: 6px 12px;
         }
     </style>
+@endsection
+
+@section('meta')
+    <meta name="keywords" content="{{$filmdetail -> keywords}}" />
+    <meta name="description" content="{{$filmdetail -> film_detail}}"/>
 @endsection

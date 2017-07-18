@@ -70,7 +70,10 @@ class FilmDetailsController extends Common
             'content',
             'fid',
         ]);
-        // 评论对应的用户
+        if(!session('home_user')){
+            return ['status' => 1,'data' => '请登录用户'];
+        }
+            // 评论对应的用户
         $data['mid']  = session('home_user') -> id;
         $data['time'] = time();
         $res = Review::create($data);
@@ -88,12 +91,11 @@ class FilmDetailsController extends Common
      */
     public function movie(Request $request)
     {
-
+        // 影厅弹层
         $data1 = $request -> only([
             'id'
         ]);
         $id = $data1['id'];
-        // 影厅弹层
         // $filmplay电影播放历史  开始时间 < 当前时间 - 10分钟
         $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','>',time()-10*60) -> get();
         $rid = [];
@@ -111,10 +113,13 @@ class FilmDetailsController extends Common
         $data = [];
         foreach($filmroom as $k=>$v){
             $data[] = [$v -> name,$id[$v -> id]];
-
         }
+       if(!$data){
+            return ['status' => 1,'data' => '该电影没有播放'];
+       } else {
+           return ['status' => 0,'data' => $data];
+       }
 
-        return ['status' => 0,'data' => $data];
     }
 
 
