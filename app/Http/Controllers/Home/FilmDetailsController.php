@@ -31,12 +31,11 @@ class FilmDetailsController extends Common
         $title = '电影详情';
         // 获取演员对象集合
         $cast = $film -> cast;
-        // 获取$film的_type类型
-        $_type = $film -> _type;
         // 获取$film id
         $fid = $film -> id;
         // 查出电影类型
-        $type = Film_type::where('id',$_type) -> select('name') -> first();
+        $type = Film_type::where('id','>',3) -> select('id','name') -> lists('name', 'id') -> toArray();
+//        dd($type,$film);
         // 通过$film的id 来查询出对应的电影评论
         $reciew = Review::where('fid',$fid) -> orderBy('time','desc') ->  paginate(10);
         $mid = [];
