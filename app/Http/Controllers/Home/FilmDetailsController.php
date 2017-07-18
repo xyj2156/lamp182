@@ -6,6 +6,8 @@ use App\Http\Controllers\Common;
 use App\Http\Model\Admin\Film;
 use App\Http\Model\Admin\Film_type;
 use App\Http\Model\Admin\FilmDetail;
+use App\Http\Model\Admin\FilmPlay;
+use App\Http\Model\Admin\FilmRoom;
 use App\Http\Model\Admin\Member_detail;
 use App\Http\Model\Admin\Review;
 use Illuminate\Http\Request;
@@ -15,6 +17,10 @@ use App\Http\Controllers\Controller;
 
 class FilmDetailsController extends Common
 {
+    /**
+     * @param $id
+     * 加载电影详情
+     */
     public function index($id)
     {
         // 通过传过来的$id 查出 电影详情
@@ -30,7 +36,7 @@ class FilmDetailsController extends Common
         // 获取$film id
         $fid = $film -> id;
         // 查出电影类型
-        $type = Film_type::where('id',$_type) -> select('name') -> first();
+        $type = Film_type::where('id',$_type) -> select('name') -> get() -> all()[$_type] -> name;
         // 通过$film的id 来查询出对应的电影评论
         $reciew = Review::where('fid',$fid) -> paginate(3);
         $mid = [];
@@ -56,7 +62,7 @@ class FilmDetailsController extends Common
     }
 
     /**
-     * @param Request $request
+     * 电影评论
      * 处理ajax传过来的数据
      */
     public function comment(Request $request)
@@ -76,5 +82,38 @@ class FilmDetailsController extends Common
             return ['status' => 1,'data' => '服务器繁忙,请重新评论'];
         }
     }
+
+    /**
+     * @param Request $request
+     * 处理购票按钮
+     *
+     */
+    public function movie(Request $request)
+    {
+
+        $data1 = $request -> only([
+            'id'
+        ]);
+        $id = $data1['id'];
+        // 影厅弹层
+        // $filmplay电影播放历史
+        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> get();
+        $rid = [];
+        foreach($filmplay as $k=>$v){
+            // 获取$reciew 的mid
+            $rid[] = $v['rid'];
+        }
+        // 去重
+        $rid = array_unique($rid);
+        // 根据rid查出对应的影厅信息
+        $filmroom = FilmRoom::whereIn('id',$rid) -> select('id','name','seat') -> get();
+        $data = [];
+        foreach($filmroom as $k=>$v){
+            $data[] = $v -> name;
+        }
+        return ['data' => $data];
+    }
+
+
 
 }
