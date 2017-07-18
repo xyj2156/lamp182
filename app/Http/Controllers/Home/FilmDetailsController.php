@@ -36,9 +36,9 @@ class FilmDetailsController extends Common
         // 获取$film id
         $fid = $film -> id;
         // 查出电影类型
-        $type = Film_type::where('id',$_type) -> select('name') -> first() -> all()[$_type] -> name;
+        $type = Film_type::where('id',$_type) -> select('name') -> first();
         // 通过$film的id 来查询出对应的电影评论
-        $reciew = Review::where('fid',$fid) -> paginate(3);
+        $reciew = Review::where('fid',$fid) -> orderBy('time','desc') ->  paginate(10);
         $mid = [];
         foreach($reciew as $k=>$v){
             // 获取$reciew 的mid
@@ -96,22 +96,27 @@ class FilmDetailsController extends Common
         ]);
         $id = $data1['id'];
         // 影厅弹层
-        // $filmplay电影播放历史
-        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> get();
+        // $filmplay电影播放历史  开始时间 < 当前时间 - 10分钟
+        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','<',time()-10*60) -> get();
         $rid = [];
+        $id = [];
         foreach($filmplay as $k=>$v){
             // 获取$reciew 的mid
             $rid[] = $v['rid'];
+            $id[$v['rid']] = $v['id'];
         }
         // 去重
         $rid = array_unique($rid);
         // 根据rid查出对应的影厅信息
         $filmroom = FilmRoom::whereIn('id',$rid) -> select('id','name','seat') -> get();
+        // 影厅名字
         $data = [];
         foreach($filmroom as $k=>$v){
-            $data[] = $v -> name;
+            $data[] = [$v -> name,$id[$v -> id]];
+
         }
-        return ['data' => $data];
+
+        return ['status' => 0,'data' => $data];
     }
 
 
