@@ -27,7 +27,7 @@
                                 <ul>
                                     <li><span>导演:</span> &nbsp; {{$filmdetail -> director}}</li>
                                     <b style="font-size:16px;color: #333;font-family: 'ambleregular';">演员:</b> &nbsp;<span style="color: #707070;">@foreach($cast as $k => $v){{$v -> name}} &nbsp;  &nbsp; @endforeach</span>
-                                    <li><span>类型:</span>&nbsp; {{$type}}</li>
+                                    <li><span>类型:</span>&nbsp; {{$type -> name}}</li>
                                     <p></p>
                                     <li><span>上映时间:</span>&nbsp; {{$filmdetail -> uptime}}</li>
                                     <li><span>片长:</span>&nbsp; {{$filmdetail -> time}}</li>
@@ -60,13 +60,14 @@
                                         <div class="fl pr">
                                             <div class="bjj"></div>
                                             <img src="{{url($vv['uface'])}}" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
-                                            <div class="tc fs0">{{$vv['name']}}</div>
+                                            <div class="tc fs0">{{$vv['name']}}<p>{{date('Y-m-d H:i:s',$vv['time'])}}</p></div>
                                         </div>
                                         <div class="fl w730 ml20 mt10">
                                             <div class="fs0 f14">{{$vv['content']}}</div>
                                         </div>
                                     </li>
                                 </ul>
+
                             </div>
                         @endforeach
 
@@ -148,7 +149,7 @@
                 },
             });
         }
-
+//        电影购票
         function buy_movie(){
             $.ajax({
                 type : 'post',
@@ -160,10 +161,11 @@
                 success:function(data){
                     console.log(data);
                     var arr = data.data;
+
                     var str = '';
                     for (var i = 0; i < arr.length; i++){
                         str += "<ul class='movie_box'>"+
-                                    "<a href='{{url('oreder')}}?id='>"+"<li>"+ arr[i] +"</li>"+"</a>"+
+                                    "<a href='{{url('order')}}?id="+arr[i][1]+"'>"+"<li>"+ arr[i][0] +"</li>"+"</a>"+
                                 "</ul>";
                     }
 
@@ -177,10 +179,7 @@
                         content:str
                     });
                 }
-
             });
-
-
         }
 
 
@@ -192,25 +191,24 @@
 @section('style')
     <style>
         {{--电影购票--}}
-        .layui-layer-content{
-            width:360px;
-            height:500px;
-            background:#ccc
+        .layui-layer-title{
+            padding: 0px;
+            text-align: center;
         }
         .movie_box li{
             float:left;
-            margin:10px;
-            width:100px;
+            margin:10px 10px ;
+            width:300px;
             height:100px;
             background:#FC7D01;
             text-align: center;
             line-height:100px;
             cursor:pointer;
+            border-radius: 10px;
         }
         .movie_box a{
             color:#fff;
         }
-
 
         .published {
             height: 78px;
@@ -261,7 +259,10 @@
         .tc{
             margin-bottom: 10px;
         }
-
+        .fs0 p{
+            text-align: right;
+            margin-top: -42px;
+        }
         /*分页样式*/
         .pagination{
             margin: 0;
