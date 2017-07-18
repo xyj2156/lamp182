@@ -67,10 +67,10 @@ class LoginController extends Controller
         // 获取到当前登录成功的时间
         $user -> ltime = time();
         // 执行跟新数据
-        $user  -> save();
+        $user  -> update();
 
         // 将用户信息添加到session中
         session(['home_user' => $user]);
-        return redirect('/');
+        return redirect('/') -> with('success', '登录成功...');
     }
 }

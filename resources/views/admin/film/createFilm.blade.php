@@ -61,7 +61,7 @@
                                 <label for="phone" class="am-u-sm-3 am-form-label">类型 <span class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <select data-am-selected="{searchBox: 1}" name="_type">
+                                    <select data-am-selected="{searchBox: 1}" name="_type" value="{{$_type[0] -> id}}">
                                         @foreach($_type as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach
@@ -73,7 +73,7 @@
                                 <label for="email" class="am-u-sm-3 am-form-label">地区 <span class="tpl-form-line-small-title">Rigion</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <select data-am-selected="{searchBox: 2}" name="area_type">
+                                    <select data-am-selected="{searchBox: 2}" name="area_type" value="{{$area_type[0] -> id}}">
                                         @foreach($area_type as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach
@@ -85,7 +85,7 @@
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">年份 <span class="tpl-form-line-small-title">Year</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <select data-am-selected="{searchBox: 3}" name="year">
+                                    <select data-am-selected="{searchBox: 3}" name="year" value="{{$year[0] -> id}}">
                                         @foreach($year as $v)
                                             <option value="{{$v -> id}}">{{$v -> name}}</option>
                                         @endforeach

@@ -23,6 +23,29 @@
         </script>
     </head>
     <body>
+        {{--提示失败或者成功--}}
+        @if(session('success') || session('error'))
+            <script>
+                $(function (){
+                    layer.msg('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
+                });
+            </script>
+        @endif
+
+        {{--提示表单验证错误--}}
+        @if (count($errors) > 0)
+            <script>
+                $(function () {
+                    layer.alert(
+                        '@foreach($errors -> all() as $err){{$err.'\n'}}@endforeach',
+                        {
+                            time:3000,
+                            icon:5
+                        }
+                    );
+                });
+            </script>
+        @endif
         <div class="header">
             <div class="headertop_desc">
                 <div class="wrap">
@@ -99,27 +122,6 @@
         </script>
         <a href="#" id="toTop"><span id="toTopHover"></span></a>
         @section('script')@show
-        {{--提示表单验证错误--}}
-        @if (count($errors) > 0)
-            <script>
-                $(function () {
-                    layer.alert(
-                        '@foreach($errors -> all() as $err){{$err.'\n'}}@endforeach',
-                        {
-                            time:3000,
-                            icon:5
-                        }
-                    );
-                });
-            </script>
-        @endif{{--提示失败或者成功--}}
-        @if(session('success') || session('error'))
-            <script>
-                $(function (){
-                    layer.msg('{{session('success')?session('success'):session('error')}}',{icon:'{{session('success')?6:5}}'});
-                });
-            </script>
-        @endif
     </body>
 </html>
 

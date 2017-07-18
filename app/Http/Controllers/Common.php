@@ -16,8 +16,8 @@ class Common extends Controller
 {
     public function __construct()
     {
-        $filmClick = Film::where('click','>',0) -> select('id','name','click','film_pic', 'price') -> orderBy('click','desc') -> take(10) -> get();
-        $filmPlay = Film::where('play','>',0) -> select('id','name','play','film_pic','price') -> orderBy('play','desc') -> take(10) -> get();
+        $filmClick = Film::where('click','>=',0) -> select('id','name','click','film_pic', 'price') -> orderBy('click','desc') -> take(10) -> get();
+        $filmPlay = Film::where('play','>=',0) -> select('id','name','play','film_pic','price') -> orderBy('play','desc') -> take(10) -> get();
 
         view() -> share('click',$filmClick);
         view() -> share('play',$filmPlay);

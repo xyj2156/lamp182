@@ -46,7 +46,7 @@
                                 <label for="phone" class="am-u-sm-3 am-form-label">类型 <span class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <select data-am-selected="" name="_type">
+                                    <select data-am-selected="" name="_type" value="{{$_type[0] -> id}}">
                                         @foreach($_type as $v)
                                             <option value="{{$v -> id}}" {{$data -> _type == $v -> id?'selected':''}} >{{$v -> name}}</option>
                                         @endforeach
@@ -58,7 +58,7 @@
                                 <label for="email" class="am-u-sm-3 am-form-label">地区 <span class="tpl-form-line-small-title">Rigion</span></label>
                                 <div class="am-u-sm-9">
 
-                                    <select data-am-selected="" name="area_type">
+                                    <select data-am-selected="" name="area_type" value="{{$area_type[0] -> id}}">
                                         @foreach($area_type as $v)
                                             <option value="{{$v -> id}}" {{$data -> area_type == $v -> id ? 'selected' : ''}}>{{$v -> name}}</option>
                                         @endforeach
@@ -69,7 +69,7 @@
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">年份 <span class="tpl-form-line-small-title">Year</span></label>
                                 <div class="am-u-sm-9">
-                                    <select data-am-selected="" style="display: none;" name="year">
+                                    <select data-am-selected="" style="display: none;" name="year" value="{{$year[0] -> id}}">
 
                                         @foreach($year as $v)
                                             <option value="{{$v -> id}}" {{$data -> year == $v -> id ? 'selected' : ''}}>{{$v -> name}}</option>

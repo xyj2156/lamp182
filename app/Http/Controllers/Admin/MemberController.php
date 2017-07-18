@@ -195,7 +195,6 @@ class MemberController extends Controller
 
         $res1 = Member::find($id);
         $res2 = Member_detail::find($id);
-        dd($res1, $res2);
 //        没有数据可能就是来路不正
         if(!$res1 || !$res2){
             return redirect('admin/user') -> with('error', '请按套路出牌。。');
@@ -212,9 +211,7 @@ class MemberController extends Controller
 
         $a = $res1 -> update($request -> only(['username','phone','email']));
         $b = $res2 -> update($request -> only(['auth','age','sex']));
-
-        dump($a,$b,DB::getQueryLog());
-
+dd();
         if(!$a || !$b){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
@@ -235,7 +232,7 @@ class MemberController extends Controller
         if (!$res1 || !$res2) {
             return [
                 'status' => 500,
-                'msg' => '请按套路出牌。。'
+                'msg' => '用户主表和附表不同步。。'
             ];
         }
 

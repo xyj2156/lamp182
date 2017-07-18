@@ -69,8 +69,9 @@
                     sec = 59;
                     min --;
                 }
-                if (min <= 0){
+                if (min <= 0 && sec <= 0){
                     clearInterval(time);
+                    layer.alert('订单超时', {icon:5});
                 }
                 em[0].innerHTML = min<10?'0' + min: min;
                 em[1].innerHTML = sec<10?'0' + sec: sec;

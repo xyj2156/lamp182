@@ -32,8 +32,8 @@
                     <p>结束时间：<span>{{date('Y-m-d H:i:s', $playing -> end_time)}}</span></p>
                     <p>座位：</p>
                     <ul id="selected-seats"></ul>
-                    <p>票数：<span id="counter">0</span></p>
-                    <p>总计：<b>￥<span id="total">0</span></b></p>
+                    <p>票数：<span id="counter">{{count($arr)}}</span></p>
+                    <p>总计：<b>￥<span id="total">{{count($arr)*$film -> price }}</span></b></p>
                     <div id="legend"></div>
                     <button class="checkout-button btn">确定购买</button>
                 </div>
@@ -107,21 +107,38 @@
                     }
                 }
             });
-            //已售出的座位
-            $.post('{{url('order/seat')}}',{
-                _token: '{{csrf_token()}}',
-                id : '{{$film -> id}}'
-            },function (data){
-                sc.get(data).status('unavailable');
-            }, 'json');
 
+            @if($arr)
+            $(function(){
+                var arr = [{!! '"'.str_replace(',', '","', implode(',', $arr)).'"' !!}];
+                for(var i = 0; i < arr.length; i ++ ){
+                    var tmp = arr[i].split('_');
+                    var str = '<li>'+ tmp[0] + '排' + tmp[1] +'座</li>';
+                    $(str).appendTo($cart);
+                }
+                sc.get(sc.seatIds).status('unavailable');
+            });
+            @else
+            $(function(){
+                //已售出的座位
+                $.post('{{url('order/seat')}}',{
+                    _token: '{{csrf_token()}}',
+                    id : '{{$playing -> rid}}'
+                },function (data){
+                    sc.get(data).status('unavailable');
+                }, 'json');
+            });
+            @endif
 //          设定牌号
-            s = $('#seat-map div.seatCharts-seat').each(function (k, v){
+            $('#seat-map div.seatCharts-seat').each(function (k, v){
                 var arr = v.id.split('_');
                 v.title = arr[0] + '排' + arr[1] + '号';
             });
-
+//          提交信息
             $('.checkout-button').click(function (){
+                @if($arr)
+                    location = '{{url('order/success')}}?name={{$orderName -> name}}';
+                @else
                 var seat = sc.find('selected').seatIds;
                 var seat = seat.join(',');
                 $.post('{{url('order')}}',{
@@ -137,6 +154,7 @@
                         location = '{{url('order/success')}}?name='+ data.name;
                     }
                 },'json');
+                @endif
             });
         });
         //计算总金额
