@@ -26,7 +26,7 @@ class OrderController extends Controller
     {
         $fid = $req -> input('id',0);
         if($fid === 0) return back() -> with('error', '请按照套路出牌....');
-        $playing = FilmPlay::find($fid);
+        $playing = FilmPlay::where('id', $fid) -> where('start_time', '<', time()-10*60) -> first();
         if(!$playing) return back() -> with('error', '请按照套路出牌....');
 
         $room = $playing -> room;
