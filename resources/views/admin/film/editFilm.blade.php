@@ -22,6 +22,19 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="keywords" class="am-u-sm-3 am-form-label">电影关键字 <span class="tpl-form-line-small-title">KeyWords</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="keywords" required name="keywords" placeholder="请输入关键字,多个请用逗号隔开" value="{{$data2 -> keywords}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="film_detail" class="am-u-sm-3 am-form-label">电影描述 <span class="tpl-form-line-small-title">detail</span></label>
+                                <div class="am-u-sm-9">
+                                    <textarea required id="film_detail" name="film_detail" rows="5">{{$data2 -> film_detail}}</textarea>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="director" class="am-u-sm-3 am-form-label">导演 <span class="tpl-form-line-small-title">Director</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="director" name="director" placeholder="请输入导演" value="{{$data2->director}}">
@@ -36,6 +49,20 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="phone" class="am-u-sm-3 am-form-label">上映时间 <span class="tpl-form-line-small-title">uptime</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="date" class="tpl-form-input" id="phone" required name="uptime" value="{{date('Y-m-d',$data2 -> uptime)}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="time" class="am-u-sm-3 am-form-label">片长 <span class="tpl-form-line-small-title">film_length</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="time" class="tpl-form-input" id="time" required name="time" value="{{$data2 -> time}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="age" name="price" placeholder="请输入售价" value="{{$data->price}}">
@@ -45,7 +72,6 @@
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">类型 <span class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
-
                                     <select data-am-selected="" name="_type" value="{{$_type[0] -> id}}">
                                         @foreach($_type as $v)
                                             <option value="{{$v -> id}}" {{$data -> _type == $v -> id?'selected':''}} >{{$v -> name}}</option>
@@ -79,10 +105,9 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-
-                                <label for="phone" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail</span></label>
+                                <label for="film_detail_full" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail_full</span></label>
                                 <div class="am-u-sm-9">
-                                    <textarea name="film_detail" rows="5">{{$data2 -> film_detail}}</textarea>
+                                    <textarea required id="film_detail_full" name="film_detail_full" rows="5">{{$data2 -> film_detail_full}}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" class="tpl-form-input" id="uface" name="film_pic"  value="{{$data -> film_pic}}" >
@@ -98,7 +123,6 @@
                                         <input id="doc-form-file" type="file" name="myfile" multiple="">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3">

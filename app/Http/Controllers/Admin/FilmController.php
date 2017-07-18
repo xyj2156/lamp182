@@ -79,17 +79,12 @@ class FilmController extends Controller
             'price' => 'required|min:0|integer',
             '_type' => 'required',
             'area_type' => 'required',
-
             'year' => 'required|integer',
-
             'film_pic' => 'required',
-
             'director' => 'required',
             'actor' => 'required',
             'uptime' => 'required',
             'film_detail' => 'required',
-
-
         ],[
             'name.required'  => '请输入电影名称.',
             'price.required' => '请输入电影票价.',
@@ -98,28 +93,21 @@ class FilmController extends Controller
             '_type.required'  => '请输入电影所属类型.',
             'area_type.required' => '请输入电影所属地区.',
             'year.required' => '请输入电影所属年份.',
-
-
             'year.integer' => '请输入正确年份.',
             'film_pic.required' => '请选择电影封面图片',
-
             'director.required' => '请填入导演',
             'actor.required' => '请填入演员',
             'uptime.required' => '请填入上映时间',
             'film_detail.required' => '请填入电影简介', 
         ]);
         
-
-
-
-     //获取主表数据
+//        获取主表数据
         $data1 = $request -> only([
             'name',
             'price',
             '_type',
             'area_type',
             'year',
-
             'film_pic'
         ]);
 
@@ -130,11 +118,13 @@ class FilmController extends Controller
             'actor',
             'uptime',
             'film_detail',
-
+            'film_detail_full',
+            'time',
+            'keywords',
         ]);
 
+        $data2['uptime'] = strtotime($data2['uptime']);
 
-        
         //开启事务
         DB::beginTransaction();
 
@@ -144,18 +134,14 @@ class FilmController extends Controller
         $res2 = FilmDetail::create($data2);
 
         if( $res1 && $res2 ){
-            DB::commit();
-
             session(['film_path' => null]);
+            DB::commit();
             return redirect('admin/film/') -> with('success', '添加成功');
-
         }else{
             DB::rollBack();
             return back() -> with('error','添加失败');
         }
     }
-
-
 
     /**
      * 修改电影信息第一步
@@ -249,7 +235,6 @@ class FilmController extends Controller
         ],[
             'name.required'  => '请输入电影名称.',
             'price.required' => '请输入电影票价.',
-
             'price.numeric' => '请输入正确的票价.',
             '_type.required'  => '请输入电影所属类型.',
             'director.required'  => '请输入导演.',
@@ -276,8 +261,13 @@ class FilmController extends Controller
             'director',
             'actor',
             'uptime',
-            'film_detail'
+            'film_detail',
+            'film_detail_full',
+            'time',
+            'keywords',
         ]);
+
+        $data2['uptime'] = strtotime($data2['uptime']);
 
         $data['film_pic'] = isset($data['film_pic']) ? $data['film_pic'] : $res -> film_pic;
 //        记录一下旧文件

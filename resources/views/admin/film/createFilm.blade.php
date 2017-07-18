@@ -16,27 +16,34 @@
                             <div class="am-form-group">
                                 <label for="user-name" class="am-u-sm-3 am-form-label">电影名称 <span class="tpl-form-line-small-title">FilmName</span></label>
                                 <div class="am-u-sm-9">
-
                                     <input type="text" class="tpl-form-input" id="user-name" required name="name" placeholder="请输入电影名" value="{{old('name')}}">
-
                                     <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="keywords" class="am-u-sm-3 am-form-label">电影关键字 <span class="tpl-form-line-small-title">KeyWords</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="keywords" required name="keywords" placeholder="请输入关键字,多个请用逗号隔开" value="{{old('keywords')}}">
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="film_detail" class="am-u-sm-3 am-form-label">电影描述 <span class="tpl-form-line-small-title">detail</span></label>
+                                <div class="am-u-sm-9">
+                                    <textarea required id="film_detail" name="film_detail" rows="5">{{old('film_detail')}}</textarea>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
-
                                     <input type="number" class="tpl-form-input" id="age" required name="price" placeholder="请输入售价" value="{{old('price')}}">
-
                                     <small></small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="phone" class="am-u-sm-3 am-form-label">导演 <span class="tpl-form-line-small-title">director</span></label>
                                 <div class="am-u-sm-9">
-
                                     <input type="text" class="tpl-form-input" id="phone" required name="director" placeholder="请输入导演" value="{{old('director')}}">
-
                                     <small></small>
                                 </div>
                             </div>
@@ -54,6 +61,13 @@
 
                                     <input type="date" class="tpl-form-input" id="phone" required name="uptime" value="{{old('uptime') ? old('uptime') : date('Y-m-d')}}">
 
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="time" class="am-u-sm-3 am-form-label">片长 <span class="tpl-form-line-small-title">film_length</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="time" class="tpl-form-input" id="time" required name="time" value="{{old('time') ? old('time') : '01:30'}}">
                                     <small></small>
                                 </div>
                             </div>
@@ -94,10 +108,9 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label for="phone" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail</span></label>
+                                <label for="film_detail_full" class="am-u-sm-3 am-form-label">电影简介 <span class="tpl-form-line-small-title">detail_full</span></label>
                                 <div class="am-u-sm-9">
-
-                                    <textarea name="film_detail" rows="5">{{old('film_detail')}}</textarea>
+                                    <textarea required id="film_detail_full" name="film_detail_full" rows="5">{{old('film_detail_full')}}</textarea>
                                 </div>
                             </div>
                             <input type="hidden" class="tpl-form-input" id="uface" name="film_pic"  value="{{old('film_pic')}}" >
