@@ -1,8 +1,6 @@
 @extends('home.layout.detail')
 
 @section('content')
-    <div class="main">
-        <div class="wrap">
             <div class="content_top">
                 <div class="back-links">
                     <p><a href="{{url('/')}}">首页</a> &gt;&gt;&gt;&gt; <a class="active">{{$film -> name}}</a></p>
@@ -116,8 +114,7 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-    </div>
+
     <script>
         // 评论
         function fun(){
