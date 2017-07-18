@@ -34,8 +34,7 @@ class FilmDetailsController extends Common
         // 获取$film id
         $fid = $film -> id;
         // 查出电影类型
-        $type = Film_type::where('id','>',3) -> select('id','name') -> lists('name', 'id') -> toArray();
-//        dd($type,$film);
+        $type = Film_type::where('id','>',3) -> select('id','name') -> lists('name','id') -> toArray();
         // 通过$film的id 来查询出对应的电影评论
         $reciew = Review::where('fid',$fid) -> orderBy('time','desc') ->  paginate(10);
         $mid = [];
@@ -96,7 +95,7 @@ class FilmDetailsController extends Common
         $id = $data1['id'];
         // 影厅弹层
         // $filmplay电影播放历史  开始时间 < 当前时间 - 10分钟
-        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','<',time()-10*60) -> get();
+        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','>',time()-10*60) -> get();
         $rid = [];
         $id = [];
         foreach($filmplay as $k=>$v){
