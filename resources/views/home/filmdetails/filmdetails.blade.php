@@ -164,7 +164,7 @@
                     var str = '';
                     for (var i = 0; i < arr.length; i++){
                         str += "<ul class='movie_box'>"+
-                                    "<a href='{{url('oreder')}}?id='>"+"<li>"+ arr[i] +"</li>"+"</a>"+
+                                    "<a href='{{url('order')}}?id="+arr[i][1]+"'>"+"<li>"+ arr[i][0] +"</li>"+"</a>"+
                                 "</ul>";
                     }
 
@@ -191,13 +191,9 @@
 @endsection
 
 @section('style')
+    {{--电影购票--}}
     <style>
-        {{--电影购票--}}
-        .layui-layer-content{
-            width:360px;
-            height:500px;
-            background:#ccc
-        }
+
         .movie_box li{
             float:left;
             margin:10px;
@@ -301,11 +297,3 @@
     </style>
 
 @endsection
-
-
-
-
-
-
-
-

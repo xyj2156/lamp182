@@ -8,6 +8,7 @@ use App\Http\Model\Admin\FilmPlay;
 use App\Http\Model\Admin\FilmRoom;
 use App\Http\Model\Admin\Member_detail;
 use App\Http\Model\Admin\Orders;
+use BaconQrCode\Encoder\QrCode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,8 +27,8 @@ class OrderController extends Controller
     {
         $fid = $req -> input('id',0);
         if($fid === 0) return back() -> with('error', '请按照套路出牌....');
-        $playing = FilmPlay::where('id', $fid) -> where('start_time', '<', time()-10*60) -> first();
-        if(!$playing) return back() -> with('error', '请按照套路出牌....');
+        $playing = FilmPlay::where('id', $fid) -> where('start_time', '>', time()-10*60) -> first();
+        if(!$playing) return back() -> with('error', '电影已开播,不能购买.');
 
         $room = $playing -> room;
         $film = $playing -> detail;
@@ -262,7 +263,8 @@ class OrderController extends Controller
         }
         DB::commit();
         $code = $id;
-        echo QrCode::generate('Make me into a QrCode!');die;
+        echo $code;
+        return QrCode::generate('Make me into a QrCode!');
         return view('',compact('code'));
     }
 }
