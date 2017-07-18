@@ -27,7 +27,8 @@
                                 <ul>
                                     <li><span>导演:</span> &nbsp; {{$filmdetail -> director}}</li>
                                     <b style="font-size:16px;color: #333;font-family: 'ambleregular';">演员:</b> &nbsp;<span style="color: #707070;">@foreach($cast as $k => $v){{$v -> name}} &nbsp;  &nbsp; @endforeach</span>
-                                    <li><span>类型:</span>&nbsp; {{$type}}</li>
+{{-- 项英杰 修复电影类型 --}}
+                                    <li><span>类型:</span>&nbsp; {{$type[$film->_type]}} / {{$type[$film->area_type]}} / {{$type[$film->year]}}</li>
                                     <p></p>
                                     <li><span>上映时间:</span>&nbsp; {{$filmdetail -> uptime}}</li>
                                     <li><span>片长:</span>&nbsp; {{$filmdetail -> time}}</li>
