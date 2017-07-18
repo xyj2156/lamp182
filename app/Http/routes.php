@@ -77,8 +77,11 @@ Route::get('reg','Home\RegController@reg');
 
 Route::group(['namespace' => 'Home'],function (){
     Route::controller('/order', 'OrderController');
-// 前台电影详情
+//  前台电影详情
     Route::get('filmdetails/{id}','FilmDetailsController@index');
+//  电影评论
     Route::post('comment','FilmDetailsController@comment');
+//    影厅弹层
+    Route::post('movie','FilmDetailsController@movie');
 });
 

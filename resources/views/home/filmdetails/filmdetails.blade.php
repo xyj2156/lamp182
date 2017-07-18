@@ -27,7 +27,7 @@
                                 <ul>
                                     <li><span>导演:</span> &nbsp; {{$filmdetail -> director}}</li>
                                     <b style="font-size:16px;color: #333;font-family: 'ambleregular';">演员:</b> &nbsp;<span style="color: #707070;">@foreach($cast as $k => $v){{$v -> name}} &nbsp;  &nbsp; @endforeach</span>
-                                    <li><span>类型:</span>&nbsp; {{$type -> name}}</li>
+                                    <li><span>类型:</span>&nbsp; {{$type}}</li>
                                     <p></p>
                                     <li><span>上映时间:</span>&nbsp; {{$filmdetail -> uptime}}</li>
                                     <li><span>片长:</span>&nbsp; {{$filmdetail -> time}}</li>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="wish-list" style="margin-bottom: -10px;">
                                 <ul>
-                                    <li><div class="button"><span><a href="">购票</a></span></div></li>
+                                    <li><div class="button"><a href="javascript:;" onclick="buy_movie()">购票</a></div></li>
                                     <li class="wish" ><span style="color:red;">{{$film -> play}}</span>播放量</li>
                                     <li class="wish" ><span style="color:red;">{{$film -> click}}</span>点击量</li>
                                 </ul>
@@ -52,29 +52,31 @@
                     {{--评论--}}
                     <div class="product_desc">
                         <p style="font-size:20px;color: #333;font-family: 'ambleregular';border-bottom: 2px solid #707070; margin-bottom:20px">热门短评:</p>
-                        @foreach($reciew as $kk=>$vv)
-                        <div class="review_cnt" id="longcomment">
-                            <ul class="clear">
-                                <li class="bdb_f2">
-                                    <div class="fl pr">
-                                        <div class="bjj"></div>
-                                        <img src="{{url($vv['uface'])}}" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
-                                        <div class="tc fs0">{{$vv['name']}}</div>
-                                    </div>
-                                    <div class="fl w730 ml20 mt10">
-                                        <div class="fs0 f14">{{$vv['content']}}</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+
+                            @foreach($reciew as $kk=>$vv)
+                            <div class="review_cnt" id="longcomment">
+                                <ul class="clear">
+                                    <li class="bdb_f2">
+                                        <div class="fl pr">
+                                            <div class="bjj"></div>
+                                            <img src="{{url($vv['uface'])}}" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
+                                            <div class="tc fs0">{{$vv['name']}}</div>
+                                        </div>
+                                        <div class="fl w730 ml20 mt10">
+                                            <div class="fs0 f14">{{$vv['content']}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         @endforeach
+
                         {{--分页--}}
                         <div class="am-u-lg-12 am-cf">
                             <div class="am-fr">
                                 {!! $reciew -> render() !!}
                             </div>
                         </div>
-
+                        {{--发表评论--}}
                         <form action="{{url('comment')}}" method="post">
                             {{csrf_field()}}
                             <div class="published pr" id="datecontent2">
@@ -124,7 +126,7 @@
         </div>
     </div>
     <script>
-
+        // 评论
         function fun(){
             $.ajax({
                 type : 'post',
@@ -146,6 +148,42 @@
                 },
             });
         }
+
+        function buy_movie(){
+            $.ajax({
+                type : 'post',
+                url:'{{url('movie')}}',
+                data:{
+                    _token:'{{csrf_token()}}',
+                    id:'{{$film -> id}}'
+                },
+                success:function(data){
+                    console.log(data);
+                    var arr = data.data;
+                    var str = '';
+                    for (var i = 0; i < arr.length; i++){
+                        str += "<ul class='movie_box'>"+
+                                    "<a href='{{url('oreder')}}?id='>"+"<li>"+ arr[i] +"</li>"+"</a>"+
+                                "</ul>";
+                    }
+
+                    layer.open({
+                        type: 1,
+                        title:'影厅',
+                        skin: 'layui-layer-demo', //样式类名
+                        closeBtn: 0, //不显示关闭按钮
+                        anim: 2,
+                        shadeClose: true, //开启遮罩关闭
+                        content:str
+                    });
+                }
+
+            });
+
+
+        }
+
+
     </script>
 
 
@@ -153,6 +191,27 @@
 
 @section('style')
     <style>
+        {{--电影购票--}}
+        .layui-layer-content{
+            width:360px;
+            height:500px;
+            background:#ccc
+        }
+        .movie_box li{
+            float:left;
+            margin:10px;
+            width:100px;
+            height:100px;
+            background:#FC7D01;
+            text-align: center;
+            line-height:100px;
+            cursor:pointer;
+        }
+        .movie_box a{
+            color:#fff;
+        }
+
+
         .published {
             height: 78px;
             padding: 0;
