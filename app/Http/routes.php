@@ -83,5 +83,7 @@ Route::group(['namespace' => 'Home'],function (){
     Route::post('comment','FilmDetailsController@comment');
 //    影厅弹层
     Route::post('movie','FilmDetailsController@movie');
+//    电影类型
+    Route::controller('type','TypeController');
 });
 
