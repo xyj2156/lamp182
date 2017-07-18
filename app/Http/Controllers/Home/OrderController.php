@@ -261,7 +261,7 @@ class OrderController extends Controller
             Redis::Smove($setKey1,$setKey2,$v);
         }
         DB::commit();
-        $code = md5($id);
+        $code = $id;
         echo QrCode::generate('Make me into a QrCode!');die;
         return view('',compact('code'));
     }
