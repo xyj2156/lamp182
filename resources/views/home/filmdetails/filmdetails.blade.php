@@ -97,9 +97,7 @@
                         <div class="clear"></div>
                     </div>
                     @endforeach
-                </div>
-                <div class="rightsidebar span_3_of_1 sidebar">
-                    <h2>热播榜</h2>
+                    <h2 style="margin-top:50px">热播榜</h2>
                     @foreach($play as $kk => $vv)
                         <div class="special_movies">
                             <div class="movie_poster">
@@ -128,7 +126,10 @@
                 },
                 success:function(data){
                     if(data.status !== 0){
-                        layer.alert(data.data);
+                        layer.msg(data.data);
+                        setTimeout(function(){
+                            location.href = '{{url('login')}}';
+                        },2000);
                     } else {
                         layer.alert(data.data);
                         setTimeout(function(){

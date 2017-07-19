@@ -71,7 +71,7 @@ class FilmDetailsController extends Common
             'fid',
         ]);
         if(!session('home_user')){
-            return ['status' => 1,'data' => '请登录用户'];
+            return ['status' => 1,'data' => '请您登录..3秒钟跳转'];
         }
             // 评论对应的用户
         $data['mid']  = session('home_user') -> id;
