@@ -27,7 +27,6 @@ class FilmController extends Controller
         $title = '电影列表';
         $search = $req -> all();
         $type = Film_type::lists('name','id') -> all();
-        dd($data);
         return view('admin.film.indexFilm', compact('data', 'title', 'search', 'type'));
     }
 
