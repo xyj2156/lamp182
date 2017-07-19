@@ -1,4 +1,4 @@
-@extends('home.layout.index')
+@extends('home.layout.detail')
 
 @section('style')
     <link href="{{asset('home/css/login.css')}}" rel="stylesheet" type="text/css" media="all"/>

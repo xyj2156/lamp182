@@ -122,6 +122,7 @@
         </script>
         <a href="#" id="toTop"><span id="toTopHover"></span></a>
         @section('script')@show
+        {!! config('webconf.count') !!}
     </body>
 </html>
 

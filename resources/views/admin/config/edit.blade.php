@@ -38,6 +38,12 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label for="tel" class="am-u-sm-3 am-form-label">电话 <span class="tpl-form-line-small-title">KeyWords</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="tel" name="tel" placeholder="请输入电话" value="{{$data -> tel}}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label for="email" class="am-u-sm-3 am-form-label">邮箱 <span class="tpl-form-line-small-title">E-mail</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" id="email" name="email" placeholder="请输入电子邮箱" value="{{$data -> email}}">
@@ -59,6 +65,12 @@
                                 <label for="user-intro" class="am-u-sm-3 am-form-label">网站描述 <span class="tpl-form-line-small-title">Description</span></label>
                                 <div class="am-u-sm-9">
                                     <textarea class="" rows="10" id="user-intro" name="description" placeholder="请输入描述内容">{{$data -> description}}</textarea>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="count" class="am-u-sm-3 am-form-label">网站统计代码 <span class="tpl-form-line-small-title">Count</span></label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="10" id="count" name="count" placeholder="请输入描述内容">{{$data -> count}}</textarea>
                                 </div>
                             </div>
                             <div class="am-form-group">
