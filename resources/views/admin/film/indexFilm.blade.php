@@ -48,9 +48,9 @@
                                 <td><img style="max-width:200px" src="{{$film->film_pic}}"></td>
 
                                 <td>{{$film->price}}</td>
-                                <td>{{$film->_type}}</td>
-                                <td>{{$film->area_type}}</td>
-								<td>{{$film->year}}</td>
+                                <td>{{$type[$film->_type]}}</td>
+                                <td>{{$type[$film->area_type]}}</td>
+								<td>{{$type[$film->year]}}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
 
