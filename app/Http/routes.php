@@ -15,23 +15,6 @@ Route::get('/', 'Home\IndexController@getIndex');
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
-// 个人中心页面
-Route::get('/personage/basic','Home\PersonageController@getIndex');
-Route::post('/personage/basic','Home\PersonageController@getIndex');
-// 个人修改基本信息
-Route::post('/personage/save','Home\PersonageController@postSave');
-// 个人安全设置
-Route::post('/personage/secure','Home\PersonageController@postSecure');
-// 个人余额页面
-Route::post('/personage/money','Home\PersonageController@postMoney');
-// 个人评论过的电影
-Route::post('/personage/review','Home\PersonageController@postReview');
-// 个人订单页面
-Route::post('/personage/consume','Home\PersonageController@postConsume');
-// 测试
-Route::get('/personage/test','Home\PersonageController@getTest');
-
-
 // 后台登录
 Route::get('/admin/login','Admin\LoginController@login');
 // 后台处理登录信息
@@ -90,16 +73,34 @@ Route::post('dologin','Home\LoginController@dologin');
 Route::get('reg','Home\RegController@reg');
 // 前台处理注册信息
 
-
-Route::group(['namespace' => 'Home'],function (){
-    Route::controller('/order', 'OrderController');
-//  前台电影详情
+Route::group(['namespace' => 'Home'], function (){
+//    前台电影详情
     Route::get('filmdetails/{id}','FilmDetailsController@index');
-//  电影评论
+//    电影评论
     Route::post('comment','FilmDetailsController@comment');
 //    影厅弹层
     Route::post('movie','FilmDetailsController@movie');
 //    电影类型
     Route::controller('type','TypeController');
+});
+
+Route::group(['namespace' => 'Home', 'middleware' => 'home.login'],function (){
+//    电影订单
+    Route::controller('/order', 'OrderController');
+// 个人中心页面
+    Route::get('/personage/basic','PersonageController@getIndex');
+    Route::post('/personage/basic','PersonageController@getIndex');
+// 个人修改基本信息
+    Route::post('/personage/save','PersonageController@postSave');
+// 个人安全设置
+    Route::post('/personage/secure','PersonageController@postSecure');
+// 个人余额页面
+    Route::post('/personage/money','PersonageController@postMoney');
+// 个人评论过的电影
+    Route::post('/personage/review','PersonageController@postReview');
+// 个人订单页面
+    Route::post('/personage/consume','PersonageController@postConsume');
+// 退出登录
+    Route::get('logout','LoginController@logout');
 });
 

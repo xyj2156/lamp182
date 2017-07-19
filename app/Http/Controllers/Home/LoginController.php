@@ -73,4 +73,10 @@ class LoginController extends Controller
         session(['home_user' => $user]);
         return redirect('/') -> with('success', '登录成功...');
     }
+
+    public function logout()
+    {
+        session(['home_user' => null]);
+        return back() -> with('success', '成功退出登录...');
+    }
 }
