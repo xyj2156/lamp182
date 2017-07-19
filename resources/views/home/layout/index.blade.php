@@ -53,8 +53,8 @@
                          <ul>
                              <li><a href="{{url('/')}}">主页</a></li>
                              <li><a href="{{url('type')}}">地区</a></li>
-                             <li><a href="{{url('type')}}">年份</a></li>
-                             <li><a href="{{url('type')}}">类型</a></li>
+                             <li><a href="{{url('type/year')}}">年份</a></li>
+                             <li><a href="{{url('type/type')}}">类型</a></li>
                          </ul>
                     </div>
                     <div class="account_desc">
