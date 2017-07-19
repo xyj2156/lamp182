@@ -1,68 +1,81 @@
-.GRinsertUL1{
-	background-color:#F1F1F1;
-	height:auto;
-	width: 355px;
-	text-align: center;
+.GRleftDIV{
+    position:relative;
 }
-.GRinsertP1{
-	height:80px;
-	border-bottom:1px solid #DFDFDF;
-	line-height:80px;
-	font-size:14px;
-	text-align:center;
+.GRleftDIV ul{
+    position:absolute;
+    z-index:3;
 }
-.GRinsertLI1{
-	height: 40px;
-	line-height:40px;
-    font-size:14px;
+.GRtitle{
+    background-image:radial-gradient(#fff,#F1F1F1);
+    border-radius:5px;
+    width:100%;
+    height:75px;
 }
-.GRupdateDIV1{
-	border:1px solid #DFDFDF;
-	border-top: none;
-	height: 650px;
+.GRtitleT{
+    float:left;
 }
-.GRinsertimg1{
-	height:260px;
-	width:260px;
-	margin-left:60px;
-	margin-top:55px;
-	box-shadow: 0px 0px 0px 1px #DFDFDF;
+.GRtitleL{
+    width:25%;
+    height:100%;
 }
-.GRinsertH21{
-	height:80px;
-	line-height:80px;
-	font-size:20px;
-	border-bottom:1px solid #DFDFDF;
+.GRtitleL>button{
+    width:100%;
+    border:none;
+    text-align:center;
+    line-height:75px;
+    font-weight:bold;
+    font-size: 20px;
 }
-.GRinsertFORM1{
-	float:right;
-	margin-right:60px;
+.GRtitleL>h2:hover{
+    cursor: pointer;
+    text-align:center;
+    line-height:75px;
+    font-weight:bold;
+    font-size: 20px;
 }
-.GRinsertFD{
-	width:100%;
-	height:35px;
-	margin-top: 30px;
-    font-size: 14px;
+.GRleftNAV{
+    list-style:none;
+    width:25%;
+    background:#656563;
+    display:none;
+    height:200px;
+    z-index:10;
 }
-.GRinsertP2{
-	clear: both;
+.GRleftNAV>li{
+    width:100%;
+    height:40px;
+    text-align:center;
+    line-height:40px;
 }
-.GRinputB1{
-	cursor: pointer;
-    border-radius: 5px;
-    margin-top: 40px;
-    width: 100px;
-    height: 40px;
-    color: #fff;
-    font-size: 18px;
-    line-height: 40px;
-    border: none;
-    background-color: #ed3931;
-    padding: 0;
+.GRtitleH3{
+    margin-left:160px;
+    line-height:73px;
+    font-size:24px;
+    color:#9E9E9E;
 }
-.GRinsertDIV3{
-	display: inline-block;
-    vertical-align: bottom;
+.GRcontent{
+    width:100%;
+    height:auto;
+    position:relative;
+}
+.GRIMG{
+    width:250px;
+    height:250px;
+    margin-top:65px;
+    margin-left:135px;
+    float:left;
+}
+.GRform1{
+    float:left;
+    margin-top:60px;
+    margin-left:140px;
+}
+.GRform1>div>input{
+    margin-bottom:20px;
+}
+.GRform1 span{
+    display:block;
+    margin-bottom:15px;
 }
 /*a  upload */
 
@@ -78,7 +91,7 @@
     border-radius: 4px;
     overflow: hidden;
     display: inline-block;
-	margin-left:150px;
+	margin-left:-305px;
 	margin-top:10px;
     *display: inline;
     *zoom: 1;
@@ -100,11 +113,151 @@
     border-color: #ccc;
     text-decoration: none
 }
+#GRmenu{
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 0px;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 18px;
+    line-height: 40px;
+    border: none;
+    background-color: #ed3931;
+    padding: 0;
+}
+#GRleftDIV>ul>li>a{
+    display:block;
+    width:100%;
+    height:100%;
+    color:#F2FFFF;
+}
+.GRlinkONE{
+    display:inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 80px;
+    color: #fff;
+    height: 30px;
+    font-size: 15px;
+    line-height:30px;
+    background-color: #ed3931;
+    border:2px solid #483340;
+    text-align:center;
+    vertical-align:top;
+}
+.GRsecure{
+    width: 600px;
+    height: auto;
+    margin-left: 430px;
+    margin-top: 80px;
+}
+.GRsecure>div{
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+.GRsecuretext{
+    display:inline-block;
+    width:207px;
+    height:30px;
+    margin-right: 20px;
+}
+.GRmoney{
+    width:100%;
+    height:150px;
+    text-align:center;
+    line-height:150px;
+    font-size:50px;
+}
+.GRfilm{
+    width:100%;
+    height: auto;
+    background-image:linear-gradient(67deg,#fff,#f1f1f1,#fff,#F1F1F1,#fff);
+}
+.filmTOP{
+    float:left;
+    margin-top:26px;
+    margin-left:90px;
+    width:195px;
+    height:195px;
+    border:1px solid green;
+}
+.filmTOP>img{
+    width:100%;
+    height:100%;
+}
+.filmBOTTOM{
+    float:left;
+    width:780px;
+    height:auto;
+    box-shadow:0px 0px 0px 1px #D3D3D3;
+    margin-top: 26px;
+    margin-left: 90px;
+}
+.filmBOTTOM>span{
+    display:inline-block;
+    width:auto;
+    height:18px;
+    margin-left:20px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.filmBOTTOM>div{
+    margin-left:20px;
+}
+.GRpagin{
+    width:100%;
+}
+.GRpagin>a{
+    display:inline-block;
+    color:#A9A9A9;
+    width:200px;
+    margin: 5px auto;
+    margin-left:520px;
+}
+.GRpagin>ul{
+    margin-top:10px;
+}
+.GRpagin>ul>li{
+    float:left;
+    margin-left:5px;
+}
+.GRorder{
+    color: #150133;
+    width: 1165px;
+    height: auto;
+    box-shadow:0px 0px 0px 1px #405F25;
+    margin: 12px;
+    background-image: linear-gradient(67deg,#C4EA83,#405F25);
+}
 
-
-
-
-
+.GRordertop>span{
+    display:inline-block;
+    height:50px;
+    width:180px;
+    line-height:50px;
+    border:1px solid #F2F2F2;
+    text-align:center;
+    margin-left:15px;
+    margin-top:12px;
+    margin-bottom:12px;
+}
+.GRorderbottom>span{
+    margin-left:20px;
+}
+.GRorderbottom>b{
+    margin-left:380px;
+}
+.GRorderCT{
+    background-image:linear-gradient(67deg,#fff,#f1f1f1,#fff,#F1F1F1,#fff);
+}
+.GRorderCT>a{
+    display:inline-block;
+    color:#A9A9A9;
+    width:200px;
+    margin: 5px auto;
+    margin-left:520px;
+}
 
 
 

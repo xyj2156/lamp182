@@ -340,10 +340,4 @@ class FilmController extends Controller
         $res = Film::where('name', 'like', "%{$name}%") -> select('id', 'name') -> take(5) -> get();
         return $res -> toArray();
     }
-
-    public function search(Request $request)
-    {
-        echo '123';
-    }
-
 }

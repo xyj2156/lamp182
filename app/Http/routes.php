@@ -15,6 +15,22 @@ Route::get('/', 'Home\IndexController@getIndex');
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
+// 个人中心页面
+Route::get('/personage/basic','Home\PersonageController@getIndex');
+Route::post('/personage/basic','Home\PersonageController@getIndex');
+// 个人修改基本信息
+Route::post('/personage/save','Home\PersonageController@postSave');
+// 个人安全设置
+Route::post('/personage/secure','Home\PersonageController@postSecure');
+// 个人余额页面
+Route::post('/personage/money','Home\PersonageController@postMoney');
+// 个人评论过的电影
+Route::post('/personage/review','Home\PersonageController@postReview');
+// 个人订单页面
+Route::post('/personage/consume','Home\PersonageController@postConsume');
+// 测试
+Route::get('/personage/test','Home\PersonageController@getTest');
+
 
 // 后台登录
 Route::get('/admin/login','Admin\LoginController@login');

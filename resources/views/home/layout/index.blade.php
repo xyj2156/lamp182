@@ -37,7 +37,7 @@
                             <li><a href="contact.html">登录</a></li>
                             <li><a href="preview.html">支付</a></li>
                             <li><a href="#">订单</a></li>
-                            <li><a href="#">个人中心</a></li>
+                            <li><a href="{{url('personage/basic')}}">个人中心</a></li>
                         </ul>
                     </div>
                     <div class="clear"></div>
