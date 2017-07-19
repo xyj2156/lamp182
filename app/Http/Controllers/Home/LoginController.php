@@ -33,7 +33,7 @@ class LoginController extends Controller
         
         // 把用户登录信息存入cookie
         if($data['remember_me'] == 'on'){
-            \Cookie::queue('userinfo',$data,10);
+            \Cookie::queue('userinfo',$data,7*24*60);
         }
         
         // 闪存数据
@@ -78,10 +78,10 @@ class LoginController extends Controller
             }else{
                 return back() -> with('error','密码错误..');
             }
-        } 
+        }
         if($email_user){
             // 验证密码是否正确
-            if($email_user['status'] == 1 && $email_user['password'] == $data['password']){
+            if($email_user['status'] == 1 && Crypt::decrypt($email_user['password']) == $data['password']){
                 // 获取到当前登录成功的时间
                 $email_user -> ltime = time();
                 // 执行跟新数据
@@ -93,5 +93,14 @@ class LoginController extends Controller
                 return back() -> with('error','邮箱未激活或密码错误..');
             }
         }
+    }
+
+    /**
+     * 安全退出
+     */
+    public function logout()
+    {
+        session(['home_user'=>null]);
+        return redirect('login');
     }
 }

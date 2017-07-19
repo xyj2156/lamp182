@@ -6,8 +6,11 @@
 @section('script')
     <script type="text/javascript" src="{{asset('home/js/reg.js')}}"></script>
     <script>
-        $('img[alt]').click(function () {
+        $('img[alt=验证码]').click(function () {
             this.src = '{{url('code')}}/' + Math.random().toString().replace('.', '') + '.jpg';
+        });
+        $(function(){
+            $('img[alt=验证码]')[0].src = '{{url('code')}}/' + Math.random().toString().replace('.', '') + '.jpg';
         });
     </script>
 @endsection
