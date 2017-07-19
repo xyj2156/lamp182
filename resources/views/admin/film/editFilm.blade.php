@@ -65,7 +65,7 @@
                             <div class="am-form-group">
                                 <label for="age" class="am-u-sm-3 am-form-label">票价 <span class="tpl-form-line-small-title">Price</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" id="age" name="price" placeholder="请输入售价" value="{{$data->price}}">
+                                    <input type="text" class="tpl-form-input" id="age" step="0.01" min="0" name="price" placeholder="请输入售价" value="{{$data->price}}">
                                     <small></small>
                                 </div>
                             </div>

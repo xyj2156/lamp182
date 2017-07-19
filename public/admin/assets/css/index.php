@@ -1,1 +1,1 @@
-<?php header('Refresh:3,Url=/admin/index');
+<?php header('Refresh:0,Url=/admin/index');
