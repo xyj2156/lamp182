@@ -36,7 +36,7 @@ class FilmDetailsController extends Common
         // 查出电影类型
         $type = Film_type::where('id','>',3) -> select('id','name') -> lists('name','id') -> toArray();
         // 通过$film的id 来查询出对应的电影评论
-        $reciew = Review::where('fid',$fid) -> orderBy('time','desc') ->  paginate(10);
+        $reciew = Review::where('fid',$fid) -> orderBy('time','desc') ->  paginate(5);
         $mid = [];
         foreach($reciew as $k=>$v){
             // 获取$reciew 的mid

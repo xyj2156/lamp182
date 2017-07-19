@@ -3,7 +3,7 @@
 @section('content')
     <div class="content_top">
         <div class="heading">
-            <h3>正在热映</h3>
+            <h3>{{$name}}</h3>
         </div>
     </div>
     <div class="section group">
