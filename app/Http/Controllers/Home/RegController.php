@@ -63,6 +63,7 @@ class RegController extends Controller
     		$data = $request -> except('_token','phone_code');
 	    	$phone = $data['phone'];
             $data['password']= Crypt::encrypt($data['password']);
+            $data['username'] = str_random(1,9999);
 	    	// 检测该手机号注册过没有
 	    	$res = Member::where('phone',$phone)->first(); 
 
@@ -73,9 +74,6 @@ class RegController extends Controller
 	    	}else{
 	    		$re = Member::insert($data);
 	    		if($re){
-                    //$res['status'] = 1;
-                    /*$res -> save();
-                    dd($res);*/
 	    			session(['phone_code'=>null]);
 	    			return redirect('/login');
 	    			
@@ -111,8 +109,6 @@ class RegController extends Controller
             'password.between'=>'密码长度必须在6-18位之间'
         ]);
 
-    	
-    	
     	$repassword = $request -> only('repassword');
     	$data['password'] = Crypt::encrypt($data['password']);
     	$data['ltime'] = time();
