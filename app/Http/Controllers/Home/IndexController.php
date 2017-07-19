@@ -21,7 +21,7 @@ class IndexController extends Common
         }
         $tmp = array_unique($tmp);
         $title = '首页';
-        $film = Film::whereIn('id',$tmp) -> select('id', 'name', 'film_pic', 'price') -> get() -> all();
+        $film = Film::whereIn('id',$tmp) -> select('id', 'name', 'film_pic', 'price') ->take(5) -> get() -> all();
         return view('home.index.index', compact('film', 'title'));
     }
 }
