@@ -112,7 +112,6 @@ class FilmController extends Controller
             'film_pic'
         ]);
 
-
 //      获取详情表数据
         $data2 = $request -> only([
             'director',
@@ -130,8 +129,8 @@ class FilmController extends Controller
         DB::beginTransaction();
 
         //插入数据
-        $res1 = Film::create($data1);
-        $data2['id'] = $res1 -> id;
+        $res1 = Film::insertGetId($data1);
+        $data2['id'] = $res1;
         $res2 = FilmDetail::create($data2);
 
         if( $res1 && $res2 ){
