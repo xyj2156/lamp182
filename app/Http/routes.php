@@ -103,4 +103,3 @@ Route::group(['namespace' => 'Home', 'middleware' => 'home.login'],function (){
 // 退出登录
     Route::get('logout','LoginController@logout');
 });
-
