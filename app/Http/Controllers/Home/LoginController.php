@@ -31,7 +31,6 @@ class LoginController extends Controller
         ]);
         // 闪存数据
         $request -> flash();
-        dd($data['code'],session('code'));
         // 验证码是否正确
         if(strtoupper($data['code']) !== session('code')){
             return back() -> with('error','验证码错误');
