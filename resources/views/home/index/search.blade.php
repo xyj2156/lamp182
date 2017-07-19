@@ -1,13 +1,13 @@
 @extends('home.layout.index')
-
 @section('content')
+    {{--搜索加载的电影--}}
     <div class="content_top">
         <div class="heading">
-            <h3>{{$name}}</h3>
+            <h3>经典影片</h3>
         </div>
     </div>
-    <div class="section group">
-        @foreach($film as $k =>$v)
+    @foreach($film as $k =>$v)
+    @if(!($k%5))@if($k!=0)</div>@endif<div class="section group">@endif
             <div class="grid_1_of_5 images_1_of_5">
                 <a href="{{url('filmdetails/'.$v -> id)}}"><img src="{{asset($v -> film_pic)}}" alt="{{$v -> name}}" /></a>
                 <h2><a href="{{url('filmdetails/'.$v -> id)}}">{{$v -> name}}</a></h2>
@@ -21,15 +21,14 @@
                     <div class="clear"></div>
                 </div>
             </div>
-        @endforeach
-    </div>
+    @if($k == count($film)-1)</div>@endif
+    @endforeach
     {{--分页--}}
     <div class="am-u-lg-12 am-cf">
         <div class="am-fr">
             {!! $film -> render() !!}
         </div>
     </div>
-
 @endsection
 
 @section('style')

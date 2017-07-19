@@ -5,8 +5,11 @@
 @endsection
 @section('script')
     <script>
-        $('img[alt]').click(function () {
+        $('img[alt=验证码]').click(function () {
             this.src = '{{url('code')}}/' + Math.random().toString().replace('.', '') + '.jpg';
+        });
+        $(function(){
+            $('img[alt=验证码]')[0].src = '{{url('code')}}/' + Math.random().toString().replace('.', '') + '.jpg';
         });
     </script>
 @endsection
@@ -47,7 +50,7 @@
                                             <div class="valid">
                                                 <input type="text" style='width:190px' class="tpl-form-input" required id="user-name" placeholder="请输入验证码" name="code">
                                                 <div>
-                                                    <img src="{{ url('code') }}/{{rand(10000, 99999)}}.jpg" alt="验证码" style='margin-left: 200px;margin-top:-35px;'>
+                                                    <img alt="验证码" style='margin-left: 200px;margin-top:-35px;'>
                                                 </div>
                                             </div>
                                         </td>
