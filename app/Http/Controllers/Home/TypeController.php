@@ -20,9 +20,9 @@ class TypeController extends Common
     {
         $pid = Film_type::where('pid',1) -> lists('id') -> toarray();
         // 通过$pid 查出film的电影信息
-        $film = Film::whereIn('area_type',$pid) -> orderBy('click','desc') -> select('id', 'name', 'film_pic', 'price') -> paginate(5);
+        $film = Film::whereIn('area_type',$pid) -> orderBy('click','desc') -> select('id', 'name', 'film_pic', 'price') -> paginate(10);
         $name = '区域排行';
-        return view('home.type.type',['title' => '经典影片','film' => $film,'name' => $name]);
+        return view('home.index.search',['title' => '经典影片','film' => $film,'name' => $name]);
     }
 
     /**
@@ -32,9 +32,9 @@ class TypeController extends Common
     {
         $pid = Film_type::where('pid',2) -> lists('id') -> toarray();
         // 通过$pid 查出film的电影信息
-        $film = Film::whereIn('year',$pid) -> orderBy('play','desc') -> select('id', 'name', 'film_pic', 'price') ->  paginate(5);
+        $film = Film::whereIn('year',$pid) -> orderBy('play','desc') -> select('id', 'name', 'film_pic', 'price') ->  paginate(10);
         $name = '年份排行';
-        return view('home.type.type',['title' => '经典影片','film' => $film,'name' => $name]);
+        return view('home.index.search',['title' => '经典影片','film' => $film,'name' => $name]);
     }
 
     /**
@@ -44,10 +44,11 @@ class TypeController extends Common
     {
         $pid = Film_type::where('pid',3) -> lists('id') -> toarray();
         // 通过$pid 查出film的电影信息
-        $film = Film::whereIn('_type',$pid) -> orderBy('click','desc') -> select('id', 'name', 'film_pic', 'price') ->  paginate(5);
+        $film = Film::whereIn('_type',$pid) -> orderBy('click','desc') -> select('id', 'name', 'film_pic', 'price') ->  paginate(10);
         $name = '类型排行';
-        return view('home.type.type',['title' => '经典影片','film' => $film,'name' => $name]);
+        return view('home.index.search',['title' => '经典影片','film' => $film,'name' => $name]);
     }
 
-    
+
+
 }

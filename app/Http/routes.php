@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'Home\IndexController@getIndex');
+// 前台搜索
+Route::post('/','Home\IndexController@search');
 // 验证码
 Route::get('/code/{id}.jpg','Admin\LoginController@code') -> where('id','\d+');
 
@@ -80,7 +82,7 @@ Route::group(['namespace' => 'Home'], function (){
     Route::post('comment','FilmDetailsController@comment');
 //    影厅弹层
     Route::post('movie','FilmDetailsController@movie');
-//    电影类型
+//    电影类型 电影搜索
     Route::controller('type','TypeController');
 });
 

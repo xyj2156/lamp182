@@ -16,8 +16,8 @@ class test extends Controller
 {
     public function test()
     {
-        $data2 = Cast::where('id', 'in',['1,2,3']) -> get();
-//        $data = Cast::find($id) -> film;
-        dump($data2);
+        for($i=0;$i<90;$i++){
+            if(!($i%5)) echo $i;
+        }
     }
 }
