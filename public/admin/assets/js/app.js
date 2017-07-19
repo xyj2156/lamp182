@@ -91,7 +91,10 @@ setTimeout(function (){
         'cast'    : 3,
         'type'    : 4,
         'config'  : 5,
-        'link'    : 6
+        'link'    : 6,
+        'filmroom' : 7,
+        'orders' : 8,
+        'admins' : 9
     };
     var li = $('.left-sidebar>.sidebar-nav>.sidebar-nav-link');
     li.eq(arr[path]).find('span.am-icon-chevron-down').addClass('sidebar-nav-sub-ico-rotate');

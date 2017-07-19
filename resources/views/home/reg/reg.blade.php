@@ -1,4 +1,4 @@
-@extends('home.layout.index')
+@extends('home.layout.detail')
 
 @section('style')
     <link href="{{asset('home/css/login.css')}}" rel="stylesheet" type="text/css" media="all"/>
@@ -13,8 +13,6 @@
 @endsection
 
 @section('content')
-
-
         <div class="content_top">
             <div class="back-links" style="min-width: 300px;">
                 <p><a href="{{url('/')}}">主页</a> &gt;&gt;&gt;&gt; <a  class="active">注册</a></p>
@@ -65,12 +63,6 @@
                                 </tr>
                                 <tr class="find">
                                     <th></th>
-                                    <td>
-                                        <div>
-                                            <label class="checkbox" for="chk11"><input style="height: auto;width: auto" id="chk11" type="checkbox" name="remember_me">记住我</label>
-                                            <a href="passport/forget-pwd" style="float: right;">忘记密码？</a>
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr>
                                     <th></th>
@@ -106,12 +98,6 @@
                                 </tr>
                                 <tr class="find">
                                     <th></th>
-                                    <td>
-                                        <div>
-                                            <label class="checkbox"><input style="height: auto;width: auto" type="checkbox" name="remember_me">记住我</label>
-                                            <a href="passport/forget-pwd" style="float: right;">忘记密码？</a>
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr>
                                     <th></th>

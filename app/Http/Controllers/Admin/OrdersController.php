@@ -25,7 +25,7 @@ class OrdersController extends Controller
         if (empty($search)){
         //根据订单mid找到用户
         $data = Orders::where('id','like',"%{$number}%")->orderBy('ctime','desc')->paginate(10);
-        if(!$data) return view('admin.orders.index',['data'=>$data,'search'=>$request->all()]);
+        if(!$data) return view('admin.orders.index',['title'=>'订单列表','data'=>$data,'search'=>$request->all()]);
         $mids = [];
         foreach($data as $k => $v){
             $mids[] = $v -> mid;
@@ -42,7 +42,7 @@ class OrdersController extends Controller
             if( empty($data[$k]->username) ) $data[$k]->username = '此订单找不到对应的用户';
         }
         //显示到网页上
-        return view('admin.orders.index',['data'=>$data,'search'=>$request->all()]);
+        return view('admin.orders.index',['title'=>'订单列表','data'=>$data,'search'=>$request->all()]);
         }
 
         //根据搜寻的用户找订单
@@ -63,7 +63,7 @@ class OrdersController extends Controller
             }
         }
         //显示到网页
-        return view('admin.orders.index',['data'=>$data,'search'=>$request->all()]);
+        return view('admin.orders.index',['title'=>'订单列表','data'=>$data,'search'=>$request->all()]);
     }
 
     /**

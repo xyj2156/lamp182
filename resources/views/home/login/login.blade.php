@@ -1,4 +1,4 @@
-@extends('home.layout.index')
+@extends('home.layout.detail')
 
 @section('style')
     <link href="{{asset('home/css/login.css')}}" rel="stylesheet" type="text/css" media="all"/>
@@ -12,9 +12,8 @@
 @endsection
 
 @section('content')
-
                 <div class="content_top">
-                    <div class="back-links">
+                    <div class="back-links" style="min-width:200px;">
                         <p><a href="{{url('/')}}">主页</a> &gt;&gt;&gt;&gt; <a href="#" class="active">登录</a></p>
                     </div>
                     <div class="clear"></div>

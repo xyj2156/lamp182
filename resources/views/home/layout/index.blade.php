@@ -59,11 +59,13 @@
                     </div>
                     <div class="account_desc">
                         <ul>
-                            <li><a href="{{url('reg')}}">注册</a></li>
-                            <li><a href="{{url('login')}}">登录</a></li>
-                            <li><a href="preview.html">支付</a></li>
-                            <li><a href="#">订单</a></li>
-                            <li><a href="#">个人中心</a></li>
+                            @if( !session('home_user') )
+                                <li><a href="{{url('reg')}}">注册</a></li>
+                                <li><a href="{{url('login')}}">登录</a></li>
+                            @else
+                                <li><a href="{{url('personage/basic')}}">个人中心</a></li>
+                                <li><a href="{{url('logout')}}">安全退出</a></li>
+                            @endif
                         </ul>
                     </div>
                     <div class="clear"></div>
@@ -122,6 +124,7 @@
         </script>
         <a href="#" id="toTop"><span id="toTopHover"></span></a>
         @section('script')@show
+        {!! config('webconf.count') !!}
     </body>
 </html>
 

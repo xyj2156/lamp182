@@ -74,8 +74,11 @@ class OrderController extends Controller
 //        检测购买未付款的座位是否卖出
         $mem_room_list = 'list:room:'.$room;
         $mem = Redis::lrange($mem_room_list, 0, -1);
-        if($mem){
-            return back() -> with('error', '您有订单未付款....');
+        if(Redis::smembers('set:room:'.$room.':'.session('home_user') -> id)){
+            return [
+                'status' => 403,
+                'msg' =>'您有订单未付款....'
+            ];
         }
         foreach ($mem as $v){
             $tmpKey = 'set:room:'.$room.':'.$v;
@@ -219,11 +222,11 @@ class OrderController extends Controller
     {
         $name = $req -> input('name');
         if(!$name) return back() -> with('error', '请按套路出牌....');
-        $res = Orders::where(['name' => $name, 'mid' => session('home_user') -> id]) -> select('fid', 'pid', 'rid', 'seat', 'num', 'price','ctime') -> first();
+        $res = Orders::where(['name' => $name, 'mid' => session('home_user') -> id]) -> select('fid', 'pid', 'rid', 'seat', 'num', 'price','ctime','status') -> first();
         if($res -> status == 3)
             return back() -> with('success', '订单超时了，请重新下单。');
         if($res -> status ==2)
-            return redirect('home.mem') -> with('success', '订单已成功付款...');
+            return redirect('mem') -> with('success', '订单已成功付款...');
         if(!$res) return back() -> with('error', '未找到订单信息');
         $tmp = $res -> ctime - time() + 15*60;
         $min = intval($tmp/60);
@@ -239,6 +242,11 @@ class OrderController extends Controller
         return view('home.order.success', compact('res', 'title', 'film', 'room', 'start', 'name', 'min', 'sec'));
     }
 
+    /**
+     * 订单成功后付款到这个位置
+     * @param Request $req
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postSuccess(Request $req)
     {
         $id = $req -> orderId;
@@ -277,17 +285,21 @@ class OrderController extends Controller
             return back() -> with('error', '付款失败.....');
         }
 //        处理redis中的座位信息
-        $listKey = 'list:room:'.$order -> rid.':'.$order -> mid;
+        $listKey = 'list:room:'.$order -> rid;
+//        删除用户list 中的id
+        Redis::lrem($listKey, 0, $order -> mid);
         $setKey1 = 'set:room:'.$order -> rid.':'.$order -> mid;
         $setKey2 = 'set:room:'.$order -> rid;
         $arr = Redis::smembers($setKey1);
         foreach($arr as $v){
             Redis::Smove($setKey1,$setKey2,$v);
         }
+        Redis::expire($setKey1, FilmPlay::where('id', $order -> pid) -> select('end_time') -> first() -> end_time);
         DB::commit();
 
-//        $code = QrCode::size(300,300) -> generate($id);
-        $code = $id;
-        return view('',compact('code'));
+        $code = QrCode::size(300,300) -> generate($id);
+        $title = '影票订购成功';
+//        $code = $id;
+        return view('home.order.complete',compact('code', 'id','title')) -> with('success', '您订票成功,请到影厅领票.');
     }
 }

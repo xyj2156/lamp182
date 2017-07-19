@@ -26,7 +26,8 @@ class FilmController extends Controller
         $data = Film::where('name','like', "%{$search}%") -> paginate(10);
         $title = '电影列表';
         $search = $req -> all();
-        return view('admin.film.indexFilm', compact('data', 'title', 'search'));
+        $type = Film_type::lists('name','id') -> all();
+        return view('admin.film.indexFilm', compact('data', 'title', 'search', 'type'));
     }
 
 
@@ -330,10 +331,4 @@ class FilmController extends Controller
         $res = Film::where('name', 'like', "%{$name}%") -> select('id', 'name') -> take(5) -> get();
         return $res -> toArray();
     }
-
-    public function search(Request $request)
-    {
-        echo '123';
-    }
-
 }
