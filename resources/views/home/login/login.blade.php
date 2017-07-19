@@ -44,9 +44,9 @@
                                     </tr>
                                     <tr id="tr-vcode" >
                                         <th>验证码</th>
-                                        <td width="245">
+                                        <td style="width:200px">
                                             <div class="valid">
-                                                <input type="text" style='width:190px' class="tpl-form-input" required id="user-name" placeholder="请输入验证码" name="code">
+                                                <input type="text" class="tpl-form-input" required id="user-name" placeholder="请输入验证码" name="code">
                                                 <div>
                                                     <img src="{{ url('code') }}/{{rand(10000, 99999)}}.jpg" alt="验证码" style='margin-left: 200px;margin-top:-35px;'>
                                                 </div>
@@ -60,7 +60,7 @@
                                         <td>
                                             <div>
                                                 <label class="checkbox" for="chk11"><input style="height: auto;width: auto" id="chk11" type="checkbox" name="remember_me">记住我</label>
-                                                <a href="passport/forget-pwd" style="float: right;">忘记密码？</a>
+                                                <a href="{{url('forget')}}" style="float: right;">忘记密码？</a>
                                             </div>
                                         </td>
                                         <td></td>
