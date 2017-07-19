@@ -71,12 +71,27 @@ Route::get('test', 'test@test');
 Route::get('login','Home\LoginController@login');
 // 前台处理登录信息
 Route::post('dologin','Home\LoginController@dologin');
+// 忘记登录密码
+Route::get('forget','Home\ForgetController@forget');
+Route::post('doforget','Home\ForgetController@doforget');
+Route::get('forget/phone_code','Home\ForgetController@phone_code');
+// 设置新密码
+Route::post('donewpass','Home\ForgetController@donewpass');
+
 // 前台注册用户
 Route::get('reg','Home\RegController@reg');
 // 前台处理注册信息
+Route::post('doreg','Home\RegController@doreg');
+// 手机注册验证码
+Route::get('reg/phone_code','Home\RegController@phone_code');
+// 邮箱注册
+Route::post('reg/doemail','Home\RegController@doemail');
+// 邮箱激活
+Route::get('reg/jihuo','Home\RegController@jihuo');
 
-Route::group(['namespace' => 'Home'], function (){
-//    前台电影详情
+Route::group(['namespace' => 'Home'],function (){
+    Route::controller('/order', 'OrderController');
+    // 前台电影详情
     Route::get('filmdetails/{id}','FilmDetailsController@index');
 //    电影评论
     Route::post('comment','FilmDetailsController@comment');
