@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Model\Admin\Member_detail;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -27,7 +28,6 @@ class RegController extends Controller
     public function phone_code(Request $request)
     {
     	$phone = $request -> input('phone');
-    	//echo $phone;
     	$res = self::send_phone($phone);
     	echo $res;
 
@@ -37,7 +37,7 @@ class RegController extends Controller
     {
     	$phone_code = rand(1,9);
     	session(['phone_code'=>$phone_code]);
-    	$url = 'http://106.ihuyi.com/webservice/sms.php?method=Submit&account=C79862553&password=92679c0200d732e45a135bdac311d81a&format=json&mobile='.$phone.'&content=您的验证码是：'.$phone_code.'。请不要把验证码泄露给其他人。';
+    	$url = 'http://106.ihuyi.com/webservice/sms.php?method=Submit&account=C29687752&password=8f3d6c8efbd3b5b73819b8f4ac9c8442&format=json&mobile='.$phone.'&content=您的验证码是：'.$phone_code.'。请不要把验证码泄露给其他人。';
     	$res = HttpController::gets($url);
     	return $res;
     }
@@ -63,19 +63,25 @@ class RegController extends Controller
     		$data = $request -> except('_token','phone_code');
 	    	$phone = $data['phone'];
             $data['password']= Crypt::encrypt($data['password']);
-            $data['username'] = str_random(1,9999);
+
 	    	// 检测该手机号注册过没有
-	    	$res = Member::where('phone',$phone)->first(); 
+	    	$res = Member::where('phone',$phone)->first();
 
 	    	if($res){
 	    		session(['phone_code'=>null]);
 	    		return back() -> with('error','已经注册过了..');
 	    		
 	    	}else{
-	    		$re = Member::insert($data);
+	    		$re = Member::insertGetId($data);
 	    		if($re){
+                    // 给对应的副表查数据
+                    $data1['id'] = $re;
+                    $data1['name'] = str_random(5,99999);
+                    $data1['auth'] = 0;
+                    $res1 = Member_detail::insert($data1);
+
 	    			session(['phone_code'=>null]);
-	    			return redirect('/login');
+	    			return redirect('/login') -> with('success','注册成功..请登录');
 	    			
 	    		}else{
 					session(['phone_code'=>null]);
@@ -113,7 +119,6 @@ class RegController extends Controller
     	$data['password'] = Crypt::encrypt($data['password']);
     	$data['ltime'] = time();
     	$data['token'] = str_random(50);
-     	//dd($data['password'],$repassword['repassword']);
 
     	//检测验证码
     	if($vcode['vcode'] != strtolower(session('code'))){
@@ -128,10 +133,13 @@ class RegController extends Controller
     	if(Crypt::decrypt($data['password']) != $repassword['repassword']){
     		return back() -> with('error','两次密码不一致..');
     	}else{
-    		//$res = Member::insert($data['email'],$data['password']);
     		$id = DB::table('members') -> insertGetId($data);
-    		
     		if($id){
+                // 给对应的副表查数据
+                $data1['id'] = $id;
+                $data1['name'] = str_random(5,99999);
+                $data1['auth'] = 0;
+                $res1 = Member_detail::insert($data1);
     			//发送邮件
     			self::send_email($data['email'],$id,$data['token']);
     			return redirect('login') -> with('success','注册成功,请去邮箱激活账号..');
@@ -157,8 +165,7 @@ class RegController extends Controller
 
     	if($token['token'] != $token['token']){
     		return redirect('/reg');
-    	}else{ 
-    		
+    	}else{
     		$res = Member::where('id',$id) -> first();
     		$res -> token = str_random(50);
     		$res -> status = 1;

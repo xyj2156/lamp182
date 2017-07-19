@@ -32,9 +32,9 @@ class LoginController extends Controller
         ]);
         
         // 把用户登录信息存入cookie
-        if($data['remember_me'] == 'on'){
-            \Cookie::queue('userinfo',$data,7*24*60);
-        }
+//        if($data['remember_me'] == 'on'){
+//            \Cookie::queue('userinfo',$data,7*24*60);
+//        }
         
         // 闪存数据
         $request -> flash();
@@ -74,7 +74,7 @@ class LoginController extends Controller
                 $phone_user -> save();
                 // 将用户信息添加到session中
                 session(['home_user' => $phone_user]);
-                return redirect('/');
+                return redirect('/') -> with('success','登录成功...请完善您的个人资料');
             }else{
                 return back() -> with('error','密码错误..');
             }
@@ -88,7 +88,7 @@ class LoginController extends Controller
                 $email_user -> save();
                 // 将用户信息添加到session中
                 session(['home_user' => $email_user]);
-                return redirect('/');
+                return redirect('/') -> with('success','登录成功...请完善您的个人资料');;
             }else{
                 return back() -> with('error','邮箱未激活或密码错误..');
             }
