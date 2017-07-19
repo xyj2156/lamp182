@@ -53,7 +53,7 @@ class LoginController extends Controller
         ]);
 
         // 根据表单name值 email 来查出这条数据
-        $user = Member::where('email',$data['email']) -> orwhere('phone',$data['email']) -> select('id','email','phone','password') -> first();
+        $user = Member::where('email',$data['email']) -> orwhere('phone',$data['email']) -> first();
         // 验证用户
         if (!$user) {
             return back() -> with('error','没有这个用户名');
