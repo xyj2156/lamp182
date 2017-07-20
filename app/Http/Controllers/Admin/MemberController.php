@@ -216,7 +216,7 @@ class MemberController extends Controller
             return back() -> with('error', '出了点状况，请稍候再试。');
         }
         DB::commit();
-//        return redirect('admin/user') -> with('success', '修改成功。');
+        return redirect('admin/user') -> with('success', '修改成功。');
     }
 
     /**
