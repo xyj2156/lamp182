@@ -220,14 +220,21 @@ class OrderController extends Controller
      */
     public function getSuccess(Request $req)
     {
+//        获取订单名
         $name = $req -> input('name');
+//        没有订单名返回
         if(!$name) return back() -> with('error', '请按套路出牌....');
+//        查询订单模型
         $res = Orders::where(['name' => $name, 'mid' => session('home_user') -> id]) -> select('fid', 'pid', 'rid', 'seat', 'num', 'price','ctime','status') -> first();
+//      订单状态判断
         if($res -> status == 3)
             return back() -> with('success', '订单超时了，请重新下单。');
         if($res -> status ==2)
             return redirect('mem') -> with('success', '订单已成功付款...');
+
+//        没有查到订单
         if(!$res) return back() -> with('error', '未找到订单信息');
+//        订单未超时,但是实际时间是超时的
         $tmp = $res -> ctime - time() + 15*60;
         $min = intval($tmp/60);
         $sec = $tmp%60;
@@ -235,6 +242,7 @@ class OrderController extends Controller
             Orders::where('name', $name) -> update(['status' => 3]);
             return back() -> with('error', '订单超时... 请重新下单...');
         }
+//        下单成功
         $title = '下单成功....';
         $film = Film::find($res -> fid,['name']) -> name;
         $room = FilmRoom::find($res -> rid, ['name']) -> name;
@@ -264,7 +272,7 @@ class OrderController extends Controller
             return back() -> with('error', '订单已过期');
         }
         $mem = Member_detail::find($order -> mid);
-        $num = $order -> price*$order -> num;
+        $num = $order -> price * $order -> num * config('film.auth')[$mem -> auth];
         if($mem -> money < $num){
             return back() -> with('error', '余额不足请充值....');
         }
