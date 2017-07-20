@@ -76,7 +76,18 @@ class MemberController extends Controller
             'sex.in'            => '请正确选择性别。',
             'phone.regex'       => '请输入正确手机号码。',
         ]);
-
+//        判断手机号码占用
+        if(Member::where('phone',$request -> input('phone')) -> count()){
+            return back() -> with('error', '手机号码已经占用,请换一个');
+        }
+//        判断邮箱占用
+        if(Member::where('email',$request -> input('email')) -> count()){
+            return back() -> with('error', '邮箱已经占用,请换一个');
+        }
+//        判断用户名占用
+        if(Member::where('username',$request -> input('username')) -> count()){
+            return back() -> with('error', '用户名已经占用,请换一个');
+        }
 //        分别获取数据以便添加到不同表中
         $data1 = $request -> only([
             'username',
@@ -208,9 +219,11 @@ class MemberController extends Controller
 //        $res2 -> auth = $request -> input('auth','0');
 //        $res2 -> age = $request -> input('age', '18');
 //        $res2 -> sex = $request -> input('sex', '18');
+        $data2 = $request -> only(['auth','age','sex']);
+        $data['status'] = 1;
 
         $a = $res1 -> update($request -> only(['username','phone','email']));
-        $b = $res2 -> update($request -> only(['auth','age','sex']));
+        $b = $res2 -> update($data2);
         if(!$a || !$b){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
