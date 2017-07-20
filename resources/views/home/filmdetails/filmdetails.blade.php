@@ -56,7 +56,12 @@
                                         <div class="fl pr">
                                             <div class="bjj"></div>
                                             <img src="{{url($vv['uface'])}}" onerror="javascript:this.src='http://film.spider.com.cn/img/common/images/boy.jpg'" width="80" height="80">
+                                            {{--@if( $vv['name'] == null)--}}
+                                                {{--<script>--}}
+                                                    {{--layer--}}
+                                                {{--</script>--}}
                                             <div class="tc fs0">{{$vv['name']}}</div>
+                                                {{--@endif--}}
                                         </div>
                                         <div class="fl w730 ml20 mt10">
                                             <div class="fs0 f14">{{$vv['content']}}</div>
@@ -129,9 +134,9 @@
                         layer.msg(data.data);
                         setTimeout(function(){
                             location.href = '{{url('login')}}';
-                        },2000);
+                        },1000);
                     } else {
-                        layer.alert(data.data);
+                        layer.msg(data.data);
                         setTimeout(function(){
                             location.href = '{{url('filmdetails')}}/{{$film -> id}}';
                         },500);
