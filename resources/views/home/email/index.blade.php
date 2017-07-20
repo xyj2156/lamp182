@@ -5,6 +5,6 @@
 	<title>Document</title>
 </head>
 <body>
-	<h3>恭喜注册成功{{$email}}..请点击<a href="http://192.168.182.123/reg/jihuo?id={{$id}}&token={{$token}}">链接</a>激活.</h3>
+	<h3>恭喜注册成功{{$email}}..请点击<a href="{{url('reg/jihuo')}}?id={{$id}}&token={{$token}}">链接</a>激活.</h3>
 </body>
 </html>
