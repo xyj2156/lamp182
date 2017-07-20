@@ -103,11 +103,9 @@ class MemberController extends Controller
 
 //        生成额外需要的数据
         $data1['ltime'] = $data2['ctime'] = time();
-
         $data1['token'] = str_random(50);
         $data1['ip'] = $request -> ip();
         $data1['password'] = Crypt::encrypt($data1['password']);
-
         $data2['name'] = strtoupper(str_random(8));
 
 //        开启事务 添加数据
@@ -204,8 +202,22 @@ class MemberController extends Controller
             'phone.regex'=>'请正确输入手机。',
         ]);
 
+
+
         $res1 = Member::find($id);
         $res2 = Member_detail::find($id);
+//        判断手机号码占用
+        if($res1::where('phone',$request -> input('phone')) -> where('id', '!=', $id) -> count()){
+            return back() -> with('error', '手机号码已经占用,请换一个');
+        }
+//        判断邮箱占用
+        if($res1::where('email',$request -> input('email')) -> where('id', '!=', $id) -> count()){
+            return back() -> with('error', '邮箱已经占用,请换一个');
+        }
+//        判断用户名占用
+        if($res1::where('username',$request -> input('username')) -> where('id', '!=', $id) -> count()){
+            return back() -> with('error', '用户名已经占用,请换一个');
+        }
 //        没有数据可能就是来路不正
         if(!$res1 || !$res2){
             return redirect('admin/user') -> with('error', '请按套路出牌。。');
