@@ -211,7 +211,6 @@ class MemberController extends Controller
 
         $a = $res1 -> update($request -> only(['username','phone','email']));
         $b = $res2 -> update($request -> only(['auth','age','sex']));
-dd();
         if(!$a || !$b){
             DB::rollback();
             return back() -> with('error', '出了点状况，请稍候再试。');
