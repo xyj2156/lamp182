@@ -29,7 +29,7 @@ class OrderController extends Controller
         $fid = $req -> input('id',0);
         if($fid === 0)
             return back() -> with('error', '没有播放id..') ;
-        $playing = FilmPlay::where('id', $fid) -> where('start_time', '>', time()-10*60) -> first();
+        $playing = FilmPlay::where('id', $fid) -> orderBy('start_time','desc') -> where('start_time', '>', time()+10*60) -> first();
         if(!$playing)
             return back() -> with('error', '该电影已经停止售票');
 
@@ -298,9 +298,8 @@ class OrderController extends Controller
         Redis::lrem($listKey, 0, $order -> mid);
         $setKey1 = 'set:room:'.$order -> rid.':'.$order -> mid;
         $setKey2 = 'set:room:'.$order -> rid;
-
 //        主座位redis过期时间
-        Redis::expire($setKey2, time() - (FilmPlay::find($order -> rid) -> end_time));
+        Redis::expire($setKey2, time() - (FilmPlay::find($order -> pid) -> end_time));
 
         $arr = Redis::smembers($setKey1);
         foreach($arr as $v){
