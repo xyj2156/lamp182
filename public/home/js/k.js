@@ -76,12 +76,13 @@ $("#GRsave").click(function(){
 			var name = $("#GRINPUTname").val();
 			var age = $("#GRINPUTage").val();
 			var sex = $("input:checked").val();
+			var uface = $("#uface").val();
 			//获取token
 			var token = $('#GRTOKEN').val();
 			$.ajax({
 				"url":"/personage/save",
 				"type":"post",
-				"data":{"_token":token,"name":name,"age":age,"sex":sex},
+				"data":{"_token":token,"name":name,"age":age,"sex":sex,"uface":uface},
 				"datatype":"json",
 				"async":true,
 				"success":function(data){

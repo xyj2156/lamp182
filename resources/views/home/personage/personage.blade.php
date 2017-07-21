@@ -5,8 +5,8 @@
 @section('content')
 <!-- start Content Middle -->
 <div class="content_top">
-	<div class="back-links">
-		<p><a href="index.html">首页</a> &gt;&gt;&gt;&gt; <a>个人中心</a></p>
+	<div class="back-links" style="width:130px">
+		<p><a href="{{url('/')}}">首页</a> &gt;&gt;&gt;&gt; <a>个人中心</a></p>
 	</div>
 	<div class="clear"></div>
 </div>
@@ -36,8 +36,10 @@
 
 	<div class="GRcontent" id="GRcontent">
 		<div class="GRpersonage1">
-			<img src="{{ $data["uface"] }}" class="GRIMG">
+			<img src="{{ $data["uface"] }}" class="GRIMG" id="pic">
 		<form class="GRform1" action="" method="post">
+			<input type="hidden" name="_token" value="{{csrf_token()}}" id="GRTOKEN">
+			<input type="hidden" name="uface" value="{{ $data["uface"] }}" id="uface">
 			<div>
 				<span>用户名: {{$data["username"]}}</span>        <br>
 			</div>
@@ -64,12 +66,12 @@
 
 			<div>
 				<a href="javascript:;" class="a-upload">
-					<input type="file" name="" id="">上传头像
+					<input id="doc-form-file" type="file" multiple="">上传头像
 				</a>
 			</div>
 		</form>
 		</div>
-		<input type="hidden" name="_token"  value="{{ csrf_token() }}" id="GRTOKEN"/>
+		
 	</div>
 
 	</div>
@@ -78,4 +80,51 @@
 @endsection
 @section('script')
 	<script src="{{ url('home/js/k.js') }}" type="text/JavaScript"></script>
+	<script>
+        $(function () {
+            $("#doc-form-file").change(function () {
+                uploadImage();
+            });
+        });
+
+        function uploadImage() {
+            // 判断是否有选择上传文件
+            var imgPath = $("#doc-form-file").val();
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif'
+                && strExtension != 'png' && strExtension != 'bmp') {
+                alert("请选择图片文件");
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('myfile',$('#doc-form-file')[0].files[0]);
+            formData.append('_token', '{{csrf_token()}}');
+
+            $.ajax({
+                type: "POST",
+                url: "{{url('home/upload')}}?path=home_face_path",
+                data: formData,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+//                                    console.log(data);
+//                                    alert("上传成功");
+                    $('#pic').attr('src', data).hide(200).show(600);
+                    $('#uface').val(data);
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传失败，请检查网络后重试");
+                }
+            });
+        }
+    </script>
 @endsection

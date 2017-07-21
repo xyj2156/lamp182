@@ -49,7 +49,7 @@
                 <div class="pay-handle">
                     <input type="hidden" name="orderId" value="{{$name}}">
                     {{csrf_field()}}
-                    <p class="pay-amount">支付：<em>￥{{$res -> price * $res -> num}}</em></p>
+                    <p class="pay-amount">支付：<em>￥{{$res -> price * $res -> num * config('film.zhe')[$auth]}}　<s>{{$res -> price * $res -> num }}</s></em></p>
                     <p><input type="submit" value="确认无误，去付款" class="btn btn-hot" gaevent="pay/submit"><a href="" target="_blank" id="J_submit"></a></p>
                     <p class="remind-pay"><i></i>电影票购票成功后，<strong>无法退换票</strong></p>
                 </div>

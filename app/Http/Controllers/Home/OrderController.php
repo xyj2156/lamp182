@@ -8,6 +8,7 @@ use App\Http\Model\Admin\FilmPlay;
 use App\Http\Model\Admin\FilmRoom;
 use App\Http\Model\Admin\Member_detail;
 use App\Http\Model\Admin\Orders;
+use Illuminate\Support\Facades\Session;
 use QrCode;
 use Illuminate\Http\Request;
 
@@ -27,16 +28,12 @@ class OrderController extends Controller
     {
         $fid = $req -> input('id',0);
         if($fid === 0)
-            return array(
-            'status' => 403,
-            'msg' => '没有播放id..'
-        );
+            return back() -> with('error', '没有播放id..') ;
         $playing = FilmPlay::where('id', $fid) -> where('start_time', '>', time()-10*60) -> first();
         if(!$playing)
-            return [
-            'status' => 403,
-            'msg' => '您有订单未付款'
-        ];
+            return back() -> with('error', '该电影已经停止售票');
+
+        session(['url' => $req -> url().'?id='.$fid]);
 
         $room = $playing -> room;
         $film = $playing -> detail;
@@ -220,14 +217,21 @@ class OrderController extends Controller
      */
     public function getSuccess(Request $req)
     {
+//        获取订单名
         $name = $req -> input('name');
+//        没有订单名返回
         if(!$name) return back() -> with('error', '请按套路出牌....');
+//        查询订单模型
         $res = Orders::where(['name' => $name, 'mid' => session('home_user') -> id]) -> select('fid', 'pid', 'rid', 'seat', 'num', 'price','ctime','status') -> first();
+//      订单状态判断
         if($res -> status == 3)
             return back() -> with('success', '订单超时了，请重新下单。');
         if($res -> status ==2)
-            return redirect('mem') -> with('success', '订单已成功付款...');
+            return redirect('personage/basic') -> with('success', '订单已成功付款...');
+
+//        没有查到订单
         if(!$res) return back() -> with('error', '未找到订单信息');
+//        订单未超时,但是实际时间是超时的
         $tmp = $res -> ctime - time() + 15*60;
         $min = intval($tmp/60);
         $sec = $tmp%60;
@@ -235,11 +239,13 @@ class OrderController extends Controller
             Orders::where('name', $name) -> update(['status' => 3]);
             return back() -> with('error', '订单超时... 请重新下单...');
         }
+        $auth = Member_detail::find(session('home_user') -> id) -> auth;
+//        下单成功
         $title = '下单成功....';
         $film = Film::find($res -> fid,['name']) -> name;
         $room = FilmRoom::find($res -> rid, ['name']) -> name;
         $start = FilmPlay::find($res -> pid, ['start_time']) -> start_time;
-        return view('home.order.success', compact('res', 'title', 'film', 'room', 'start', 'name', 'min', 'sec'));
+        return view('home.order.success', compact('res', 'title', 'film', 'room', 'start', 'name', 'min', 'sec', 'auth'));
     }
 
     /**
@@ -250,6 +256,7 @@ class OrderController extends Controller
     public function postSuccess(Request $req)
     {
         $id = $req -> orderId;
+//        通过订单和用户id 查找订单信息
         $order = Orders::where('name', $id) -> where('mid', session('home_user') -> id) -> first();
         if(!$order)
             return back() -> with('error', '订单未找到');
@@ -263,8 +270,9 @@ class OrderController extends Controller
             }
             return back() -> with('error', '订单已过期');
         }
+//        查询用户详情
         $mem = Member_detail::find($order -> mid);
-        $num = $order -> price*$order -> num;
+        $num = $order -> price * $order -> num * config('film.zhe')[$mem -> auth];
         if($mem -> money < $num){
             return back() -> with('error', '余额不足请充值....');
         }
@@ -290,6 +298,10 @@ class OrderController extends Controller
         Redis::lrem($listKey, 0, $order -> mid);
         $setKey1 = 'set:room:'.$order -> rid.':'.$order -> mid;
         $setKey2 = 'set:room:'.$order -> rid;
+
+//        主座位redis过期时间
+        Redis::expire($setKey2, time() - (FilmPlay::find($order -> rid) -> end_time));
+
         $arr = Redis::smembers($setKey1);
         foreach($arr as $v){
             Redis::Smove($setKey1,$setKey2,$v);
@@ -299,7 +311,13 @@ class OrderController extends Controller
 
         $code = QrCode::size(300,300) -> generate($id);
         $title = '影票订购成功';
+        if ( $mem -> auth == 0){
+            $msg = '恭喜您订票成功,请到影厅领票.';
+        } else {
+            $msg = '尊贵的 '.config('film.auth')[$mem -> auth].'已帮您打'.(config('film.zhe')[$mem -> auth]*100).'折, 恭喜您订票成功,';
+        }
 //        $code = $id;
-        return view('home.order.complete',compact('code', 'id','title')) -> with('success', '您订票成功,请到影厅领票.');
+        Session::flash('success', $msg);
+        return view('home.order.complete',compact('code', 'id','title'));
     }
 }
