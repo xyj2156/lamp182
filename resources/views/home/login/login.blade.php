@@ -32,14 +32,14 @@
                                     <tr>
                                         <th>账户</th>
                                         <td width="245">
-                                            <input id="email" type="text" name="email" placeholder="电子邮箱/手机号" autocomplete="off" value="{{old('email')}}"></td>
+                                            <input id="email" type="text" name="email" placeholder="电子邮箱/手机号" autocomplete="off" value="{{old('email') ? old('email') : \Cookie::get('userinfo')['email']}}"></td>
                                         <td>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>密码</th>
                                         <td width="245">
-                                            <input id="password" type="password" name="password" placeholder="请输入密码" autocomplete="off">
+                                            <input id="password" type="password" name="password" placeholder="请输入密码" autocomplete="off" value="{{\Cookie::get('userinfo')['password']}}">
                                         </td>
                                         <td>
                                         </td>
@@ -61,7 +61,7 @@
                                         <th></th>
                                         <td>
                                             <div>
-                                                <label class="checkbox" for="chk11"><input style="height: auto;width: auto" id="chk11" type="checkbox" name="remember_me">记住我</label>
+                                                <label class="checkbox" for="chk11"><input style="height: auto;width: auto" id="chk11" type="checkbox" name="remember_me" @if(!!\Cookie::get('userinfo')) checked @endif>记住我</label>
                                                 <a href="{{url('forget')}}" style="float: right;">忘记密码？</a>
                                             </div>
                                         </td>

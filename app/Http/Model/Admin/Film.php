@@ -29,4 +29,12 @@ class Film extends Model
     {
         return $this -> belongsToMany('\App\Http\Model\Admin\Cast', 'film_casts','fid','cid');
     }
+
+    /**
+     *  一对多关联影厅表
+     */
+    public function room()
+    {
+        return $this -> belongsTo('\App\Http\Model\Admin\Filmroom','id','id');
+    }
 }

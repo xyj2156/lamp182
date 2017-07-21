@@ -77,10 +77,10 @@
                          <a href="{{url('/')}}"><img src="{{asset(config('webconf.logo'))}}" alt="" /></a>
                      </div>
                      <div class="header_top_right">
-                          <div class="search_box">
-                              <form method="post" action="{{url('/')}}">
+                          <div class="search_box" style="border-radius: 20px;">
+                              <form method="post" action="{{url('/')}}" >
                                   {{csrf_field()}}
-                                  <input type="text" name='search' value="{{$search['search'] or ''}}">
+                                  <input type="text" name='search' value="{{$search['search'] or ''}}" placeholder='找影视剧'>
                                   <input type="submit" value="">
                               </form>
                           </div>

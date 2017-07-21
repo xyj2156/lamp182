@@ -16,8 +16,6 @@ class test extends Controller
 {
     public function test()
     {
-        for($i=0;$i<90;$i++){
-            if(!($i%5)) echo $i;
-        }
+        echo date('Y-m-d H:i:s',time()+3600);
     }
 }

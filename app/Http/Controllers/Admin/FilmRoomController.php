@@ -19,8 +19,19 @@ class FilmRoomController extends Controller
      */
     public function index(Request $request)
     {
-        // 查询出 film_plays 表的所有数据
-        $data = FilmPlay::where('rid','like','%%') -> paginate(10);
+        // 接收传过来的搜索值
+        $search = $request -> input('search', '');
+        // 查询出 film_plays 表的数据按照开始时间排序
+        $data = FilmPlay::orderBy('start_time','desc');
+        if ($search) {
+            $film = Film::where('name','like',"%{$search}%") -> lists('id') -> all();
+            $data -> whereIn('fid',$film);
+        }
+
+        if($rid = $request -> input('rid',null)){
+            $data -> where('rid',$rid);
+        }
+        $data = $data -> paginate(10);
         // 生成查询电影表和影厅表的条件
         $rids = [];
         $fids = [];
@@ -39,7 +50,7 @@ class FilmRoomController extends Controller
         // 获取当前的时间
         $time = time();
         // 搜索分页需要的变量
-        $search = [];
+        $search = $request -> all();
         return view('admin.film_room.index',compact('title','time','data','ridsR','fidsR','search'));
     }
 
@@ -91,14 +102,18 @@ class FilmRoomController extends Controller
         // 接收过来的时间是 2017-07-12T01:32:40 , 以下代码是把 T 踢掉并转化成时间戳
         $data['start_time'] = strtotime(str_replace('T',' ',$data['start_time']));  // 开始时间
         $data['end_time'] = strtotime(str_replace('T',' ',$data['end_time']));      // 结束时间
+        if($data['start_time'] <= time()+3600){
+            return back() -> with('error','请安排合理的时间');
+        }
+
         // 接收过来的时间必须是数值型并且开始时间小于结束时间
         if (!is_numeric($data['start_time']) || !is_numeric($data['end_time']) || ($data['start_time'] >= $data['end_time'])) {
             return back() -> with('error','时间错误');
         }
-
+        
         // 通过id 降序查出 end_time 值
         $user = FilmPlay::orderBy('id','desc') -> select('end_time') -> first();
-//        播放次数自增
+        // 播放次数自增
         Film::find($data['fid']) -> increment('play');
         if ($user) {
             // 结束时间

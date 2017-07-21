@@ -48,8 +48,10 @@ class RegController extends Controller
     public function doreg(Request $request)
     {
         $this->validate($request, [
+            'email' => 'regex:/^1[34578][0-9]{9}$/',
             'password'=>'required|between:6,18'
         ],[
+            'email.regex' => '请输入正确的手机号',
             'password.required'=>'必须输入密码',
             'password.between'=>'密码长度必须在6-18位之间'
         ]);
@@ -63,6 +65,8 @@ class RegController extends Controller
     		$data = $request -> except('_token','phone_code');
 	    	$phone = $data['phone'];
             $data['password']= Crypt::encrypt($data['password']);
+            $data['username'] = str_random(5);
+            $data['status'] = 1;
 
 	    	// 检测该手机号注册过没有
 	    	$res = Member::where('phone',$phone)->first();
@@ -106,9 +110,12 @@ class RegController extends Controller
         $request -> flash();
         // 验证密码
         $this->validate($request, [
+            'email' => 'required|email',
             'repassword'=>'required|between:6,18',
             'password'=>'required|between:6,18'
         ],[
+            'email.required' => '邮箱不能为空',
+            'email.email' => '邮箱格式错误',
             'repassword.required'=>'必须确认密码',
             'repassword.between'=>'确认密码长度必须在6-18位之间',
             'password.required'=>'必须输入密码',
@@ -119,6 +126,7 @@ class RegController extends Controller
     	$data['password'] = Crypt::encrypt($data['password']);
     	$data['ltime'] = time();
     	$data['token'] = str_random(50);
+    	$data['username'] = str_random(5);
 
     	//检测验证码
     	if($vcode['vcode'] != strtolower(session('code'))){
@@ -132,19 +140,24 @@ class RegController extends Controller
 
     	if(Crypt::decrypt($data['password']) != $repassword['repassword']){
     		return back() -> with('error','两次密码不一致..');
-    	}else{
-    		$id = DB::table('members') -> insertGetId($data);
-    		if($id){
-                // 给对应的副表查数据
-                $data1['id'] = $id;
-                $data1['name'] = str_random(5,99999);
-                $data1['auth'] = 0;
-                $res1 = Member_detail::insert($data1);
-    			//发送邮件
-    			self::send_email($data['email'],$id,$data['token']);
-    			return redirect('login') -> with('success','注册成功,请去邮箱激活账号..');
-    		}
     	}
+        // 开启事务 添加数据
+    	DB::beginTransaction();
+        $id = DB::table('members') -> insertGetId($data);
+        // 给对应的副表查数据
+        $data1['id'] = $id;
+        $data1['name'] = str_random(5);
+        $data1['auth'] = 0;
+        $res1 = Member_detail::insert($data1);
+        //发送邮件
+        self::send_email($data['email'],$id,$data['token']);
+        if($id && $res1){
+            DB::commit();
+            return redirect('login') -> with('success','注册成功,请去邮箱激活账号..');
+        } else {
+            DB::rollback();
+            return back() -> with('error','注册失败');
+        }
     }
 
     public static function send_email($email,$id,$token)
@@ -164,7 +177,7 @@ class RegController extends Controller
     	$token['token'] = Member::where('id',$id) -> select('token') -> first();
 
     	if($token['token'] != $token['token']){
-    		return redirect('/reg');
+    		return redirect('/reg') -> with('error','激活失败');
     	}else{
     		$res = Member::where('id',$id) -> first();
     		$res -> token = str_random(50);
