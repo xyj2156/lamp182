@@ -29,7 +29,7 @@ class OrderController extends Controller
         $fid = $req -> input('id',0);
         if($fid === 0)
             return back() -> with('error', '没有播放id..') ;
-        $playing = FilmPlay::where('id', $fid) -> where('start_time', '>', time()-10*60) -> first();
+        $playing = FilmPlay::where('id', $fid) -> orderBy('start_time','desc') -> where('start_time', '>', time()+10*60) -> first();
         if(!$playing)
             return back() -> with('error', '该电影已经停止售票');
 
