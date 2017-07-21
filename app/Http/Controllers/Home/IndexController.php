@@ -34,7 +34,9 @@ class IndexController extends Common
 
         // 搜索表单传过来的search
         $search = $req -> input('search', '');
-
+        if ($search == null) {
+            return view('home.index.search_error',['title' => '错误']);
+        }
         $film = Film::where('name', 'like', "%{$search}%") -> paginate(10);
         $name = [];
         foreach($film as $k=>$v){

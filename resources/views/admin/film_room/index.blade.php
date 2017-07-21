@@ -8,7 +8,13 @@
                 <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 影厅播放管理 <small>江洋八子</small></div>
                 <p class="page-header-description">简单组合。。。干不简单的事情。。。</p>
             </div>
-
+            {{--<!-- 搜索 -->--}}
+            <div class="am-fl tpl-header-search">
+                <form class="tpl-header-search-form" action="{{url('admin/filmroom')}}">
+                    <button class="tpl-header-search-btn am-icon-search" type="submit"></button>
+                    <input class="tpl-header-search-box" name="search" type="text" value="{{$search['search'] or ''}}" placeholder="搜索电影名。.">
+                </form>
+            </div>
         </div>
     </div>
     <div class="row-content am-cf">

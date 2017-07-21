@@ -22,7 +22,7 @@
     'id' => 31,
     'linkname' => 'xxoo11',
     'linktitle' => '周星驰',
-    'order' => 7,
+    'order' => 6,
     'linkthumb' => '/uploads/thumbnail/2017-07-11-16-28-12-59648c1c8e4e0.jpg',
     'linkurl' => 'zxc.com',
   ),
