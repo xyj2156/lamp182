@@ -44,8 +44,9 @@ class PersonageController extends Controller
     	$x = $data['sex'] == 'x' ? 'checked':'';
 
     	$str = '<div class="GRpersonage1">
-			<img src="'.$data['uface'].'" class="GRIMG">
+			<img src="'.$data['uface'].'" class="GRIMG" id="pic">
 		<form class="GRform1" method="post">
+            <input type="hidden" name="uface" value="'.$data['uface'].'" id="uface">
 			<input type="hidden" name="_token"  value="'. csrf_token().'" id="GRTOKEN"/>
 			<div>
 				<span>用户名: '.$data['username'].'</span>        <br>
@@ -73,7 +74,7 @@ class PersonageController extends Controller
 
 			<div>
 				<a href="javascript:;" class="a-upload">
-					<input type="file" name="" id="">上传头像
+					<input id="doc-form-file" type="file">上传头像
 				</a>
 			</div>
 		</form>
@@ -83,11 +84,12 @@ class PersonageController extends Controller
 				var name = $("#GRINPUTname").val();
 				var age = $("#GRINPUTage").val();
 				var sex = $("input:checked").val();
+                var uface = $("#uface").val();
 				
 				$.ajax({
 					"url":"'.url("personage/save").'",
 					"type":"post",
-					"data":{"_token":"'.csrf_token().'","name":name,"age":age,"sex":sex},
+					"data":{"_token":"'.csrf_token().'","name":name,"age":age,"sex":sex,"uface":uface},
 					"datatype":"json",
 					"async":true,
 					"success":function(data){
@@ -105,6 +107,48 @@ class PersonageController extends Controller
 					}
 				});
 			});
+
+        $("#doc-form-file").change(function(){
+                uploadImage();
+        });
+
+        function uploadImage() {
+            // 判断是否有选择上传文件
+            var imgPath = $("#doc-form-file").val();
+            if (imgPath == "") {
+                layer.msg("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf(".") + 1);
+            if (strExtension != "jpg" && strExtension != "gif"
+                && strExtension != "png" && strExtension != "bmp") {
+                layer.msg("请选择图片文件");
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append("myfile",$("#doc-form-file")[0].files[0]);
+            formData.append("_token", "'.csrf_token().'");
+
+            $.ajax({
+                type: "POST",
+                url: "'.url("home/upload").'?path=home_face_path",
+                data: formData,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {                            
+                    $("#pic").attr("src", data).hide(200).show(600);
+                    $("#uface").val(data);
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("上传失败，请检查网络后重试");
+                }
+            });
+        }
 		</script>
 		';
 
@@ -124,7 +168,7 @@ class PersonageController extends Controller
 				<span class="GRsecuretext">用户名: '.$member['username'].'</span>   
 			</div>
 			<div>
-				<span class="GRsecuretext">密　码: ****************</span> <a class="GRlinkONE" href="">修改密码</a>
+				<span class="GRsecuretext">密　码: ****************</span> <a class="GRlinkONE" href="'.url('/updatepassword').'">修改密码</a>
 			</div>
 			<div>
 				<span class="GRsecuretext">手　机: '.$member['phone'].'</span> <a class="GRlinkONE" href="">更换手机号</a>
@@ -250,7 +294,7 @@ class PersonageController extends Controller
 		foreach($review as $k => $v){
 			if( !in_array($v->fid,$fid) ){
 				$fid[] = $v->fid;
-			}else{ break; }
+			}else{ continue; }
 			$str2 .=	'<div>
 							<img class="filmTOP" src="'.$v->film_pic.'">
 					 	</div>
@@ -264,7 +308,7 @@ class PersonageController extends Controller
 
 		$str3 = 	'<div style="clear:both"></div>
 					<div class="GRpagin">
-						<a href="javascript:;">点击查看更多评论过的电影</a>	
+						<a href="'.url('reviewlist').'">点击查看更多评论过的电影</a>	
 					</div>
 				</div>
 		<input type="hidden" name="_token"  value="'. csrf_token() .'" id="GRTOKEN"/>';
@@ -281,6 +325,8 @@ class PersonageController extends Controller
     {
     	$request = $request -> except('_token');
 
+        if( empty($request['uface']) ) return $data = ['status'=>'500','response'=>'请选择头像'];
+
     	if( empty($request['name']) )  return $data = ['status'=>'500','response'=>'请填写昵称'];
 
     	if( empty($request['age']) )  return $data = ['status'=>'500','response'=>'请填写正确年龄'];
@@ -292,7 +338,7 @@ class PersonageController extends Controller
     	$id = session('home_user')['id'];
 
     	//进行修改
-    	$res = Member_detail::where('id',$id)->update(['name'=>$request['name'],'sex'=>$request['sex'],'age'=>$request['age']]);
+    	$res = Member_detail::where('id',$id)->update(['name'=>$request['name'],'sex'=>$request['sex'],'age'=>$request['age'],'uface'=>$request['uface']]);
 
     	if(!$res) return $data = ['status'=>'500','response'=>'数据并未更改'];
 
@@ -389,7 +435,7 @@ class PersonageController extends Controller
 				</div><br>';
 	}
 			
-	$str2 =	'<a href="#">查看更多消费记录</a><input type="hidden" name="_token"  value="'. csrf_token() .'" id="GRTOKEN"/>
+	$str2 =	'<a href="'.url('orderlist').'">查看更多消费记录</a><input type="hidden" name="_token"  value="'. csrf_token() .'" id="GRTOKEN"/>
 			</div>';
 
 		$str = $str0.$str1.$str2;	
@@ -403,96 +449,6 @@ class PersonageController extends Controller
 
     public function getTest()
     {	
-
-    	$member = session('home_user');
-
-    	//找到对应的订单
-    	$order = Orders::where('mid',$member['id'])->orderBy('ctime','desc')->paginate(10);
-
-    	//找到订单所在影厅
-    	$rids = [];
-    	foreach($order as $k => $v){
-    		$rids[] = $v -> rid;
-    	}
-    	$rids = array_unique($rids);
-    	$room = FilmRoom::select(['id','name'])->whereIn('id',$rids)->get();
-    	foreach($order as $k => $v){
-    		foreach($room as $kk => $vv){
-    			if($v->rid == $vv->id){
-    				$order[$k]->room = $vv -> name; 
-    			}
-    		}
-    	}
-
-    	//找到开播时间
-    	$pids = [];
-    	foreach($order as $k => $v){
-    		$pids[] = $v -> pid;
-    	}
-    	$pids = array_unique($pids);
-    	$play = FilmPlay::select(['id','start_time'])->whereIn('id',$pids)->get();
-    	foreach($order as $k => $v){
-    		foreach($play as $kk => $vv){
-    			if($v->pid == $vv->id){
-    				$order[$k]->start_time = $vv->start_time;
-    			}
-    		}
-    	}
-
-    	//找到影片名
-    	$fids = [];
-    	foreach($order as $k => $v){
-    		$fids[] = $v->fid;
-    	}
-    	$film = Film::select(['id','name'])->whereIn('id',$fids)->get();
-    	foreach($order as $k => $v){
-    		foreach($film as $kk => $vv){
-    			if( $v->fid == $vv->id ){
-    				$order[$k]->fname = $vv->name;
-    			}
-    		}
-    	}
-    	die;
-    	//显示订单状态
-    	foreach($order as $k => $v){
-    		switch ($v->status){
-    			case 1: $v->status='未付款';break;
-    			case 2: $v->status='已付款';break;
-    			case 3: $v->status='已发货';break;
-    			case 4: $v->status='订单完成';break;
-    			case 5: $v->status='订单废除';break;
-    		}
-    	}
-
-    	//显示座位
-    	foreach($order as $k => $v){
-    		$order[$k]->seat = explode(',',$v->seat);
-    		$str='';
-    		for($i=0;$i<count($order[$k]->seat);$i++){
-    			$str .= str_replace('_','行',$order[$k]->seat[$i]).'列,';
-    		}
-    		$order[$k]->seat = $str;
-    	}
-
-    $str1 = '';
-    foreach($order as $k => $v){
-    $str1 .= '<div class="GRorder">
-				<i>'.date('Y-m-d H:i:s',$v->ctime).'</i>   <br>
-				<div class="GRordertop">
-					<span>影厅: '.$v->room.' </span> <span>开播时间: '.date('H:i:s',$v->start_time).' </span> <span>影片: '.$v->fname.' </span> <spa n>座位: '.$v->seat.' </span> <span>票价: '.$v->price.' </span>  <br>
-				</div>
-				<div class="GRorderbottom">
-					<span>座位数:'.$v->num.'</span>  <span> 总价: '.$v->price*$v->num.' </span>  <span>订单状态: '.$v->status.'</span>
-					<b>单号: '.$v->name.'</b>
-				</div>       
-			</div><br><br>';
-	}
-			
-	$str2 =	'<a href="#">查看更多消费</a>';
-
-		$str = $str1.$str2;	
-
-		return $str;
 
     }
 }
