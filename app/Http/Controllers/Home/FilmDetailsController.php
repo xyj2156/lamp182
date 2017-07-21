@@ -30,7 +30,7 @@ class FilmDetailsController extends Common
         $film -> increment('click');
         $title = '电影详情';
         // 获取演员对象集合
-        $cast = $film -> cast;
+        $cast = explode(',', $filmdetail -> actor);
         // 获取$film id
         $fid = $film -> id;
         // 查出电影类型
