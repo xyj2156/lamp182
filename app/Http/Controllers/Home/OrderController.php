@@ -38,6 +38,8 @@ class OrderController extends Controller
             'msg' => '您有订单未付款'
         ];
 
+        session(['url' => $req -> url()]);
+
         $room = $playing -> room;
         $film = $playing -> detail;
 
