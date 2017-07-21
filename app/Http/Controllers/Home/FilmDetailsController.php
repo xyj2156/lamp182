@@ -97,7 +97,7 @@ class FilmDetailsController extends Common
         ]);
         $id = $data1['id'];
         // $filmplay电影播放历史  开始时间 < 当前时间 - 10分钟
-        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','>',time()-10*60) -> get();
+        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','>',time()+10*60) -> get();
         $rid = [];
         $id = [];
         foreach($filmplay as $k=>$v){
@@ -115,7 +115,7 @@ class FilmDetailsController extends Common
             $data[] = [$v -> name,$id[$v -> id]];
         }
        if(!$data){
-            return ['status' => 1,'data' => '该电影没有播放'];
+            return ['status' => 1,'data' => '该电影已截止购票'];
        } else {
            return ['status' => 0,'data' => $data];
        }
