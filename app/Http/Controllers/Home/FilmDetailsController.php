@@ -97,7 +97,7 @@ class FilmDetailsController extends Common
         ]);
         $id = $data1['id'];
         // $filmplay电影播放历史  开始时间 < 当前时间 - 10分钟
-        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','<',time()-10*60) -> get();
+        $filmplay = FilmPlay::where('fid',$id) -> select('id','rid') -> where('start_time','>',time()+10*60) -> get();
         $rid = [];
         $id = [];
         foreach($filmplay as $k=>$v){
