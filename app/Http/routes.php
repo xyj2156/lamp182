@@ -22,7 +22,7 @@ Route::post('/admin/dologin','Admin\LoginController@dologin');
 // 后台用户退出
 Route::get('/admin/logout', 'Admin\LoginController@logout');
 
-
+Route::any('/home/upload','Admin\UsersetController@upload');
 
 Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'admin.login'], function(){
 
@@ -100,6 +100,23 @@ Route::group(['namespace' => 'Home', 'middleware' => 'home.login'],function (){
     Route::post('/personage/review','PersonageController@postReview');
 // 个人订单页面
     Route::post('/personage/consume','PersonageController@postConsume');
+// 用户消费单页
+    Route::get('orderlist','ListController@Orderlist');
+// 用户评论过的电影页
+    Route::get('reviewlist','ListController@Reviewlist');
+// 修改密码
+    Route::get('updatepassword','SecureController@updatePassword');
+// 验证密码ajax
+    Route::post('ajaxPWD','SecureController@passwordAjax');
+// 发送短信改密码
+    Route::get('phoneAjax','SecureController@phoneAjax');
+// 进行修改密码
+    Route::post('updateValidate','SecureController@updateValidate');
+
+// 更换邮箱
+    //Route::get();
+// 更换手机号
+    //Route::get();
 // 退出登录
     Route::get('logout','LoginController@logout');
 });
