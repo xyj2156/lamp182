@@ -242,12 +242,13 @@ class OrderController extends Controller
             Orders::where('name', $name) -> update(['status' => 3]);
             return back() -> with('error', '订单超时... 请重新下单...');
         }
+        $auth = Member_detail::find(session('home_user') -> id)->select('auth') -> first() -> auth;
 //        下单成功
         $title = '下单成功....';
         $film = Film::find($res -> fid,['name']) -> name;
         $room = FilmRoom::find($res -> rid, ['name']) -> name;
         $start = FilmPlay::find($res -> pid, ['start_time']) -> start_time;
-        return view('home.order.success', compact('res', 'title', 'film', 'room', 'start', 'name', 'min', 'sec'));
+        return view('home.order.success', compact('res', 'title', 'film', 'room', 'start', 'name', 'min', 'sec', 'auth'));
     }
 
     /**
@@ -272,7 +273,7 @@ class OrderController extends Controller
             return back() -> with('error', '订单已过期');
         }
         $mem = Member_detail::find($order -> mid);
-        $num = $order -> price * $order -> num * config('film.auth')[$mem -> auth];
+        $num = $order -> price * $order -> num * config('film.zhe')[$mem -> auth];
         if($mem -> money < $num){
             return back() -> with('error', '余额不足请充值....');
         }
@@ -307,7 +308,12 @@ class OrderController extends Controller
 
         $code = QrCode::size(300,300) -> generate($id);
         $title = '影票订购成功';
+        if ( $mem -> auth == 0){
+            $msg = '恭喜您订票成功,请到影厅领票.';
+        } else {
+            $msg = '尊贵的 '.config('film.auth')[$mem -> auth].'已帮您打'.(config('film.zhe')[$mem -> auth]*100).'折, 恭喜您订票成功,';
+        }
 //        $code = $id;
-        return view('home.order.complete',compact('code', 'id','title')) -> with('success', '您订票成功,请到影厅领票.');
+        return view('home.order.complete',compact('code', 'id','title')) -> with('success', $msg);
     }
 }
