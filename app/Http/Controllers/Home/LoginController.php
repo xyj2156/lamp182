@@ -75,7 +75,10 @@ class LoginController extends Controller
                 } else {
                     \Cookie::queue('userinfo',null,-1);
                 }
-                return redirect('/') -> with('success','登录成功...请完善您的个人资料');
+                if (session('url')) {
+                    return redirect(session('url')) -> with('success','登录成功');
+                }
+                return redirect('/') -> with('success','登录成功...');
             }else{
                 return back() -> with('error','密码错误..');
             }
@@ -96,7 +99,10 @@ class LoginController extends Controller
                 } else {
                     \Cookie::queue('userinfo',null,-1);
                 }
-                return redirect('/') -> with('success','登录成功...请完善您的个人资料');
+                if (session('url')) {
+                    return redirect(session('url')) -> with('success','登录成功');
+                }
+                return redirect('/') -> with('success','登录成功...');
             }else{
                 return back() -> with('error','邮箱未激活或密码错误..');
             }
