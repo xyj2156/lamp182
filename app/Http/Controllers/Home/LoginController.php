@@ -84,8 +84,11 @@ class LoginController extends Controller
             }
         }
         if($email_user){
+            // 验证邮箱是否激活
+            if ($email_user['status'] !== 1)
+                return back() -> with('邮箱未激活');
             // 验证密码是否正确
-            if($email_user['status'] == 1 && Crypt::decrypt($email_user['password']) == $data['password']){
+            if(Crypt::decrypt($email_user['password']) == $data['password']){
                 // 获取到当前登录成功的时间
                 $email_user -> ltime = time();
                 // 执行跟新数据
@@ -99,12 +102,15 @@ class LoginController extends Controller
                 } else {
                     \Cookie::queue('userinfo',null,-1);
                 }
-                if (session('url')) {
-                    return redirect(session('url')) -> with('success','登录成功');
+                // 判断有没有来源地址 (购票登录)
+                $url = session('url');
+                if ($url) {
+                    session(['url' => null]);
+                    return redirect::intended($url) -> with('success','登录成功');
                 }
                 return redirect('/') -> with('success','登录成功...');
             }else{
-                return back() -> with('error','邮箱未激活或密码错误..');
+                return back() -> with('error','密码错误..');
             }
         }
         return back() -> with('error','没有这个用户');
