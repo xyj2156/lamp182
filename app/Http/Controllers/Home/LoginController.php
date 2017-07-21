@@ -101,6 +101,7 @@ class LoginController extends Controller
                 return back() -> with('error','邮箱未激活或密码错误..');
             }
         }
+        return back() -> with('error','没有这个用户');
     }
 
     /**
