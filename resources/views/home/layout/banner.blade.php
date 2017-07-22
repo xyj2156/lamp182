@@ -15,7 +15,7 @@
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     @foreach(config('banner') as $k => $v)
-                    <a title="{{ $v['title'] }}" href="{{ $v['url'] }}"><img src="{{ asset($v['pic']) }}" data-thumb="{{ asset($v['pic']) }}" alt="" /></a>
+                    <a title="{{ $v['title'] }}" href="{{ $v['url'] }}" target="_blank"><img src="{{ asset($v['pic']) }}" data-thumb="{{ asset($v['pic']) }}" alt="" /></a>
                     @endforeach
                 </div>
             </div>
