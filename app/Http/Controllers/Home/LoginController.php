@@ -106,7 +106,7 @@ class LoginController extends Controller
                 $url = session('url');
                 if ($url) {
                     session(['url' => null]);
-                    return redirect::intended($url) -> with('success','登录成功');
+                    return redirect($url) -> with('success','登录成功');
                 }
                 return redirect('/') -> with('success','登录成功...');
             }else{

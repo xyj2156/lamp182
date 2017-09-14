@@ -39,6 +39,7 @@ class FilmRoomController extends Controller
             $rids[] = $v -> rid;
             $fids[] = $v -> fid;
         }
+//        dd($data);
         // 去掉重复的
         $fids = array_unique($fids);
         $rids = array_unique($rids);

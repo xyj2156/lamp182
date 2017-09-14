@@ -67,6 +67,7 @@ class RegController extends Controller
             $data['password']= Crypt::encrypt($data['password']);
             $data['username'] = str_random(5);
             $data['status'] = 1;
+            $data['ip'] = $request -> ip();
 
 	    	// 检测该手机号注册过没有
 	    	$res = Member::where('phone',$phone)->first();
@@ -124,9 +125,9 @@ class RegController extends Controller
 
     	$repassword = $request -> only('repassword');
     	$data['password'] = Crypt::encrypt($data['password']);
-    	$data['ltime'] = time();
     	$data['token'] = str_random(50);
     	$data['username'] = str_random(5);
+        $data['ip'] = $request -> ip();
 
     	//检测验证码
     	if($vcode['vcode'] != strtolower(session('code'))){
